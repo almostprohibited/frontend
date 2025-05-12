@@ -1,6 +1,4 @@
-import Footer from "@/components/footer/component";
-
-export default function() {
+export default function PrivacyPage() {
 	return (
 		<div>
 			<p>privacy page</p>
