@@ -1,8 +1,9 @@
 "use client";
 
-import { Box, Center, Divider, Space, Text, Title, useMantineTheme } from "@mantine/core";
+import { Alert, Box, Center, Divider, Group, Space, Text, Title, useMantineTheme } from "@mantine/core";
 import SearchBar from "@/components/search/component";
 import RetailerCards from "@/components/retailerCards/component";
+import { IconInfoCircle } from "@tabler/icons-react";
 
 export default function Home() {
 	const theme = useMantineTheme();
@@ -16,13 +17,21 @@ export default function Home() {
 					<Text>Canada&apos;s upcoming sporting goods product aggregator</Text>
 				</Box>
 			</Center>
-			<Space h={"xl"} />
-			<Center>
-				<Box ta={"center"} w={"100%"} p={"var(--content-side-padding)"}>
+			<Center mt={"2rem"} mb={"2rem"}>
+				<Box w={"100%"} p={"var(--content-side-padding)"}>
 					<SearchBar />
 				</Box>
 			</Center>
-			<Space h={"xl"} />
+			<Divider />
+			<Center mt={"2rem"} mb={"2rem"}>
+				<Box w={"100%"} p={"var(--content-side-padding)"}>
+					<Alert variant="outline" color="blue" title="Hey, heads up!" icon={<IconInfoCircle />}>
+						<Text size="sm">
+							This website is in development, some elements and cards might move around from time to time.
+						</Text>
+					</Alert>
+				</Box>
+			</Center>
 			<Divider />
 			<Space h={"xl"} />
 			<Center>

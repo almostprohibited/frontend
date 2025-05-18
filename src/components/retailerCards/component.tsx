@@ -1,6 +1,7 @@
 "use client";
 
-import { Box, Card, SimpleGrid, Space, Text, Title } from "@mantine/core";
+import { Alert, Box, Card, Space, Text, Title } from "@mantine/core";
+import { IconAlertTriangle } from "@tabler/icons-react";
 
 export default function RetailerCards() {
 	const retailers = ["Reliable Gun", "Italian Sporting Goods"];
@@ -15,12 +16,17 @@ export default function RetailerCards() {
 	});
 
 	return (
-		<Box ta={"center"}>
-			<Title order={3}>Supported Retailers</Title>
+		<Box w={"100%"} p={"var(--content-side-padding)"}>
+			<Title order={3} ta={"center"} >Supported Retailers</Title>
 			<Space h={"xl"} />
-			<SimpleGrid cols={4}>
+			{/* <SimpleGrid cols={4}>
 				{retailerCards}
-			</SimpleGrid>
+			</SimpleGrid> */}
+			<Alert variant="outline" color="yellow" title="Under construction!" icon={<IconAlertTriangle />}>
+				<Text size="sm">
+					This section is under construction! Check back later.
+				</Text>
+			</Alert>
 		</Box>
 	);
 }

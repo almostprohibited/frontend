@@ -1,3 +1,12 @@
 .input {
 	text-align: center;
 }
+
+/* fixes the text in inputbox being off center because of X button */
+/* unneeded if both left and right icons are specified */
+/* .override {
+	&[data-with-right-section] {
+		--input-padding-inline-start: var(--input-padding);
+		--input-padding-inline-end: var(--input-padding);
+	}
+} */

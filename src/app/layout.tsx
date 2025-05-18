@@ -21,7 +21,7 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
 			<body>
 				<MantineProvider defaultColorScheme="dark">
 					<Header />
-					<Box h={"100vh"}>
+					<Box style={{flexGrow: 1}} mb="2rem">
 						{children}
 					</Box>
 					<Footer />

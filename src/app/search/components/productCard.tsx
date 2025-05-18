@@ -1,0 +1,49 @@
+import { Card, Text, Image, CardSection, Badge, Stack, Skeleton, Anchor, Group, TooltipFloating } from "@mantine/core";
+import { FirearmResult } from "../searchResult";
+import { useState } from "react";
+
+function centsToHumanString(price: number): string {
+	const dollars = Math.floor(price / 100);
+	const cents = String(price % 100).padEnd(2, "0");
+
+	return `$ ${dollars}.${cents}`;
+}
+
+export default function ProductCard({firearm}: {firearm: FirearmResult}) {
+	const [imageLoaded, setImageLoaded] = useState(false);
+
+	let priceBadgeChildren;
+
+	if (firearm.price.sale_price) {
+		const regularPriceElement = <Text inherit td="line-through">{centsToHumanString(firearm.price.regular_price)}</Text>
+		const salePriceElement = <Text inherit>{centsToHumanString(firearm.price.sale_price)}</Text>;
+
+		priceBadgeChildren = [salePriceElement, regularPriceElement];
+	} else {
+		priceBadgeChildren = [<Text inherit>{centsToHumanString(firearm.price.regular_price)}</Text>];
+	}
+
+	return (
+		<Anchor href={firearm.link} target="_blank" underline="never"c="initial">
+			<Card key={firearm.name + firearm.query_time.toString()} radius="lg" withBorder={true} h="22rem">
+				<CardSection mb="1rem">
+					<Skeleton h="10rem" visible={!imageLoaded}>
+						<Image h="10rem" src={firearm.thumbnail_link} onLoad={() => setImageLoaded(true)} />
+					</Skeleton>
+				</CardSection>
+				<Stack mb="1rem" gap="xs">
+					<Badge variant="outline" size="lg" color="gray"><Group gap="sm">{...priceBadgeChildren}</Group></Badge>
+					<Badge variant="outline" size="md" color="blue">{firearm.retailer}</Badge>
+				</Stack>
+				<TooltipFloating
+					label={firearm.name}
+					color="black"
+					multiline
+					w="15rem"
+				>
+					<Text size="sm" lineClamp={4}>{firearm.name}</Text>
+				</TooltipFloating>
+			</Card>
+		</Anchor>
+	);
+}
