@@ -15,7 +15,7 @@ export default function ProductCard({firearm}: {firearm: FirearmResult}) {
 	let priceBadgeChildren;
 
 	if (firearm.price.sale_price) {
-		const regularPriceElement = <Text inherit td="line-through">{centsToHumanString(firearm.price.regular_price)}</Text>
+		const regularPriceElement = <Text inherit td="line-through" c="dimmed">{centsToHumanString(firearm.price.regular_price)}</Text>
 		const salePriceElement = <Text inherit>{centsToHumanString(firearm.price.sale_price)}</Text>;
 
 		priceBadgeChildren = [salePriceElement, regularPriceElement];
@@ -32,7 +32,7 @@ export default function ProductCard({firearm}: {firearm: FirearmResult}) {
 					</Skeleton>
 				</CardSection>
 				<Stack mb="1rem" gap="xs">
-					<Badge variant="outline" size="lg" color="gray"><Group gap="sm">{...priceBadgeChildren}</Group></Badge>
+					<Badge variant="outline" size="lg" color="gray"><Group gap="0.5rem">{...priceBadgeChildren}</Group></Badge>
 					<Badge variant="outline" size="md" color="blue">{firearm.retailer}</Badge>
 				</Stack>
 				<TooltipFloating

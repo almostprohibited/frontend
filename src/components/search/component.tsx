@@ -3,7 +3,7 @@
 import { ActionIcon, CloseButton, Collapse, Fieldset, Flex, Group, NumberInput, Skeleton, TextInput } from "@mantine/core";
 import styles from "./component.module.css";
 import { Suspense, useState } from "react";
-import { IconAdjustmentsHorizontal, IconSearch } from "@tabler/icons-react";
+import { IconAdjustmentsHorizontal, IconSearch, IconSend2 } from "@tabler/icons-react";
 import { useSearchParams } from "next/navigation";
 import Form from "next/form";
 
@@ -70,14 +70,23 @@ export default function SearchBar() {
 					align="center"
 					justify="center"
 				>
+					<ActionIcon
+						variant="default"
+						size="input-lg"
+						mr="0.5rem"
+						onClick={() => filterVisibleToggle(!filterVisible)}
+					>
+						<IconAdjustmentsHorizontal />
+					</ActionIcon>
 					<SuspendedSearch />
 					<ActionIcon
 						variant="default"
 						size="input-lg"
 						ml="0.5rem"
-						onClick={() => filterVisibleToggle(!filterVisible)}
+						c="blue"
+						// onClick={() => filterVisibleToggle(!filterVisible)}
 					>
-						<IconAdjustmentsHorizontal />
+						<IconSend2 />
 					</ActionIcon>
 				</Flex>
 			</Suspense>

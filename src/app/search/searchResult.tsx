@@ -3,6 +3,10 @@ export enum RetailerName {
     LeverArms,
     ItalianSportingGoods,
     InternationalShootingSupplies,
+    AlFlahertys,
+    BullseyeNorth,
+    CanadasGunShop,
+	CanadasGunStore,
 }
 
 export interface FirearmResult {
