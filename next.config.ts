@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
 			"@mantine/hooks",
 		]
 	},
-	reactStrictMode: false
 };
 
 export default nextConfig;

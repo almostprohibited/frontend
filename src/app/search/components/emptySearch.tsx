@@ -1,15 +1,20 @@
-import { Box, Center, Group, Text } from "@mantine/core";
-import { IconMapX } from "@tabler/icons-react";
+import { Box, Center, Flex, Group, Stack, Text } from "@mantine/core";
+import { IconZoomQuestion } from "@tabler/icons-react";
 
 export default function EmptySearch() {
 	return (
-		<Center>
-			<Group c={"dark"}>
-				<IconMapX size={"3rem"} />
+		<Center h="100%">
+			<Flex
+				c="dark"
+				justify="center"
+				align="center"
+				gap="sm"
+			>
+				<IconZoomQuestion size={"3rem"} />
 				<Box>
 					<Text size="xl">whoops, no results were found, please try again</Text>
 				</Box>
-			</Group>
+			</Flex>
 		</Center>
 	);
 }

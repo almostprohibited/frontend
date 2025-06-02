@@ -1,5 +1,5 @@
 import { Card, Text, Image, CardSection, Badge, Stack, Skeleton, Anchor, Group, TooltipFloating } from "@mantine/core";
-import { FirearmResult } from "../searchResult";
+import { FirearmResult, Retailer, RetailerEnum } from "../../../utils/apiStructs";
 import { useState } from "react";
 
 function centsToHumanString(price: number): string {
@@ -23,9 +23,18 @@ export default function ProductCard({firearm}: {firearm: FirearmResult}) {
 		priceBadgeChildren = [<Text inherit>{centsToHumanString(firearm.price.regular_price)}</Text>];
 	}
 
+	// @ts-ignore
+	const retailer: Retailer = RetailerEnum[firearm.retailer];
+
 	return (
-		<Anchor href={firearm.link} target="_blank" underline="never"c="initial">
-			<Card key={firearm.name + firearm.query_time.toString()} radius="lg" withBorder={true} h="22rem">
+		<Anchor
+			key={firearm.name + firearm.query_time.toString()}
+			href={firearm.link}
+			target="_blank"
+			underline="never"
+			c="initial"
+		>
+			<Card radius="lg" withBorder={true} h="22rem" shadow="sm">
 				<CardSection mb="1rem">
 					<Skeleton h="10rem" visible={!imageLoaded}>
 						<Image h="10rem" src={firearm.thumbnail_link} onLoad={() => setImageLoaded(true)} />
@@ -33,7 +42,7 @@ export default function ProductCard({firearm}: {firearm: FirearmResult}) {
 				</CardSection>
 				<Stack mb="1rem" gap="xs">
 					<Badge variant="outline" size="lg" color="gray"><Group gap="0.5rem">{...priceBadgeChildren}</Group></Badge>
-					<Badge variant="outline" size="md" color="blue">{firearm.retailer}</Badge>
+					<Badge variant="outline" size="md" bg={retailer.colourHex} color="gray">{retailer.name}</Badge>
 				</Stack>
 				<TooltipFloating
 					label={firearm.name}

@@ -1,59 +1,66 @@
 "use client";
 
 import SearchBar from "@/components/search/component";
-import { Box, Divider, Grid, SimpleGrid, Stack, Text } from "@mantine/core";
+import { Box, Divider, keys, SimpleGrid, Skeleton } from "@mantine/core";
 import { useSearchParams } from "next/navigation";
-import { ReactElement, Suspense, useEffect, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, Suspense, useEffect, useState } from "react";
 import ProductCard from "./components/productCard";
-import { FirearmResult } from "./searchResult";
+import { ApiResponse, FirearmResult } from "../../utils/apiStructs";
 import EmptySearch from "./components/emptySearch";
 
-function SuspendedFirearms() {
+function Firearms({setTotalCount}: {setTotalCount: Dispatch<SetStateAction<number>>}) {
 	const searchParams = useSearchParams();
-	const search = searchParams.get("query") || "";
 
 	const [firearms, setFirearms] = useState<Array<ReactElement>>([]);
+	const [isSearching, setIsSearching] = useState(true);
 
 	useEffect(() => {
 		const url = new URL("http://localhost:3001/api");
-		url.searchParams.append("query", search);
 
-		console.log("sending request to " + url);
+		// who reverses KV pair arguments, wtf nextjs
+		searchParams.forEach((value, key) => {
+			url.searchParams.append(key, value);
+		});
 
 		fetch(url).then(async response => {
 			return await response.json();
 		})
-		.then(async (data: Array<FirearmResult>) => {
+		.then(async (data: ApiResponse) => {
 			const firearmObjs: Array<ReactElement> = [];
 			
-			data.forEach(firearm => {
-				console.log(firearm);
+			data.firearms.forEach(firearm => {
 				firearmObjs.push(<ProductCard key={firearm.link} firearm={firearm}/>);
 			})
 
 			setFirearms(firearmObjs);
-		})
-	}, [search])
+			setTotalCount(data.total_count);
+		});
+	}, [searchParams])
+
+	if (isSearching) {
+		// do loading
+	}
 
 	if (firearms.length === 0) {
 		return <EmptySearch />;
-	} else {
-		return (
-			<SimpleGrid cols={4}>
-				{...firearms}
-			</SimpleGrid>
-		);
 	}
-
+	
+	return (
+		<SimpleGrid cols={4}>
+			{...firearms}
+		</SimpleGrid>
+	);
 }
 
 export default function SearchPage() {
+	const [totalCount, setTotalCount] = useState(0);
+
 	return (
 		<Box mt="2rem" w={"100%"} p={"var(--content-side-padding)"}>
-			<SearchBar />
+			<SearchBar totalCount={totalCount} />
 			<Divider mt="1rem" mb="1rem" />
-			<Suspense>
-				<SuspendedFirearms />
+			<Suspense fallback={<Skeleton />}>
+				<Firearms setTotalCount={setTotalCount} />
 			</Suspense>
 		</Box>
 	);

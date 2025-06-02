@@ -1,17 +1,33 @@
 "use client";
 
-import { Alert, Box, Card, Space, Text, Title } from "@mantine/core";
-import { IconAlertTriangle } from "@tabler/icons-react";
+import { RetailerEnum } from "@/utils/apiStructs";
+import { Box, SimpleGrid, Space, Text, Title, Image, Card, CardSection, Center, Anchor } from "@mantine/core";
 
 export default function RetailerCards() {
-	const retailers = ["Reliable Gun", "Italian Sporting Goods"];
 	const retailerCards: Array<React.ReactElement> = [];
 
-	retailers.forEach(retailer => {
+	RetailerEnum.getRetailers().forEach(retailer => {
 		retailerCards.push(
-			<Card key={retailer}>
-				<Text>{retailer}</Text>
-			</Card>
+			<Anchor
+				key={retailer.name}
+				href={retailer.url}
+				target="_blank"
+				underline="never"
+				c="initial"
+			>
+				<Card shadow="sm" radius="md">
+					<CardSection>
+						<Image
+							src={retailer.logoUrl}
+							radius="md"
+							fit="contain"
+							h="5rem" />
+					</CardSection>
+					<Center mt="1rem">
+						<Text size="xl">{retailer.name}</Text>
+					</Center>
+				</Card>
+			</Anchor>
 		)
 	});
 
@@ -19,14 +35,9 @@ export default function RetailerCards() {
 		<Box w={"100%"} p={"var(--content-side-padding)"}>
 			<Title order={3} ta={"center"} >Supported Retailers</Title>
 			<Space h={"xl"} />
-			{/* <SimpleGrid cols={4}>
+			<SimpleGrid cols={4}>
 				{retailerCards}
-			</SimpleGrid> */}
-			<Alert variant="outline" color="yellow" title="Under construction!" icon={<IconAlertTriangle />}>
-				<Text size="sm">
-					This section is under construction! Check back later.
-				</Text>
-			</Alert>
+			</SimpleGrid>
 		</Box>
 	);
 }
