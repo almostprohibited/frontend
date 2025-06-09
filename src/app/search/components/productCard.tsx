@@ -12,18 +12,22 @@ function centsToHumanString(price: number): string {
 export default function ProductCard({firearm}: {firearm: FirearmResult}) {
 	const [imageLoaded, setImageLoaded] = useState(false);
 
+	const regularPrice = centsToHumanString(firearm.price.regular_price);
+
 	let priceBadgeChildren;
 
 	if (firearm.price.sale_price) {
-		const regularPriceElement = <Text inherit td="line-through" c="dimmed">{centsToHumanString(firearm.price.regular_price)}</Text>
-		const salePriceElement = <Text inherit>{centsToHumanString(firearm.price.sale_price)}</Text>;
+		const salePrice = centsToHumanString(firearm.price.sale_price);
+
+		const regularPriceElement = <Text key={regularPrice} inherit td="line-through" c="dimmed">{regularPrice}</Text>
+		const salePriceElement = <Text key={salePrice} inherit>{salePrice}</Text>;
 
 		priceBadgeChildren = [salePriceElement, regularPriceElement];
 	} else {
-		priceBadgeChildren = [<Text inherit>{centsToHumanString(firearm.price.regular_price)}</Text>];
+		priceBadgeChildren = [<Text key={regularPrice} inherit>{regularPrice}</Text>];
 	}
 
-	// @ts-ignore
+	// @ts-expect-error: enum is of type object, required to ignore to get working
 	const retailer: Retailer = RetailerEnum[firearm.retailer];
 
 	return (
@@ -37,7 +41,7 @@ export default function ProductCard({firearm}: {firearm: FirearmResult}) {
 			<Card radius="lg" withBorder={true} h="22rem" shadow="sm">
 				<CardSection mb="1rem">
 					<Skeleton h="10rem" visible={!imageLoaded}>
-						<Image h="10rem" src={firearm.thumbnail_link} onLoad={() => setImageLoaded(true)} />
+						<Image alt="" h="10rem" src={firearm.thumbnail_link} onLoad={() => setImageLoaded(true)} />
 					</Skeleton>
 				</CardSection>
 				<Stack mb="1rem" gap="xs">

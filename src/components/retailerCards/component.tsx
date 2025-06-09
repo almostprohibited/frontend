@@ -18,6 +18,7 @@ export default function RetailerCards() {
 				<Card shadow="sm" radius="md">
 					<CardSection>
 						<Image
+							alt=""
 							src={retailer.logoUrl}
 							radius="md"
 							fit="contain"

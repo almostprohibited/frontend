@@ -58,13 +58,18 @@ export class RetailerEnum {
 		"#001e62"
 	);
 
-	private constructor(private readonly key: string, public readonly value: any) {}
+	
+	private constructor(
+		private readonly key: string,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		public readonly value: any
+	) {}
 
 	static getRetailers(): Array<Retailer> {
 		const arr: Array<Retailer> = [];
 
 		Object.getOwnPropertyNames(this).forEach(prop => {
-			// @ts-ignore
+			// @ts-expect-error: value is required to be any to get enum of objects to work
 			const retailer = RetailerEnum[prop];
 
 			if (retailer instanceof Retailer) {

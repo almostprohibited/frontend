@@ -1,9 +1,10 @@
 "use client";
 
-import { Alert, Box, Center, Divider, Group, Space, Text, Title, useMantineTheme } from "@mantine/core";
+import { Alert, Box, Center, Divider, Skeleton, Space, Text, Title, useMantineTheme } from "@mantine/core";
 import SearchBar from "@/components/search/component";
 import RetailerCards from "@/components/retailerCards/component";
 import { IconInfoCircle } from "@tabler/icons-react";
+import { Suspense } from "react";
 
 export default function Home() {
 	const theme = useMantineTheme();
@@ -19,7 +20,9 @@ export default function Home() {
 			</Center>
 			<Center mt={"2rem"} mb={"2rem"}>
 				<Box w={"100%"} p={"var(--content-side-padding)"}>
-					<SearchBar />
+					<Suspense fallback={<Skeleton />}>
+						<SearchBar />
+					</Suspense>
 				</Box>
 			</Center>
 			<Divider />

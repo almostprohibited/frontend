@@ -1,4 +1,6 @@
-import { Box, Center, Flex, Group, Stack, Text } from "@mantine/core";
+"use client";
+
+import { Box, Center, Flex, Text } from "@mantine/core";
 import { IconZoomQuestion } from "@tabler/icons-react";
 
 export default function EmptySearch() {
