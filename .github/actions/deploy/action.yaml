@@ -1,0 +1,31 @@
+name: Deploy
+inputs:
+  artifact-id:
+    type: string
+    required: true
+    description: "The artifact ID from the previous build step containing static files"
+  workspace-path:
+    type: string
+    required: true
+    description: "The parent folder of where things are deployed to"
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      name: Download built files
+      with:
+        artifact-ids: ${{ inputs.artifact-id }}
+        path: ${{ inputs.workspace-path }}/download
+    - name: Replace static files
+      run: |
+        set -euo pipefail
+
+        mkdir -p ${{ inputs.workspace-path }}/web
+
+        echo "Removing old files"
+        rm -rf ${{ inputs.workspace-path }}/web/*
+
+        echo "Moving downloaded files"
+        mv ${{ inputs.workspace-path }}/download/built-files/* ${{ inputs.workspace-path }}/web
+      shell: bash

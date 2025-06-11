@@ -4,7 +4,7 @@ on:
     branches: [develop]
   workflow_dispatch:
 env:
-  STATIC_FILE_PATH: "/home/ubuntu/almostprohibited/frontend-beta/web"
+  WORKSPACE_PATH: "/home/ubuntu/almostprohibited/frontend-beta"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,8 +18,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: ./.github/actions/deploy
+        name: Deploy
         with:
           artifact-ids: ${{ steps.build.outputs.artifact-id }}
-          path: ${{ env.STATIC_FILE_PATH }}
-
+          workspace-path: ${{ env.STATIC_FILE_PATH }}
