@@ -12,7 +12,7 @@ export default function Firearms({setTotalCount}: {setTotalCount: Dispatch<SetSt
 	// const [isSearching, setIsSearching] = useState(true);
 
 	useEffect(() => {
-		const url = new URL("http://localhost:3001/api");
+		const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api`);
 
 		// who reverses KV pair arguments, wtf nextjs
 		searchParams.forEach((value, key) => {
