@@ -12,14 +12,9 @@ export default function Firearms({setTotalCount}: {setTotalCount: Dispatch<SetSt
 	// const [isSearching, setIsSearching] = useState(true);
 
 	useEffect(() => {
-		const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api`);
+		const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api?`;
 
-		// who reverses KV pair arguments, wtf nextjs
-		searchParams.forEach((value, key) => {
-			url.searchParams.append(key, value);
-		});
-
-		fetch(url).then(async response => {
+		fetch(url + searchParams.toString()).then(async response => {
 			return await response.json();
 		})
 		.then(async (data: ApiResponse) => {
