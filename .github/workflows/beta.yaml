@@ -22,4 +22,4 @@ jobs:
         name: Deploy
         with:
           artifact-ids: ${{ steps.build.outputs.artifact-id }}
-          workspace-path: ${{ env.STATIC_FILE_PATH }}
+          workspace-path: ${{ env.WORKSPACE_PATH }}
