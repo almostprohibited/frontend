@@ -11,6 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build
+        id: build
         uses: ./.github/actions/build
+  deploy:
+    needs: [build]
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          STATIC_FILE_PATH: ${{ env.BINARY_PATH }}
+          artifact-ids: ${{ steps.build.outputs.artifact-id }}
+          path: ${{ env.STATIC_FILE_PATH }}
+

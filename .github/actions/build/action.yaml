@@ -1,4 +1,9 @@
 name: Build
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+outputs:
+  artifact-id:
+    value: ${{ steps.upload.outputs.artifact-id }}
 runs:
   using: 'composite'
   steps:
@@ -9,9 +14,10 @@ runs:
         
         npm ci
         npm run build
-
-        echo "Using static path: ${{ inputs.binary-path }}"
-        mkdir -p ${{ inputs.binary-path }}
-
-        ls dist
       shell: bash
+    - uses: actions/upload-artifact@v4
+      id: upload
+      with:
+        name: frontend
+        path: dist/*
+        if-no-files-found: error
