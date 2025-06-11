@@ -1,0 +1,17 @@
+name: Build
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: |
+        set -ueo pipefail
+        
+        npm ci
+        npm run build
+
+        echo "Using static path: ${{ inputs.binary-path }}"
+        mkdir -p ${{ inputs.binary-path }}
+
+        ls dist
+      shell: bash

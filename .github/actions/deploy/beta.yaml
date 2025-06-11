@@ -1,0 +1,16 @@
+name: Publish (beta)
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+env:
+  STATIC_FILE_PATH: "/home/ubuntu/almostprohibited/frontend-beta/web"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          STATIC_FILE_PATH: ${{ env.BINARY_PATH }}
