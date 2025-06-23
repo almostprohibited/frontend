@@ -27,9 +27,6 @@ export class RetailerEnum {
 		"#605a4d"
 	);
 
-    // static readonly ItalianSportingGoods = new Retailer();
-    // static readonly InternationalShootingSupplies = new Retailer();
-
     static readonly AlFlahertys = new Retailer(
 		"Al Flaherty's",
 		"https://alflahertys.com/",
@@ -51,11 +48,18 @@ export class RetailerEnum {
 		"#1c2530"
 	);
 	
-	static readonly CanadasGunStore = new Retailer(
-		"Canada's Gun Store",
-		"https://www.canadasgunstore.ca/",
-		"https://www.canadasgunstore.ca/inet/styles/CGSINET/app/images/_logo/CGS-logo-navigation.svg",
-		"#001e62"
+	// static readonly CanadasGunStore = new Retailer(
+	// 	"Canada's Gun Store",
+	// 	"https://www.canadasgunstore.ca/",
+	// 	"https://www.canadasgunstore.ca/inet/styles/CGSINET/app/images/_logo/CGS-logo-navigation.svg",
+	// 	"#001e62"
+	// );
+
+	static readonly FirearmsOutletCanada = new Retailer(
+		"Firearms Outlet Canada",
+		"https://firearmsoutletcanada.com/",
+		"https://cdn11.bigcommerce.com/s-ezlzxhcsxg/images/stencil/290x63/logo_1706733195__42983.original.png",
+		"#ee2020"
 	);
 
 	
@@ -85,24 +89,32 @@ export class RetailerEnum {
 	}
 }
 
+export interface Price {
+    regular_price: number,
+    sale_price?: number,
+}
+
+export enum Category {
+	Firearm,
+	Ammunition,
+	Other
+}
+
 export interface ApiResponse {
-	firearms: Array<FirearmResult>,
+	items: Array<CrawlResult>,
 	total_count: number
 }
 
-export interface FirearmResult {
-	name: string,
-	link: string,
-	thumbnail_link: string,
-	query_time: number,
-	price: {
-		regular_price: number,
-		sale_price?: number
-	},
-	retailer: RetailerEnum,
-	description?: string,
-	ammo_type?: string,
-	action_type?: string,
-	firearm_type?: string,
-	firearm_class?: string,
+export interface CrawlResult {
+    name: string,
+    url: string,
+    price: Price,
+    query_time: number,
+    retailer: RetailerEnum,
+    category: Category,
+    description?: string,
+    image_url?: string,
+	// TODO: fix this, this is
+	// suppose to represent metadata
+    metadata?: object,
 }

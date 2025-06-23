@@ -24,7 +24,11 @@ const placeHolderValues = [
 	"mrx bison"
 ];
 
-export default function MainInput() {
+export default function MainInput({
+	disabled = false
+}: {
+	disabled?: boolean,
+}) {
 	const searchParams = useSearchParams();
 	const query = searchParams.get("query") || "";
 
@@ -38,6 +42,7 @@ export default function MainInput() {
 	const searchIcon = <IconSearch />;
 
 	return <TextInput
+		disabled={disabled}
 		name="query"
 		classNames={{input: styles.input, wrapper: styles.override}}
 		placeholder={placeHolderText}

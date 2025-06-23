@@ -1,33 +1,61 @@
 "use client";
 
-import { ActionIcon, Collapse, Fieldset, Flex, Group, Pagination, Skeleton } from "@mantine/core";
-import { Suspense, useState } from "react";
+import { ActionIcon, Box, Collapse, Divider, Fieldset, Flex, Group, LoadingOverlay, Pagination, Skeleton } from "@mantine/core";
+import { Suspense, useEffect, useState } from "react";
 import { IconAdjustmentsHorizontal, IconSend2 } from "@tabler/icons-react";
 import Form from "next/form";
 import MainInput from "./mainInput";
 import SortOptions from "./searchOptions";
 import FormattedNumberInput from "./formatedNumberInput";
+import { usePathname, useSearchParams } from "next/navigation";
+import Firearms from "@/app/search/components/results";
 
-function submitForm(target: Element) {
-	target.closest("form")?.requestSubmit();
+function submitForm() {
+	const form: HTMLFormElement | null = document.querySelector("#api");
+	form?.requestSubmit();
 }
 
-export default function SearchBar({totalCount = 0}: {totalCount?: number}) {
+export default function SearchBar() {
+	const searchParams = useSearchParams();
+	const queryPage = Number(searchParams.get("page")) || 0;
+
+	const pathname = usePathname();
+	
+	const [totalItemsCount, setTotalCount] = useState(0);
+
+	const maxPages = Math.ceil(totalItemsCount / 32);
+
 	const [filterVisible, filterVisibleToggle] = useState(false);
-	const [page, setPage] = useState(0);
+	const [isFirstLoad, setFirstLoad] = useState(true);
+	const [isSendingRequest, setSendingRequest] = useState(false);
+	const [page, onPageChange] = useState(queryPage)
+
+	useEffect(() => {
+		if (!isFirstLoad) {
+			submitForm();
+		} else if (isFirstLoad) {
+			setFirstLoad(false);
+		}
+	}, [page]);
 
 	return (
-		<Form action="/search" onKeyDown={(event) => {
+		<Form disabled={isSendingRequest} id="api" action="/search" onKeyDown={(event) => {
 			if (event.key === "Enter") {
-				submitForm(event.currentTarget);
+				submitForm();
 			}
 		}}>
-			<Suspense fallback={<Skeleton />}>
+			<Box pos="relative">
 				<Flex
 					align="center"
 					justify="center"
 				>
+					<LoadingOverlay
+						overlayProps={{radius: "md", backgroundOpacity: 0.5}}
+						visible={isSendingRequest}
+						loaderProps={{type: "oval"}}
+					/>
 					<ActionIcon
+						disabled={isSendingRequest}
 						variant="default"
 						size="input-lg"
 						mr="0.5rem"
@@ -35,42 +63,66 @@ export default function SearchBar({totalCount = 0}: {totalCount?: number}) {
 					>
 						<IconAdjustmentsHorizontal />
 					</ActionIcon>
-					<MainInput />
+					<MainInput disabled={isSendingRequest} />
 					<ActionIcon
+						disabled={isSendingRequest}
 						variant="default"
 						size="input-lg"
 						ml="0.5rem"
 						c="blue"
-						onClick={(event) => submitForm(event.currentTarget)}
+						onClick={submitForm}
 					>
 						<IconSend2 />
 					</ActionIcon>
 				</Flex>
+
 				<Group
 					mt="1rem"
 					justify="space-between"
 				>
-					<SortOptions />
+					<SortOptions disabled={isSendingRequest} onChange={submitForm} />
 					<Pagination
-						total={Math.ceil(totalCount / 32)}
-						withPages={totalCount > 0}
-						onChange={(val) => {
-							setPage(val - 1);
-							submitForm(document.body)
-						}}
-						value={page + 1}
+						value={Math.max(page, 1)}
+						total={maxPages}
+						onChange={onPageChange}
+						disabled={maxPages <= 1 || isSendingRequest ? true : false}
 					/>
-					<input hidden={true} name="page" value={page} readOnly />
+					<input id="page" hidden={true} name="page" value={Math.max(page - 1, 0)} readOnly />
 				</Group>
+
 				<Collapse mt="1rem" in={filterVisible}>
-					<Fieldset legend="Price" display="initial">
+					<Fieldset disabled={isSendingRequest} legend="Price" display="initial">
 						<Group>
 							<FormattedNumberInput inputName="min-price" placeholder="minimum price" />
 							<FormattedNumberInput inputName="max-price" placeholder="maximum price" />
 						</Group>
 					</Fieldset>
 				</Collapse>
-			</Suspense>
+			</Box>
+
+			{pathname.startsWith("/search") && 
+				<>
+					<Divider mt="1rem" mb="1rem" />
+					<Suspense fallback={<Skeleton />}>
+						<Firearms setTotalCount={setTotalCount} setLoadingOverlay={setSendingRequest} />
+					</Suspense>
+					<Divider mt="1rem" mb="1rem" />
+				</>
+			}
+
+			<Flex pos="relative" align="flex-center" justify="flex-end">
+				<LoadingOverlay
+					overlayProps={{radius: "md", backgroundOpacity: 0.5}}
+					visible={isSendingRequest}
+					loaderProps={{type: "oval"}}
+				/>
+				<Pagination
+					value={Math.max(page, 1)}
+					total={maxPages}
+					onChange={onPageChange}
+					disabled={maxPages <= 1 || isSendingRequest ? true : false}
+				/>
+			</Flex>
 		</Form>
 	);
 }

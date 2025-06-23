@@ -6,16 +6,18 @@ import { Box, ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mant
 import "./globals.css";
 import Footer from "@/components/footer/component";
 import Header from "@/components/header/component";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-	title: "project-carbon",
-	description: "project-carbon",
+	title: "Almost Prohibited",
+	description: "Canada's upcoming sporting goods aggregator",
 };
 
-export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
+export default function RootLayout({children}: Readonly<{children: ReactNode}>) {
 	return (
 		<html lang="en" {...mantineHtmlProps}>
 			<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 				<ColorSchemeScript />
 			</head>
 			<body>
