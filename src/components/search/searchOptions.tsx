@@ -1,6 +1,6 @@
 "use client";
 
-import { SegmentedControl, Center, Stack } from "@mantine/core";
+import { SegmentedControl, Center } from "@mantine/core";
 import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconLayersIntersect, IconBoom } from "@tabler/icons-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ export default function SortOptions({
 		} else if (isFirstRender && pathname.startsWith("/search")) {
 			setFirstRender(false);
 		}
-	}, [sort, category]);
+	}, [sort, category, pathname, isFirstRender, onChange]);
 
 	return (
 		<>

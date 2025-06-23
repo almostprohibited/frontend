@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionIcon, Box, Collapse, Divider, Fieldset, Flex, Group, LoadingOverlay, Pagination, Skeleton } from "@mantine/core";
+import { ActionIcon, Box, Collapse, Divider, Fieldset, Flex, Group, LoadingOverlay, Pagination, Skeleton, Stack } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import { IconAdjustmentsHorizontal, IconSend2 } from "@tabler/icons-react";
 import Form from "next/form";
@@ -36,7 +36,7 @@ export default function SearchBar() {
 		} else if (isFirstLoad) {
 			setFirstLoad(false);
 		}
-	}, [page]);
+	}, [page, isFirstLoad]);
 
 	return (
 		<Form disabled={isSendingRequest} id="api" action="/search" onKeyDown={(event) => {
@@ -76,19 +76,20 @@ export default function SearchBar() {
 					</ActionIcon>
 				</Flex>
 
-				<Group
-					mt="1rem"
-					justify="space-between"
-				>
-					<SortOptions disabled={isSendingRequest} onChange={submitForm} />
-					<Pagination
-						value={Math.max(page, 1)}
-						total={maxPages}
-						onChange={onPageChange}
-						disabled={maxPages <= 1 || isSendingRequest ? true : false}
-					/>
-					<input id="page" hidden={true} name="page" value={Math.max(page - 1, 0)} readOnly />
-				</Group>
+				<Stack mt="1rem">
+					<Group justify="space-between">
+						<SortOptions disabled={isSendingRequest} onChange={submitForm} />
+					</Group>
+					<Flex pos="relative" align="flex-center" justify="flex-end">
+						<Pagination
+							value={Math.max(page, 1)}
+							total={maxPages}
+							onChange={onPageChange}
+							disabled={maxPages <= 1 || isSendingRequest ? true : false}
+						/>
+						<input id="page" hidden={true} name="page" value={Math.max(page - 1, 0)} readOnly />
+					</Flex>
+				</Stack>
 
 				<Collapse mt="1rem" in={filterVisible}>
 					<Fieldset disabled={isSendingRequest} legend="Price" display="initial">

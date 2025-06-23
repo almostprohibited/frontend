@@ -14,7 +14,7 @@ export default function Results({
 	setLoadingOverlay: Dispatch<SetStateAction<boolean>>,
 }) {
 	const searchParams = useSearchParams();
-	const isSmallWindow = useMediaQuery("(max-width: 1000px)");
+	const isSmallWindow = useMediaQuery("(max-width: 1100px)");
 
 	const [results, setResults] = useState<Array<ReactElement>>([]);
 
@@ -30,7 +30,7 @@ export default function Results({
 			const resultElements: Array<ReactElement> = [];
 			console.log(data);
 			data.items.forEach(apiResult => {
-				resultElements.push(<ProductCard key={apiResult.url} crawlData={apiResult}/>);
+				resultElements.push(<ProductCard key={apiResult.name} crawlData={apiResult}/>);
 			})
 
 			setResults(resultElements);
