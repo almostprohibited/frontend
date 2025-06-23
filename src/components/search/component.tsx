@@ -36,7 +36,7 @@ export default function SearchBar() {
 		} else if (isFirstLoad) {
 			setFirstLoad(false);
 		}
-	}, [page, isFirstLoad]);
+	}, [page]);
 
 	return (
 		<Form disabled={isSendingRequest} id="api" action="/search" onKeyDown={(event) => {
