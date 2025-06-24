@@ -42,7 +42,7 @@ export class RetailerEnum {
 	);
 
     static readonly CanadasGunShop = new Retailer(
-		"Canada's Gun Shop",
+		"Calgary Shooting Centre",
 		"https://store.theshootingcentre.com/",
 		"https://cdn11.bigcommerce.com/s-stx5s5fhga/images/stencil/375x75/csc-canadas-gun-shop-logo-250x113_1712677834__05165.original.png",
 		"#1c2530"
