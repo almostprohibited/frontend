@@ -50,7 +50,7 @@ export default function SortOptions({
 						label: (
 							<Center style={{gap: "0.5rem"}}>
 								<IconStar size="1rem" />
-								<span>Relevent</span>
+								<span>Relevant</span>
 							</Center>
 						)
 					},
