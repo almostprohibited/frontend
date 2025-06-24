@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useState, ReactElement, useEffect } from "react";
 import EmptySearch from "./emptySearch";
 import ProductCard from "./productCard";
-import { useMediaQuery } from "@mantine/hooks";
+import { useMobileView } from "@/utils/hooks/useMobileView";
 
 export default function Results({
 	setTotalCount,
@@ -14,7 +14,7 @@ export default function Results({
 	setLoadingOverlay: Dispatch<SetStateAction<boolean>>,
 }) {
 	const searchParams = useSearchParams();
-	const isSmallWindow = useMediaQuery("(max-width: 1100px)");
+	const isSmallWindow = useMobileView();
 
 	const [results, setResults] = useState<Array<ReactElement>>([]);
 
@@ -46,7 +46,7 @@ export default function Results({
 	}
 	
 	return (
-		<SimpleGrid cols={isSmallWindow ? 3 : 4}>
+		<SimpleGrid cols={isSmallWindow ? 2 : 4}>
 			{...results}
 		</SimpleGrid>
 	);

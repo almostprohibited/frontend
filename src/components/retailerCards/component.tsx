@@ -1,9 +1,12 @@
 "use client";
 
 import { RetailerEnum } from "@/utils/apiStructs";
+import { useMobileView } from "@/utils/hooks/useMobileView";
 import { Box, SimpleGrid, Space, Text, Title, Image, Card, CardSection, Center, Anchor } from "@mantine/core";
 
 export default function RetailerCards() {
+	const isMobile = useMobileView();
+
 	const retailerCards: Array<React.ReactElement> = [];
 
 	RetailerEnum.getRetailers().forEach(retailer => {
@@ -34,9 +37,9 @@ export default function RetailerCards() {
 
 	return (
 		<Box w={"100%"} p={"var(--content-side-padding)"}>
-			<Title order={3} ta={"center"} >Supported Retailers</Title>
+			<Title order={3} ta={"center"}>Supported Retailers</Title>
 			<Space h={"xl"} />
-			<SimpleGrid cols={4}>
+			<SimpleGrid cols={isMobile ? 2 : 4}>
 				{retailerCards}
 			</SimpleGrid>
 		</Box>

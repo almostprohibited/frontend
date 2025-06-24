@@ -1,5 +1,6 @@
 "use client";
 
+import { useMobileView } from "@/utils/hooks/useMobileView";
 import { SegmentedControl, Center } from "@mantine/core";
 import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconLayersIntersect, IconBoom } from "@tabler/icons-react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -12,6 +13,8 @@ export default function SortOptions({
 	onChange: CallableFunction,
 	disabled?: boolean,
 }) {
+	const isMobile = useMobileView();
+
 	const searchParams = useSearchParams();
 	const sortParam = searchParams.get("sort") || "relevant";
 	const categoryParam = searchParams.get("category") || "all";
@@ -22,17 +25,20 @@ export default function SortOptions({
 	const [category, setCategory] = useState(categoryParam);
 	const [isFirstRender, setFirstRender] = useState(true);
 
+	const segmentWidth = isMobile ? "100%" : "";
+
 	useEffect(() => {
 		if (!isFirstRender && pathname.startsWith("/search")) {
 			onChange();
 		} else if (isFirstRender && pathname.startsWith("/search")) {
 			setFirstRender(false);
 		}
-	}, [sort, category, pathname, isFirstRender, onChange]);
+	}, [sort, category, pathname, onChange]);
 
 	return (
 		<>
 			<SegmentedControl
+				w={segmentWidth}
 				disabled={disabled}
 				value={sort}
 				onChange={setSort}
@@ -69,6 +75,7 @@ export default function SortOptions({
 				]}
 			/>
 			<SegmentedControl
+				w={segmentWidth}
 				disabled={disabled}
 				value={category}
 				onChange={setCategory}

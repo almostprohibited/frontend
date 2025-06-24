@@ -1,19 +1,24 @@
 "use client";
 
 import { ContactForm } from "@/components/contact/contactForm";
+import { useMobileView } from "@/utils/hooks/useMobileView";
 import { Box, Code, Flex, Stack, Text, Title } from "@mantine/core";
 
-export default function contactPage() {
+export default function ContactPage() {
+	const isMobile = useMobileView();
+
+	const boxSize = isMobile ? "100%" : "50%";
+
 	return (
 		<Box mt="2rem" p={"var(--content-side-padding)"}>
 			<Title order={1} ta={"center"}>{"Contact Me"}</Title>
 			<Flex
 				gap="xl"
 				mt="5rem"
-				direction="row"
+				direction={isMobile ? "column" : "row"}
 				justify="center"
 			>
-				<Box w="50%">
+				<Box w={boxSize}>
 					<Stack>
 						<Title order={2} c="lightgrey">{"For retailers"}</Title>
 						<Text>{"I perform a daily crawl on your products starting at 12AM PT. This crawl only fetches text. All images, and dynamically loading content, are not loaded."}</Text>
@@ -28,7 +33,7 @@ export default function contactPage() {
 						<Text>{"Send me a message about it and I'll take a look into it at some point."}</Text>
 					</Stack>
 				</Box>
-				<Box w="50%">
+				<Box w={boxSize}>
 					<ContactForm />
 				</Box>
 			</Flex>
