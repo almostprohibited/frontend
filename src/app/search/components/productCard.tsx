@@ -1,15 +1,18 @@
 import { Card, Text, Image, CardSection, Badge, Stack, Skeleton, Anchor, Group, TooltipFloating, Flex, Box } from "@mantine/core";
 import { CrawlResult, Retailer, RetailerEnum } from "../../../utils/apiStructs";
 import { useState } from "react";
+import { useMobileView } from "@/utils/hooks/useMobileView";
 
 function centsToHumanString(price: number): string {
 	const dollars = Math.floor(price / 100);
 	const cents = String(price % 100).padEnd(2, "0");
 
-	return `$ ${dollars}.${cents}`;
+	return `${dollars}.${cents}`;
 }
 
 export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
+	const isMobile = useMobileView();
+
 	const [imageLoaded, setImageLoaded] = useState(false);
 
 	const regularPrice = centsToHumanString(crawlData.price.regular_price);
@@ -20,11 +23,11 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 		const salePrice = centsToHumanString(crawlData.price.sale_price);
 
 		const regularPriceElement = <Text key={regularPrice} inherit td="line-through" c="dimmed">{regularPrice}</Text>
-		const salePriceElement = <Text key={salePrice} inherit>{salePrice}</Text>;
+		const salePriceElement = <Text c="green" key={salePrice} inherit>{"$ " + salePrice}</Text>;
 
 		priceBadgeChildren = [salePriceElement, regularPriceElement];
 	} else {
-		priceBadgeChildren = [<Text key={regularPrice} inherit>{regularPrice}</Text>];
+		priceBadgeChildren = [<Text key={regularPrice} inherit>{"$ " + regularPrice}</Text>];
 	}
 
 	// @ts-expect-error: enum is of type object, required to ignore to get working
@@ -33,6 +36,8 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 	const currentUnixSecs = new Date().getTime() / 1000;
 	const timeDiffSecs = currentUnixSecs - crawlData.query_time;
 	const timeDiffHours = (timeDiffSecs / 60 / 60).toFixed(2);
+
+	const badgeWidth = isMobile ? "100%" : "";
 
 	return (
 		<Anchor
@@ -53,8 +58,8 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 					h="100%"
 				>
 					<Stack mb="1rem" gap="xs">
-						<Badge variant="outline" size="lg" color="gray"><Group gap="0.5rem">{...priceBadgeChildren}</Group></Badge>
-						<Badge variant="outline" size="md" bg={retailer.colourHex} color="gray">{retailer.name}</Badge>
+						<Badge w={badgeWidth} variant="outline" size="lg" color="gray"><Group gap="0.5rem">{...priceBadgeChildren}</Group></Badge>
+						<Badge w={badgeWidth} variant="outline" size="md" bg={retailer.colourHex} color="gray">{retailer.name}</Badge>
 					</Stack>
 					<Box flex={1}>
 						<TooltipFloating
