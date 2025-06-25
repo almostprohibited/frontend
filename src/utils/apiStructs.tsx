@@ -48,12 +48,12 @@ export class RetailerEnum {
 		"#1c2530"
 	);
 	
-	// static readonly CanadasGunStore = new Retailer(
-	// 	"Canada's Gun Store",
-	// 	"https://www.canadasgunstore.ca/",
-	// 	"https://www.canadasgunstore.ca/inet/styles/CGSINET/app/images/_logo/CGS-logo-navigation.svg",
-	// 	"#001e62"
-	// );
+	static readonly CanadasGunStore = new Retailer(
+		"Canada's Gun Store",
+		"https://www.canadasgunstore.ca/",
+		"https://www.canadasgunstore.ca/inet/styles/CGSINET/app/images/_logo/CGS-logo-navigation.svg",
+		"#001e62"
+	);
 
 	static readonly FirearmsOutletCanada = new Retailer(
 		"Firearms Outlet Canada",
@@ -61,6 +61,13 @@ export class RetailerEnum {
 		"https://cdn11.bigcommerce.com/s-ezlzxhcsxg/images/stencil/290x63/logo_1706733195__42983.original.png",
 		"#ee2020"
 	);
+
+	// static readonly TheAmmoSource = new Retailer(
+	// 	"The Ammo Source",
+	// 	"https://theammosource.com/",
+	// 	"https://cdn11.bigcommerce.com/s-7f2680ghys/images/stencil/166x100/sfrc_1544201399__41333.original.jpg",
+	// 	"#88b04b"
+	// )
 
 	
 	private constructor(

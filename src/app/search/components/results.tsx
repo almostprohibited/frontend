@@ -28,7 +28,7 @@ export default function Results({
 		})
 		.then(async (data: ApiResponse) => {
 			const resultElements: Array<ReactElement> = [];
-			console.log(data);
+			
 			data.items.forEach(apiResult => {
 				resultElements.push(<ProductCard key={apiResult.name} crawlData={apiResult}/>);
 			})
