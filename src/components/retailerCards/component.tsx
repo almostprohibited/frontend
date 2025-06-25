@@ -21,6 +21,7 @@ export default function RetailerCards() {
 				<Card shadow="sm" radius="md">
 					<CardSection>
 						<Image
+							p="0.25rem"
 							alt=""
 							src={retailer.logoUrl}
 							radius="md"
@@ -28,7 +29,7 @@ export default function RetailerCards() {
 							h="5rem" />
 					</CardSection>
 					<Center mt="1rem">
-						<Text size="xl">{retailer.name}</Text>
+						<Text size="lg">{retailer.name}</Text>
 					</Center>
 				</Card>
 			</Anchor>

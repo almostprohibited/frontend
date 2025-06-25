@@ -102,9 +102,9 @@ export interface Price {
 }
 
 export enum Category {
-	Firearm,
-	Ammunition,
-	Other
+	Firearm = "firearm",
+	Ammunition = "ammunition",
+	Other = "other"
 }
 
 export interface ApiResponse {

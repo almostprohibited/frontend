@@ -2,6 +2,7 @@ import { Card, Text, Image, CardSection, Badge, Stack, Skeleton, Anchor, Group, 
 import { CrawlResult, Retailer, RetailerEnum } from "../../../utils/apiStructs";
 import { useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
+import { IconClockCheck, IconClockQuestion } from "@tabler/icons-react";
 
 function centsToHumanString(price: number): string {
 	const dollars = Math.floor(price / 100);
@@ -35,9 +36,11 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 
 	const currentUnixSecs = new Date().getTime() / 1000;
 	const timeDiffSecs = currentUnixSecs - crawlData.query_time;
-	const timeDiffHours = (timeDiffSecs / 60 / 60).toFixed(2);
+	const timeDiffHours = timeDiffSecs / 60 / 60;
 
 	const badgeWidth = isMobile ? "100%" : "";
+
+	const clockIcon = timeDiffHours < 24 ? <IconClockCheck /> : <IconClockQuestion />;
 
 	return (
 		<Anchor
@@ -72,7 +75,10 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 						</TooltipFloating>
 					</Box>
 					<Box>
-						<Text size="sm" c="grey">{timeDiffHours} hours ago</Text>
+						<Group gap="xs" c="grey">
+							{clockIcon}
+							<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
+						</Group>
 					</Box>
 				</Flex>
 			</Card>

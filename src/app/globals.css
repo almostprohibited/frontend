@@ -33,6 +33,17 @@ a {
 	margin: auto;
 }
 
+@media only screen and (max-width: 1200) {
+	:root {
+		--content-side-padding: 0 10rem 0 10rem;
+	}
+
+	.mantine-Alert-root {
+		width: 90%;
+	}
+}
+
+
 @media only screen and (max-width: 1000px) {
 	:root {
 		--content-side-padding: 0 1rem 0 1rem;
