@@ -21,7 +21,7 @@ export default function ContactPage() {
 				<Box w={boxSize}>
 					<Stack>
 						<Title order={2} c="lightgrey">{"For retailers"}</Title>
-						<Text>{"I perform a daily crawl on your products starting at 12AM PT. This crawl only fetches text. All images, and dynamically loading content, are not loaded."}</Text>
+						<Text>{"I perform a daily crawl on your products starting at 12AM PT. This crawl only fetches text. All images, and dynamically loading content, are not included."}</Text>
 						<Text>{"There is a minimum of 1 second between page requests, but this is typically 10 seconds for most retailers."}</Text>
 						<Text>{"My crawler will identify itself with the following user agent:"}</Text>
 						<Code block>{"almostprohibited/1.0 (+https://almostprohibited.ca/contact/; hello@almostprohibited.ca)"}</Code>

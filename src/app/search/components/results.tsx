@@ -6,12 +6,19 @@ import EmptySearch from "./emptySearch";
 import ProductCard from "./productCard";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 
+// export default function Results({
+// 	setTotalCount,
+// 	setLoadingOverlay,
+// }: {
+// 	setTotalCount: Dispatch<SetStateAction<number>>,
+// 	setLoadingOverlay: Dispatch<SetStateAction<boolean>>,
+// }) {
 export default function Results({
-	setTotalCount,
-	setLoadingOverlay,
+	setTotalItems,
+	setLoadingState,
 }: {
-	setTotalCount: Dispatch<SetStateAction<number>>,
-	setLoadingOverlay: Dispatch<SetStateAction<boolean>>,
+	setTotalItems: Dispatch<SetStateAction<number>>,
+	setLoadingState: Dispatch<SetStateAction<boolean>>,
 }) {
 	const searchParams = useSearchParams();
 	const isSmallWindow = useMobileView();
@@ -19,7 +26,7 @@ export default function Results({
 	const [results, setResults] = useState<Array<ReactElement>>([]);
 
 	useEffect(() => {
-		setLoadingOverlay(true);
+		setLoadingState(true);
 
 		const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/search?`;
 
@@ -34,12 +41,12 @@ export default function Results({
 			})
 
 			setResults(resultElements);
-			setTotalCount(data.total_count);
+			setTotalItems(data.total_count);
 		})
 		.finally(() => {
-			setLoadingOverlay(false);
+			setLoadingState(false);
 		});
-	}, [searchParams, setTotalCount, setLoadingOverlay])
+	}, [searchParams])
 
 	if (results.length === 0) {
 		return <EmptySearch />;

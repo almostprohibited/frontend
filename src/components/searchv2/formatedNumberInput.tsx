@@ -1,18 +1,19 @@
 "use client";
 
 import { NumberInput } from "@mantine/core";
-import { useSearchParams } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 export default function FormattedNumberInput({
 	inputName,
+	value,
+	setValue,
 	placeholder,
 }: {
 	inputName: string
+	value: string | number,
+	setValue: Dispatch<SetStateAction<string | number>>,
 	placeholder: string
 }) {
-	const searchParams = useSearchParams();
-	const value = searchParams.get(inputName) || "";
-
 	const numberInputProps = {
 		decimalScale: 2,
 		allowNegative: false,
@@ -21,5 +22,13 @@ export default function FormattedNumberInput({
 		leftSection: "$"
 	};
 
-	return <NumberInput name={inputName} placeholder={placeholder} value={value} {...numberInputProps} />;
+	return (
+		<NumberInput
+			name={inputName}
+			placeholder={placeholder}
+			value={value}
+			onChange={setValue}
+			{...numberInputProps}
+		/>
+	);
 }

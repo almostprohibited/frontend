@@ -1,7 +1,7 @@
 "use client";
 
 import { Alert, Box, Center, Divider, Skeleton, Space, Text, Title, useMantineTheme } from "@mantine/core";
-import SearchBar from "@/components/search/component";
+import SearchBar from "@/components/searchv2/component";
 import RetailerCards from "@/components/retailerCards/component";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { Suspense } from "react";

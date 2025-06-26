@@ -9,7 +9,9 @@ export default function RetailerCards() {
 
 	const retailerCards: Array<React.ReactElement> = [];
 
-	RetailerEnum.getRetailers().forEach(retailer => {
+	RetailerEnum.getRetailers().sort((a, b) => {
+		return a.name.localeCompare(b.name);
+	}).forEach(retailer => {
 		retailerCards.push(
 			<Anchor
 				key={retailer.name}
@@ -18,7 +20,7 @@ export default function RetailerCards() {
 				underline="never"
 				c="initial"
 			>
-				<Card shadow="sm" radius="md">
+				<Card shadow="sm" radius="md" h="10.5rem">
 					<CardSection>
 						<Image
 							p="0.25rem"

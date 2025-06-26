@@ -4,8 +4,7 @@ import styles from "./mainInput.module.css";
 
 import { CloseButton, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const placeHolderValues = [
 	"norinco sks",
@@ -25,15 +24,14 @@ const placeHolderValues = [
 ];
 
 export default function MainInput({
+	value,
+	setValue,
 	disabled = false
 }: {
+	value: string,
+	setValue: Dispatch<SetStateAction<string>>,
 	disabled?: boolean,
 }) {
-	const searchParams = useSearchParams();
-	const query = searchParams.get("query") || "";
-
-	const [value, setValue] = useState(query);
-
 	const [placeHolderText] = useState(
 		placeHolderValues[Math.floor(Math.random() * placeHolderValues.length)]
 	)

@@ -83,7 +83,7 @@ export function ContactForm() {
 				<TextInput
 					label="Email"
 					placeholder="your@email.com"
-					description="Optional. Only needed if you want a reply"
+					description="Optional. Only required if you want a reply"
 					value={email}
 					onChange={(event) => validateEmail(event.currentTarget.value)}
 					error={emailContainsError}
@@ -92,7 +92,7 @@ export function ContactForm() {
 				<TextInput
 					label="Subject" 
 					placeholder="summary of your message"
-					description="Optional"
+					description="Optional."
 					value={subject}
 					onChange={(event) => setSubject(event.currentTarget.value)}
 					disabled={hasSentRequest}
