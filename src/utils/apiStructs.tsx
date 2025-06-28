@@ -62,6 +62,13 @@ export class RetailerEnum {
 		"#ee2020"
 	);
 
+	static readonly ItalianSportingGoods = new Retailer(
+		"Italian Sporting Goods",
+		"https://www.italiansportinggoods.com/",
+		"https://www.italiansportinggoods.com/static/version1749100864/frontend/isg/main/en_CA/images/ISG_logo_300x100.jpg",
+		"#666633"
+	);
+
 	// static readonly TheAmmoSource = new Retailer(
 	// 	"The Ammo Source",
 	// 	"https://theammosource.com/",
