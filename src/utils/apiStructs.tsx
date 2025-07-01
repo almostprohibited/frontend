@@ -70,7 +70,7 @@ export class RetailerEnum {
 	);
 
 	static readonly TheAmmoSource = new Retailer(
-		"The Ammo Source",
+		"SFRC",
 		"https://theammosource.com/",
 		"https://cdn11.bigcommerce.com/s-7f2680ghys/images/stencil/166x100/sfrc_1544201399__41333.original.jpg",
 		"#88b04b"
