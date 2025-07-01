@@ -76,7 +76,13 @@ export class RetailerEnum {
 		"#88b04b"
 	)
 
-	
+	static readonly Tenda = new Retailer(
+		"Tenda",
+		"https://www.gotenda.com/",
+		"https://www.gotenda.com/wp-content/uploads/2020/04/logo-yellow.png",
+		"#ffc300"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
