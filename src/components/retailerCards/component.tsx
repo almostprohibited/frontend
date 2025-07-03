@@ -31,7 +31,7 @@ export default function RetailerCards() {
 							h="5rem" />
 					</CardSection>
 					<Center mt="1rem">
-						<Text size="lg">{retailer.name}</Text>
+						<Text size="lg" ta="center">{retailer.name}</Text>
 					</Center>
 				</Card>
 			</Anchor>

@@ -3,12 +3,14 @@ export class Retailer {
 	readonly url: string;
 	readonly logoUrl: string;
 	readonly colourHex: string;
+	readonly textColourHex: string;
 
-	constructor(name: string, url: string, logoUrl: string, colourHex: string) {
+	constructor(name: string, url: string, logoUrl: string, colourHex: string, textColourHex: string = "#e2e2e2") {
 		this.name = name;
 		this.url = url;
 		this.logoUrl = logoUrl;
 		this.colourHex = colourHex;
+		this.textColourHex = textColourHex;
 	}
 }
 
@@ -31,7 +33,8 @@ export class RetailerEnum {
 		"Al Flaherty's",
 		"https://alflahertys.com/",
 		"https://cdn11.bigcommerce.com/s-rk4zcah9rr/images/stencil/250x50/new_logo_moose_renner_text_2019_white_1571237423__82941.original.png",
-		"#232f3e"
+		"#232f3e",
+		"#e2e2e2"
 	);
 
     static readonly BullseyeNorth = new Retailer(
@@ -73,14 +76,16 @@ export class RetailerEnum {
 		"SFRC",
 		"https://theammosource.com/",
 		"https://cdn11.bigcommerce.com/s-7f2680ghys/images/stencil/166x100/sfrc_1544201399__41333.original.jpg",
-		"#88b04b"
+		"#88b04b",
+		"#000"
 	)
 
 	static readonly Tenda = new Retailer(
-		"Tenda",
+		"Tenda Canada",
 		"https://www.gotenda.com/",
 		"https://www.gotenda.com/wp-content/uploads/2020/04/logo-yellow.png",
-		"#ffc300"
+		"#ffc300",
+		"#000"
 	)
 
 	private constructor(
