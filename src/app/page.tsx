@@ -13,9 +13,9 @@ export default function Home() {
 		<>
 			<Center>
 				<Box ta={"center"} pt={"2rem"} pb={"2rem"} w={"100%"} bg={theme.colors.indigo[9]} c={theme.colors.cyan[1]}>
-					<Title order={1}>almostprohibited.ca</Title>
+					<Title order={1}>AlmostProhibited.ca</Title>
 					<Space h={"lg"} />
-					<Text>Canada&apos;s upcoming sporting goods product aggregator</Text>
+					<Text>{"Canada's upcoming aggregator for firearms, parts, and accessories"}</Text>
 				</Box>
 			</Center>
 			<Center mt={"2rem"} mb={"2rem"}>

@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /contact/
+Disallow: /privacy/
+Disallow: /search/
+Disallow: /api/

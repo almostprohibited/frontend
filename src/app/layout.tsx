@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
-
 import '@mantine/core/styles.css';
-import { Box, ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
-
 import "./globals.css";
+
+import { Box, ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 import Footer from "@/components/footer/component";
 import Header from "@/components/header/component";
 import { ReactNode } from "react";
+import { RetailerEnum } from '@/utils/apiStructs';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: "Almost Prohibited",
-	description: "Canada's upcoming sporting goods aggregator",
+	title: "Almost Prohibited - Browse items from your favourite retailers",
+	description: "Canada's upcoming aggregator for firearms, parts, and accessories",
+	keywords: RetailerEnum.getRetailers().map(retailer => retailer.name)
 };
 
 export default function RootLayout({children}: Readonly<{children: ReactNode}>) {

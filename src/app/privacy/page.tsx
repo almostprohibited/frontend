@@ -1,3 +1,5 @@
+"use client";
+
 import { Anchor, Box, List, ListItem, Space, Stack, Text, Title } from "@mantine/core";
 
 export default function privacyPage() {

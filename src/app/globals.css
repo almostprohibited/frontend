@@ -1,5 +1,5 @@
 :root {
-	--content-side-padding: 0 15rem 0 15rem;
+	--content-side-padding: 0 10% 0 10%;
 }
 
 html,
@@ -32,17 +32,6 @@ a {
 	width: 50%;
 	margin: auto;
 }
-
-@media only screen and (max-width: 1200) {
-	:root {
-		--content-side-padding: 0 10rem 0 10rem;
-	}
-
-	.mantine-Alert-root {
-		width: 90%;
-	}
-}
-
 
 @media only screen and (max-width: 1000px) {
 	:root {
