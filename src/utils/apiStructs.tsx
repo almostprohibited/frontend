@@ -92,7 +92,7 @@ export class RetailerEnum {
 		"Red Deer Shooting Centre",
 		"https://rdsc.ca/",
 		"https://rdsc.ca/static/version1749125248/frontend/RDSC/default/en_US/images/logo.svg",
-		"#6b81ac",
+		"#9cb4e3",
 		"#fff"
 	)
 
