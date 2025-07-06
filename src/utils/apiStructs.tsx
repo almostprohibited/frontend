@@ -73,7 +73,7 @@ export class RetailerEnum {
 	);
 
 	static readonly TheAmmoSource = new Retailer(
-		"SFRC",
+		"SFRC (The Ammo Source)",
 		"https://theammosource.com/",
 		"https://cdn11.bigcommerce.com/s-7f2680ghys/images/stencil/166x100/sfrc_1544201399__41333.original.jpg",
 		"#88b04b",
@@ -86,6 +86,14 @@ export class RetailerEnum {
 		"https://www.gotenda.com/wp-content/uploads/2020/04/logo-yellow.png",
 		"#ffc300",
 		"#000"
+	)
+
+	static readonly Rdsc = new Retailer(
+		"Red Deer Shooting Centre",
+		"https://rdsc.ca/",
+		"https://rdsc.ca/static/version1749125248/frontend/RDSC/default/en_US/images/logo.svg",
+		"#6b81ac",
+		"#fff"
 	)
 
 	private constructor(
