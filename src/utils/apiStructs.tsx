@@ -96,6 +96,22 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly G4CGunStore = new Retailer(
+		"G4C",
+		"https://g4cgunstore.com/",
+		"https://g4cgunstore.com/wp-content/uploads/2020/08/headerlogo1.png",
+		"#231f20",
+		"#fff"
+	)
+	
+	static readonly Tillsonburg = new Retailer(
+		"Tillsonburg Gun Shop",
+		"https://tillsonburggunshop.com/",
+		"https://g4cgunstore.com/wp-content/uploads/2020/08/headerlogo1.png",
+		"#D9C003",
+		"#000"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
