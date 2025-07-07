@@ -107,7 +107,7 @@ export class RetailerEnum {
 	static readonly Tillsonburg = new Retailer(
 		"Tillsonburg Gun Shop",
 		"https://tillsonburggunshop.com/",
-		"https://g4cgunstore.com/wp-content/uploads/2020/08/headerlogo1.png",
+		"https://tillsonburggunshop.com/image/catalog/logo.png",
 		"#D9C003",
 		"#000"
 	)
