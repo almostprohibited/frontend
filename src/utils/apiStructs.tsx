@@ -112,6 +112,14 @@ export class RetailerEnum {
 		"#000"
 	)
 
+	static readonly DanteSports = new Retailer(
+		"Dante Sports",
+		"https://www.dantesports.com/",
+		"/retailers/dante.svg",
+		"#fac726",
+		"#000"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
