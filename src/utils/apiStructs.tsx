@@ -120,6 +120,14 @@ export class RetailerEnum {
 		"#000"
 	)
 
+	static readonly SelectShootingSupplies = new Retailer(
+		"Select Shooting Supplies",
+		"https://selectshootingsupplies.com/",
+		"https://cdn11.bigcommerce.com/s-wpb0dq6yc5/images/stencil/original/logobc_1534372578__92678.original.png",
+		"#ed1c24",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
