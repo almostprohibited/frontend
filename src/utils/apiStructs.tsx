@@ -92,12 +92,12 @@ export class RetailerEnum {
 		"Red Deer Shooting Centre",
 		"https://rdsc.ca/",
 		"https://rdsc.ca/static/version1749125248/frontend/RDSC/default/en_US/images/logo.svg",
-		"#9cb4e3",
+		"#23407B",
 		"#fff"
 	)
 
 	static readonly G4CGunStore = new Retailer(
-		"G4C",
+		"G4C Gun Store",
 		"https://g4cgunstore.com/",
 		"https://g4cgunstore.com/wp-content/uploads/2020/08/headerlogo1.png",
 		"#231f20",
