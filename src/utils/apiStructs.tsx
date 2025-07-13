@@ -128,6 +128,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly RangeviewSports = new Retailer(
+		"Rangeview Sports",
+		"https://www.rangeviewsports.ca/",
+		"https://www.rangeviewsports.ca/wp-content/uploads/2025/04/rangeviewlogo-dark.webp",
+		"#c62d2d",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
