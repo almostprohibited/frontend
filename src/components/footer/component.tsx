@@ -18,8 +18,8 @@ export default function Footer() {
 				align={"center"}
 				gap={"xl"}
 			>
-				<Link href={"/contact"}>Contact</Link>
-				<Link href={"/privacy"}>Privacy Policy</Link>
+				<Link href={"/contact"}>{"[ Contact ]"}</Link>
+				<Link href={"/privacy"}>{"[ Privacy Policy ]"}</Link>
 			</Flex>
 		</>
 	);
