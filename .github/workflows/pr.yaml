@@ -1,8 +1,12 @@
 name: PR Check
+
 on:
   pull_request:
     branches: [develop, main]
-  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,3 +15,13 @@ jobs:
       - name: Build
         id: build
         uses: ./.github/actions/build
+  automerge:
+    needs: [build]
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'almostprohibited/frontend'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge PR
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
