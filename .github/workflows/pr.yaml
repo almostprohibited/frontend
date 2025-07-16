@@ -15,6 +15,7 @@ jobs:
   automerge:
     permissions:
       contents: write
+      pull-request: write
     needs: [build]
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'almostprohibited/frontend'
     runs-on: ubuntu-latest
