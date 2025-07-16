@@ -1,0 +1,13 @@
+name: PR Check
+on:
+  pull_request:
+    branches: [develop, main]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        id: build
+        uses: ./.github/actions/build
