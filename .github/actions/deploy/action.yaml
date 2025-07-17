@@ -1,4 +1,5 @@
 name: Deploy
+
 inputs:
   artifact-id:
     type: string
@@ -8,6 +9,7 @@ inputs:
     type: string
     required: true
     description: "The parent folder of where things are deployed to"
+
 runs:
   using: 'composite'
   steps:
@@ -15,7 +17,7 @@ runs:
     - uses: actions/download-artifact@v4
       name: Download built files
       with:
-        artifact-ids: ${{ inputs.artifact-id }}
+        artifact-id: ${{ inputs.artifact-id }}
         path: ${{ inputs.workspace-path }}/download
     - name: Replace static files
       run: |
