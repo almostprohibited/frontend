@@ -144,6 +144,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly DominionOutdoors = new Retailer(
+		"Dominion Outdoors",
+		"https://www.dominionoutdoors.ca/",
+		"https://cdn.shoplightspeed.com/shops/644978/themes/13862/assets/logo.png",
+		"#414141",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
