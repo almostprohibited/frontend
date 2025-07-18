@@ -136,6 +136,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly TrueNorthArms = new Retailer(
+		"True North Arms",
+		"https://truenortharms.com/",
+		"https://cdn11.bigcommerce.com/s-e2fesuoqas/images/stencil/420x42/tna_magento_banner_v5-21_1652799439__63191.original.png",
+		"#9e1600",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
