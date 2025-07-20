@@ -20,6 +20,7 @@ export default function Footer() {
 			>
 				<Link href={"/contact"}>{"[ Contact ]"}</Link>
 				<Link href={"/privacy"}>{"[ Privacy Policy ]"}</Link>
+				<Link href={"/roadmap"}>{"[ Roadmap ]"}</Link>
 			</Flex>
 		</>
 	);

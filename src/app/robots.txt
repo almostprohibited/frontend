@@ -3,3 +3,4 @@ Disallow: /contact
 Disallow: /privacy
 Disallow: /search
 Disallow: /api
+Disallow: /roadmap
