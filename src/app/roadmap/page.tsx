@@ -84,7 +84,7 @@ export default function roadmapPage() {
 					<Stack mt="1rem" c="dimmed">
 						<Text>{"I hope that I'll be able to maintain and keep this running for as long as I can (years)."}</Text>
 						<Text>{"Opening sourcing this project is one of the ways that I'll be able to make sure that if I can't continue this project, others can."}</Text>
-						<Text>{"I have API tokens and webhook URLs hard-coded in the code base, so I can't exactly just press visibility button on Github to make everything public right now."}</Text>
+						<Text>{"I have API tokens and webhook URLs hard-coded in the code base, so I can't exactly just toggle the visibility on Github to make everything public right now."}</Text>
 					</Stack>
 				</TimelineItem>
 			</Timeline>
