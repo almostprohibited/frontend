@@ -9,6 +9,10 @@ export default function roadmapPage() {
 		<Box mt="2rem" p={"var(--content-side-padding)"}>
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
+			<Text size="sm" c="dark">
+				{"Last updated: July 26th 2025"}
+			</Text>
+			<Space h="md" />
 			<Group gap="xs">
 				<Text>Read my rants about what I want to add to the website below. Treat it as a blog if you will. Do you want to influence this roadmap? Head over to the <Link style={{color: "revert"}} href="/contact">contact page</Link> and let me hear about it.</Text>
 			</Group>
@@ -24,13 +28,15 @@ export default function roadmapPage() {
 						<Text>{"We could always add support for more retailers, after all, most of us are here to find the lowest prices across ALL stores in Canada right?"}</Text>
 						<Text>{"Recently added retailers:"}</Text>
 						<List withPadding>
-							<ListItem>{"Dominion Outdoors (July 17th)"}</ListItem>
-							<ListItem>{"True North Arms (July 17th)"}</ListItem>
-							<ListItem>{"Rangeview Sports (July 13th)"}</ListItem>
+							<ListItem>{"Dominion Outdoors"}</ListItem>
+							<ListItem>{"True North Arms"}</ListItem>
+							<ListItem>{"Rangeview Sports"}</ListItem>
 						</List>
 						<Text>{"The short list of retailers to add (non-exhaustive, and in no particular order):"}</Text>
 						<List withPadding>
 							<ListItem>{"Prophet River"}</ListItem>
+							<ListItem>{"Great North Guns"}</ListItem>
+							<ListItem>{"Solely Outdoors"}</ListItem>
 						</List>
 					</Stack>
 				</TimelineItem>
