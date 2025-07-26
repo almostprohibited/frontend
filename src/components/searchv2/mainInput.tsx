@@ -14,13 +14,17 @@ const placeHolderValues = [
 	"citadel ad-500",
 	"henry lever 357",
 	"phased plasma rifle 40-watt",
-	"sterling arms r9",
 	"chiappa takedown",
 	"howa m1500",
 	"mauser",
 	"cz alpha",
 	"winchester 94",
-	"mrx bison"
+	"mrx bison",
+	"LAR mag",
+	"10/22 rotary magazine",
+	"stripper clip",
+	"vortex venom",
+	"red dot",
 ];
 
 export default function MainInput({
