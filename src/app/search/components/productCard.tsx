@@ -38,7 +38,9 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 	const timeDiffSecs = currentUnixSecs - crawlData.query_time;
 	const timeDiffHours = timeDiffSecs / 60 / 60;
 
-	const clockIcon = timeDiffHours < 24 ? <IconClockCheck /> : <IconClockQuestion />;
+	const isItemStale = timeDiffHours >= 24;
+
+	const clockIcon = isItemStale ? <IconClockQuestion /> : <IconClockCheck />;
 
 	return (
 		<Anchor
@@ -85,10 +87,18 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 						</TooltipFloating>
 					</Box>
 					<Box>
-						<Group gap="xs" c="grey">
-							{clockIcon}
-							<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
-						</Group>
+						<TooltipFloating
+							label="Its 24 hours since we've seen this item, it may be out of stock!"
+							color="black"
+							multiline
+							w="15rem"
+							disabled={isMobile || !isItemStale}
+						>
+							<Group gap="xs" c={isItemStale ? "#c77700ff" : "grey"}>
+								{clockIcon}
+								<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
+							</Group>
+						</TooltipFloating>
 					</Box>
 				</Flex>
 			</Card>
