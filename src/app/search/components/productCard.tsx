@@ -88,7 +88,7 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 					</Box>
 					<Box>
 						<TooltipFloating
-							label="Its 24 hours since we've seen this item, it may be out of stock!"
+							label="It's been 24 hours since we've seen this item, so it may be out of stock!"
 							color="black"
 							multiline
 							w="15rem"
