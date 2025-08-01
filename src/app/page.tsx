@@ -1,9 +1,8 @@
 "use client";
 
-import { Alert, Box, Center, Divider, Skeleton, Space, Text, Title, useMantineTheme } from "@mantine/core";
+import { Box, Center, Divider, Skeleton, Space, Text, Title, useMantineTheme } from "@mantine/core";
 import SearchBar from "@/components/searchv2/component";
 import RetailerCards from "@/components/retailerCards/component";
-import { IconInfoCircle } from "@tabler/icons-react";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -23,16 +22,6 @@ export default function Home() {
 					<Suspense fallback={<Skeleton />}>
 						<SearchBar />
 					</Suspense>
-				</Box>
-			</Center>
-			<Divider />
-			<Center mt={"2rem"} mb={"2rem"}>
-				<Box w={"100%"} p={"var(--content-side-padding)"}>
-					<Alert variant="outline" color="blue" title="Hey, heads up!" icon={<IconInfoCircle />}>
-						<Text size="sm">
-							This website is in development, some elements and cards might move around from time to time.
-						</Text>
-					</Alert>
 				</Box>
 			</Center>
 			<Divider />
