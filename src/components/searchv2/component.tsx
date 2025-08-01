@@ -41,12 +41,12 @@ export default function SearchBar({
 	const initialPage = Number(searchParams.get("page")) || 0;
 	const [page, onPageChange] = useState(initialPage)
 
-	function sendQuery() {
+	function sendQuery(forcePageReset: boolean = false) {
 		const form = document.querySelector<HTMLFormElement>("#api");
 		if (!form) return;
 
 		const inputPage = form.querySelector<HTMLInputElement>('input#page');
-		if (inputPage && initialSearchValue !== queryValue) {
+		if (inputPage && (forcePageReset || initialSearchValue !== queryValue)) {
 			// evil hack to change form input "in flight"
 			inputPage.value = "0";
 			onPageChange(1);
@@ -57,9 +57,15 @@ export default function SearchBar({
 	
 	useEffect(() => {
 		if (pathname.startsWith("/search")) {
+			sendQuery(true);
+		}
+	}, [sortValue, categoryValue]);
+
+	useEffect(() => {
+		if (pathname.startsWith("/search")) {
 			sendQuery();
 		}
-	}, [sortValue, categoryValue, page]);
+	}, [page]);
 
 	return (
 		<Form disabled={isSendingRequest} id="api" action="/search" onKeyDown={(event) => {
@@ -91,7 +97,7 @@ export default function SearchBar({
 						size="input-lg"
 						ml="0.5rem"
 						c="blue"
-						onClick={sendQuery}
+						onClick={() => sendQuery()}
 					>
 						<IconSend2 />
 					</ActionIcon>
