@@ -10,7 +10,7 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Last updated: July 26th 2025"}
+				{"Last updated: July 31st 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
@@ -28,13 +28,12 @@ export default function roadmapPage() {
 						<Text>{"We could always add support for more retailers, after all, most of us are here to find the lowest prices across ALL stores in Canada right?"}</Text>
 						<Text>{"Recently added retailers:"}</Text>
 						<List withPadding>
+							<ListItem>{"Prophet River"}</ListItem>
 							<ListItem>{"Dominion Outdoors"}</ListItem>
 							<ListItem>{"True North Arms"}</ListItem>
-							<ListItem>{"Rangeview Sports"}</ListItem>
 						</List>
 						<Text>{"The short list of retailers to add (non-exhaustive, and in no particular order):"}</Text>
 						<List withPadding>
-							<ListItem>{"Prophet River"}</ListItem>
 							<ListItem>{"Great North Guns"}</ListItem>
 							<ListItem>{"Solely Outdoors"}</ListItem>
 						</List>

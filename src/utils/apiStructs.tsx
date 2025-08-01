@@ -152,6 +152,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly ProphetRiver = new Retailer(
+		"Prophet River",
+		"https://store.prophetriver.com/",
+		"https://cdn11.bigcommerce.com/s-dcynby20nc/images/stencil/250x100/download_1_1741678164__86402.original.png",
+		"#996633",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
