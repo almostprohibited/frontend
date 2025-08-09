@@ -1,26 +1,29 @@
 "use client";
 
+import useResultsBuilder from "@/components/apiResponse/buildResults";
 import SearchBar from "@/components/searchv2/component";
+import { useApiCaller } from "@/utils/apiRequest";
 import { Box, Skeleton } from "@mantine/core";
-import { Suspense, useState } from "react";
-import Results from "./components/results";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
+function SearchBarWrapper() {
+	const searchParams = useSearchParams();
+	
+	// TODO: do something about `error`, I removed it to stop the linter from complaining about
+	// unused vars but we should fix this edge case: data is cached, but second API request fails
+	const {data, isLoading} = useApiCaller(searchParams);
+	
+	const results = useResultsBuilder(isLoading, data);
+
+	return <SearchBar isLoading={isLoading} apiResults={results} totalItems={data ? data.total_count : 0} />
+}
 
 export default function SearchPage() {
-	const [totalItems, setTotalItems] = useState(0);
-	const [isSendingRequest, setSendingRequest] = useState(false);
-
 	return (
 		<Box mt="2rem" w={"100%"} p={"var(--content-side-padding)"}>
 			<Suspense fallback={<Skeleton />}>
-				<SearchBar
-					totalItemCount={totalItems}
-					isSendingRequest={isSendingRequest}
-					results={
-						<Results
-							setTotalItems={setTotalItems}
-							setLoadingState={setSendingRequest}
-						/>}
-					/>
+				<SearchBarWrapper />
 			</Suspense>
 		</Box>
 	);

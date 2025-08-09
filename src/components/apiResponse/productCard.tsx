@@ -1,5 +1,5 @@
 import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box } from "@mantine/core";
-import { CrawlResult, Retailer, RetailerEnum } from "../../../utils/apiStructs";
+import { CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
 import { useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { IconClockCheck, IconClockQuestion } from "@tabler/icons-react";

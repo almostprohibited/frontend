@@ -10,12 +10,14 @@ export default function SortOptions({
 	setSortValue,
 	categoryValue,
 	setCategoryValue,
+	onChange,
 	disabled = false,
 }: {
 	sortValue: string,
 	setSortValue: Dispatch<SetStateAction<string>>,
 	categoryValue: string,
 	setCategoryValue: Dispatch<SetStateAction<string>>,
+	onChange: () => void,
 	disabled?: boolean,
 }) {
 	const isMobile = useMobileView();
@@ -28,7 +30,10 @@ export default function SortOptions({
 				w={segmentWidth}
 				disabled={disabled}
 				value={sortValue}
-				onChange={setSortValue}
+				onChange={(val) => {
+					setSortValue(val);
+					onChange();
+				}}
 				name="sort"
 				withItemsBorders={false}
 				data = {[
@@ -65,7 +70,10 @@ export default function SortOptions({
 				w={segmentWidth}
 				disabled={disabled}
 				value={categoryValue}
-				onChange={setCategoryValue}
+				onChange={(val) => {
+					setCategoryValue(val);
+					onChange();
+				}}
 				name="category"
 				withItemsBorders={false}
 				data = {[

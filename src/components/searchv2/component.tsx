@@ -4,40 +4,40 @@ import Form from "next/form";
 import MainInput from "./mainInput";
 import { ActionIcon, Box, Collapse, Divider, Fieldset, Flex, Group, LoadingOverlay } from "@mantine/core";
 import { IconAdjustmentsHorizontal, IconSend2 } from "@tabler/icons-react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import SortOptions from "./searchOptions";
 import FormattedNumberInput from "./formatedNumberInput";
 import PaginationButtons from "./pagination";
+import { useFirstRender } from "@/utils/hooks/useFirstRender";
 
 export default function SearchBar({
-	totalItemCount = 0,
-	isSendingRequest = false,
-	results,
+	isLoading = false,
+	apiResults = <></>,
+	totalItems = 0
 }: {
-	totalItemCount?: number,
-	isSendingRequest?: boolean,
-	results?: ReactNode
+	isLoading?: boolean,
+	apiResults?: ReactElement,
+	totalItems?: number
 }) {
-	const pathname = usePathname();
 	const searchParams = useSearchParams();
+	const isFirstLoad = useFirstRender();
+
+	const pathname = usePathname();
+	const isSearchPage = pathname.startsWith("/search");
 
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const initialSearchValue = searchParams.get("query") || "";
 	const [queryValue, setQueryValue] = useState(initialSearchValue);
 
-	const initialMinPriceValue = searchParams.get("min-price") || "";
-	const initialMaxPriceValue = searchParams.get("max-price") || "";
-	const [minPriceValue, setMinPriceValue] = useState<string | number>(initialMinPriceValue);
-	const [maxPriceValue, setMaxPriceValue] = useState<string | number>(initialMaxPriceValue);
+	const minPriceValue = searchParams.get("min-price") || "";
+	const maxPriceValue = searchParams.get("max-price") || "";
 
-	const initialSortParam = searchParams.get("sort") || "relevant";
-	const initialCategoryParam = searchParams.get("category") || "all";
-	const [sortValue, setSortValue] = useState(initialSortParam);
-	const [categoryValue, setCategoryValue] = useState(initialCategoryParam);
+	const [sortValue, setSortValue] = useState(searchParams.get("sort") || "relevant");
+	const [categoryValue, setCategoryValue] = useState(searchParams.get("category") || "all");
 	
-	const maxPages = Math.ceil(totalItemCount / 32);
+	const maxPages = Math.ceil(totalItems / 32);
 	const initialPage = Number(searchParams.get("page")) || 0;
 	const [page, onPageChange] = useState(initialPage)
 
@@ -54,27 +54,23 @@ export default function SearchBar({
 
 		form.requestSubmit();
 	}
-	
-	useEffect(() => {
-		if (pathname.startsWith("/search")) {
-			sendQuery(true);
-		}
-	}, [sortValue, categoryValue]);
 
 	useEffect(() => {
-		if (pathname.startsWith("/search")) {
+		if (isSearchPage && !isFirstLoad) {
 			sendQuery();
 		}
 	}, [page]);
 
 	return (
-		<Form disabled={isSendingRequest} id="api" action="/search" onKeyDown={(event) => {
-			if (event.key === "Enter") sendQuery();
+		<Form disabled={isLoading} id="api" action="/search" onKeyDown={(event) => {
+			if (event.key === "Enter") {
+				sendQuery()
+			};
 		}}>
 			<Box pos="relative">
 				<LoadingOverlay
 					overlayProps={{radius: "md", backgroundOpacity: 0.5}}
-					visible={isSendingRequest}
+					visible={isLoading}
 					loaderProps={{type: "oval"}}
 				/>
 				<Flex
@@ -82,7 +78,7 @@ export default function SearchBar({
 					justify="center"
 				>
 					<ActionIcon
-						disabled={isSendingRequest}
+						disabled={isLoading}
 						variant="default"
 						size="input-lg"
 						mr="0.5rem"
@@ -90,9 +86,9 @@ export default function SearchBar({
 					>
 						<IconAdjustmentsHorizontal />
 					</ActionIcon>
-					<MainInput disabled={isSendingRequest} value={queryValue} setValue={setQueryValue} />
+					<MainInput disabled={isLoading} value={queryValue} setValue={setQueryValue} />
 					<ActionIcon
-						disabled={isSendingRequest}
+						disabled={isLoading}
 						variant="default"
 						size="input-lg"
 						ml="0.5rem"
@@ -105,27 +101,30 @@ export default function SearchBar({
 
 				<Group justify="space-between" mt="1rem">
 					<SortOptions
-						disabled={isSendingRequest}
+						disabled={isLoading}
 						sortValue={sortValue}
 						setSortValue={setSortValue}
 						categoryValue={categoryValue}
 						setCategoryValue={setCategoryValue}
+						onChange={() => {
+							if (isSearchPage) {
+								sendQuery(true);
+							}
+						}}
 					/>
 				</Group>
 
 				<Collapse mt="1rem" in={dropdownVisible}>
-					<Fieldset disabled={isSendingRequest} legend="Price" display="initial">
+					<Fieldset disabled={isLoading} legend="Price" display="initial">
 						<Group>
 							<FormattedNumberInput
 								inputName="min-price"
 								value={minPriceValue}
-								setValue={setMinPriceValue}
 								placeholder="minimum price"
 							/>
 							<FormattedNumberInput
 								inputName="max-price"
 								value={maxPriceValue}
-								setValue={setMaxPriceValue}
 								placeholder="maximum price"
 							/>
 						</Group>
@@ -133,24 +132,25 @@ export default function SearchBar({
 				</Collapse>
 			</Box>
 
+			<input id="page" hidden={true} name="page" value={Math.max(page - 1, 0)} readOnly />
+
 			{
-				results &&
+				isSearchPage &&
 				<>
-					<input id="page" hidden={true} name="page" value={Math.max(page - 1, 0)} readOnly />
 					<Divider mt="1rem" mb="1rem" />
 					<Flex direction="column" gap="md">
 						<PaginationButtons
 							page={page}
 							maxPages={maxPages}
 							setPage={onPageChange}
-							isSendingRequest={isSendingRequest}
+							isSendingRequest={isLoading}
 						/>
-						{results}
+						{apiResults}
 						<PaginationButtons
 							page={page}
 							maxPages={maxPages}
 							setPage={onPageChange}
-							isSendingRequest={isSendingRequest}
+							isSendingRequest={isLoading}
 						/>
 					</Flex>
 				</>
