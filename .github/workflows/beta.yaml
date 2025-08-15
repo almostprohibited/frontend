@@ -1,10 +1,13 @@
 name: Publish (beta)
+
 on:
   push:
     branches: [develop]
   workflow_dispatch:
+
 env:
-  WORKSPACE_PATH: "/home/ubuntu/almostprohibited/frontend-beta"
+  STAGE: beta
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +16,8 @@ jobs:
       - name: Build
         id: build
         uses: ./.github/actions/build
+        with:
+          stage: ${{ env.STAGE }}
   deploy:
     needs: [build]
     runs-on: self-hosted
@@ -22,4 +27,4 @@ jobs:
         name: Deploy
         with:
           artifact-ids: ${{ steps.build.outputs.artifact-id }}
-          workspace-path: ${{ env.WORKSPACE_PATH }}
+          workspace-path: ${{ vars.WORKSPACE_PATH_BETA }}

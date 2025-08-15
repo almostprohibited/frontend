@@ -2,7 +2,7 @@
 
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { SegmentedControl, Center } from "@mantine/core";
-import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconLayersIntersect, IconBoom } from "@tabler/icons-react";
+import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconLayersIntersect, IconBoom, IconBox } from "@tabler/icons-react";
 import { Dispatch, SetStateAction } from "react";
 
 export default function SortOptions({
@@ -23,6 +23,49 @@ export default function SortOptions({
 	const isMobile = useMobileView();
 
 	const segmentWidth = isMobile ? "100%" : "";
+
+	const categories = [
+		{
+			value: "all",
+			label: (
+				<Center style={{gap: "0.5rem"}}>
+					<IconAsterisk size="1rem" />
+					<span>All</span>
+				</Center>
+			)
+		},
+		{
+			value: "firearm",
+			label: (
+				<Center style={{gap: "0.5rem"}}>
+					<IconBoom size="1rem" />
+					<span>Firearms</span>
+				</Center>
+			)
+		}
+	];
+
+	if (process.env.NEXT_PUBLIC_STAGE === "beta") {
+		categories.push({
+			value: "ammunition",
+			label: (
+				<Center style={{gap: "0.5rem"}}>
+					<IconBox size="1rem" />
+					<span>Ammo</span>
+				</Center>
+			)
+		});
+	}
+
+	categories.push({
+		value: "other",
+		label: (
+			<Center style={{gap: "0.5rem"}}>
+				<IconLayersIntersect size="1rem" />
+				<span>Other</span>
+			</Center>
+		)
+	});
 
 	return (
 		<>
@@ -76,35 +119,7 @@ export default function SortOptions({
 				}}
 				name="category"
 				withItemsBorders={false}
-				data = {[
-					{
-						value: "all",
-						label: (
-							<Center style={{gap: "0.5rem"}}>
-								<IconAsterisk size="1rem" />
-								<span>All</span>
-							</Center>
-						)
-					},
-					{
-						value: "firearm",
-						label: (
-							<Center style={{gap: "0.5rem"}}>
-								<IconBoom size="1rem" />
-								<span>Firearms</span>
-							</Center>
-						)
-					},
-					{
-						value: "other",
-						label: (
-							<Center style={{gap: "0.5rem"}}>
-								<IconLayersIntersect size="1rem" />
-								<span>Other</span>
-							</Center>
-						)
-					}
-				]}
+				data = {categories}
 			/>
 		</>
 	);

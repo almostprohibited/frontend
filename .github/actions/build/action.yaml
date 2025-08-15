@@ -1,7 +1,11 @@
 name: Build
 
-env:
-  NEXT_TELEMETRY_DISABLED: 1
+inputs:
+  stage:
+    type: choice
+    required: true
+    description: "Deployment stage"
+    options: ["release", "beta"]
 
 outputs:
   artifact-id:
@@ -15,6 +19,9 @@ runs:
       run: |
         set -ueo pipefail
         
+        export NEXT_TELEMETRY_DISABLED=1
+        export NEXT_PUBLIC_STAGE=${{ inputs.stage }}
+
         npm ci
         npm run build
       shell: bash
