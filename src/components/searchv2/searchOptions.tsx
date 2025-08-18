@@ -1,5 +1,6 @@
 "use client";
 
+import { useIsBeta } from "@/utils/hooks/useIsBeta";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { SegmentedControl, Center } from "@mantine/core";
 import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconLayersIntersect, IconBoom, IconBox } from "@tabler/icons-react";
@@ -21,6 +22,7 @@ export default function SortOptions({
 	disabled?: boolean,
 }) {
 	const isMobile = useMobileView();
+	const isBeta = useIsBeta();
 
 	const segmentWidth = isMobile ? "100%" : "";
 
@@ -45,7 +47,7 @@ export default function SortOptions({
 		}
 	];
 
-	if (process.env.NEXT_PUBLIC_STAGE === "beta") {
+	if (isBeta) {
 		categories.push({
 			value: "ammunition",
 			label: (

@@ -7,6 +7,7 @@ import { IconHome } from "@tabler/icons-react";
 
 export default function Header() {
 	const homeIcon = <IconHome />
+
 	return (
 		<Box className={styles.header}>
 			<Link href={"/"}>{homeIcon}</Link>
