@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box } from "@mantine/core";
 import { CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
 import { useState } from "react";
@@ -11,25 +13,59 @@ function centsToHumanString(price: number): string {
 	return `${dollars}.${cents}`;
 }
 
+function finalStringFormatter(price: string, isPricePerRoundView: boolean): string {
+	let finalText = "$ " + price;
+
+	if (isPricePerRoundView) {
+		finalText += " per round";
+	}
+
+	return finalText;
+}
+
+function PriceCard({crawlData}: {crawlData: CrawlResult}) {
+	const regularPriceString = crawlData.price.regular_price;
+	const salePriceString = crawlData.price.sale_price;
+
+	let roundCount = 1;
+
+	if (crawlData.metadata && "Ammunition" in crawlData.metadata) {
+		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
+		roundCount = crawlData.metadata["Ammunition"]["round_count"] || 1;
+	}
+
+	const isPricePerRoundView = roundCount !== 1;
+
+	const regularPrice = centsToHumanString(Math.round(regularPriceString / roundCount));
+
+	let priceBadgeChildren;
+
+	if (salePriceString) {
+		const salePrice = centsToHumanString(Math.round(salePriceString / roundCount));
+
+		const regularPriceElement = <Text key={regularPrice} inherit td="line-through" c="dimmed">{regularPrice}</Text>
+		const salePriceElement = <Text key={salePrice} c="green" inherit>{finalStringFormatter(salePrice, isPricePerRoundView)}</Text>;
+
+		priceBadgeChildren = [salePriceElement];
+
+		if (!isPricePerRoundView) {
+			priceBadgeChildren.push(regularPriceElement);
+		}
+	} else {
+		priceBadgeChildren = [<Text key={regularPrice} inherit>{finalStringFormatter(regularPrice, isPricePerRoundView)}</Text>];
+	}
+
+	return (
+		<Flex pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center" gap="sm">
+			{...priceBadgeChildren}
+		</Flex>
+	);
+}
+
 export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 	const isMobile = useMobileView();
 
 	const [imageLoaded, setImageLoaded] = useState(false);
-
-	const regularPrice = centsToHumanString(crawlData.price.regular_price);
-
-	let priceBadgeChildren;
-
-	if (crawlData.price.sale_price) {
-		const salePrice = centsToHumanString(crawlData.price.sale_price);
-
-		const regularPriceElement = <Text key={regularPrice} inherit td="line-through" c="dimmed">{regularPrice}</Text>
-		const salePriceElement = <Text key={salePrice} c="green" inherit>{"$ " + salePrice}</Text>;
-
-		priceBadgeChildren = [salePriceElement, regularPriceElement];
-	} else {
-		priceBadgeChildren = [<Text key={regularPrice} inherit>{"$ " + regularPrice}</Text>];
-	}
 
 	// @ts-expect-error: enum is of type object, required to ignore to get working
 	const retailer: Retailer = RetailerEnum[crawlData.retailer];
@@ -57,9 +93,7 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 					</Skeleton>
 				</CardSection>
 				<CardSection mb="1rem">
-					<Flex pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center" gap="sm">
-						{...priceBadgeChildren}
-					</Flex>
+					<PriceCard crawlData={crawlData} />
 					<Flex bg={retailer.colourHex} pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center">
 						<Text
 							size={isMobile ? "sm" : "xs"}
@@ -88,7 +122,7 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 					</Box>
 					<Box>
 						<TooltipFloating
-							label="It's been 24 hours since we've seen this item, so it may be out of stock!"
+							label="It's been 24 hours since we've seen this item, it may be out of stock!"
 							color="black"
 							multiline
 							w="15rem"
