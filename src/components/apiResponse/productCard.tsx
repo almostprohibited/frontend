@@ -37,13 +37,13 @@ function PriceCard({
 
 	let roundCount = 1;
 
-	const isAmmoProduct = crawlData.category === Category.Ammunition;
-	const displayAmmoPricing = isAmmoProduct && viewProductPrice;
-
 	if (viewProductPrice && crawlData.metadata && "Ammunition" in crawlData.metadata) {
 		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
 		roundCount = crawlData.metadata["Ammunition"]["round_count"] || 1;
 	}
+	
+	const isAmmoProduct = crawlData.category === Category.Ammunition;
+	const displayAmmoPricing = isAmmoProduct && viewProductPrice;
 
 	const regularPrice = centsToHumanString(Math.round(regularPriceString / roundCount));
 
