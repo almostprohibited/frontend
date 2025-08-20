@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box } from "@mantine/core";
-import { CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
-import { useState } from "react";
+import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box, ActionIcon } from "@mantine/core";
+import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
-import { IconClockCheck, IconClockQuestion } from "@tabler/icons-react";
+import { IconClockCheck, IconClockQuestion, IconSwitchHorizontal } from "@tabler/icons-react";
 
 function centsToHumanString(price: number): string {
 	const dollars = Math.floor(price / 100);
@@ -14,7 +14,7 @@ function centsToHumanString(price: number): string {
 }
 
 function finalStringFormatter(price: string, isPricePerRoundView: boolean): string {
-	let finalText = "$ " + price;
+	let finalText = "$" + price;
 
 	if (isPricePerRoundView) {
 		finalText += " per round";
@@ -23,18 +23,27 @@ function finalStringFormatter(price: string, isPricePerRoundView: boolean): stri
 	return finalText;
 }
 
-function PriceCard({crawlData}: {crawlData: CrawlResult}) {
+function PriceCard({
+	crawlData,
+	viewProductPrice,
+	setViewProductPrice
+}: {
+	crawlData: CrawlResult,
+	viewProductPrice: boolean,
+	setViewProductPrice: Dispatch<SetStateAction<boolean>>
+}) {
 	const regularPriceString = crawlData.price.regular_price;
 	const salePriceString = crawlData.price.sale_price;
 
 	let roundCount = 1;
 
-	if (crawlData.metadata && "Ammunition" in crawlData.metadata) {
+	const isAmmoProduct = crawlData.category === Category.Ammunition;
+	const displayAmmoPricing = isAmmoProduct && viewProductPrice;
+
+	if (viewProductPrice && crawlData.metadata && "Ammunition" in crawlData.metadata) {
 		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
 		roundCount = crawlData.metadata["Ammunition"]["round_count"] || 1;
 	}
-
-	const isPricePerRoundView = roundCount !== 1;
 
 	const regularPrice = centsToHumanString(Math.round(regularPriceString / roundCount));
 
@@ -43,26 +52,52 @@ function PriceCard({crawlData}: {crawlData: CrawlResult}) {
 	if (salePriceString) {
 		const salePrice = centsToHumanString(Math.round(salePriceString / roundCount));
 
-		const regularPriceElement = <Text key={regularPrice} inherit td="line-through" c="dimmed">{regularPrice}</Text>
-		const salePriceElement = <Text key={salePrice} c="green" inherit>{finalStringFormatter(salePrice, isPricePerRoundView)}</Text>;
+		const regularPriceElement = <Text key={regularPrice + "regular"} inherit td="line-through" c="dimmed">{regularPrice}</Text>
+		const salePriceElement = <Text key={salePrice + "sale"} c="green" inherit>{finalStringFormatter(salePrice, displayAmmoPricing)}</Text>;
 
 		priceBadgeChildren = [salePriceElement];
 
-		if (!isPricePerRoundView) {
+		if (!displayAmmoPricing) {
 			priceBadgeChildren.push(regularPriceElement);
 		}
 	} else {
-		priceBadgeChildren = [<Text key={regularPrice} inherit>{finalStringFormatter(regularPrice, isPricePerRoundView)}</Text>];
+		priceBadgeChildren = [<Text key={regularPrice + "regular"} inherit>{finalStringFormatter(regularPrice, displayAmmoPricing)}</Text>];
+	}
+
+	let priceToggle = <></>;
+
+	if (isAmmoProduct) {
+		priceToggle = (
+			<ActionIcon
+				variant="transparent"
+				size="sm"
+				color={viewProductPrice ? "blue" : "grey"}
+				onClick={(e) => {setViewProductPrice(!viewProductPrice); e.preventDefault()}}
+				pos="absolute"
+				right="0.5rem"
+			>
+				<IconSwitchHorizontal />
+			</ActionIcon>
+		);
 	}
 
 	return (
 		<Flex pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center" gap="sm">
 			{...priceBadgeChildren}
+			{priceToggle}
 		</Flex>
 	);
 }
 
-export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
+export default function ProductCard({
+	crawlData,
+	viewProductPrice,
+	setViewProductPrice
+}: {
+	crawlData: CrawlResult,
+	viewProductPrice: boolean,
+	setViewProductPrice: Dispatch<SetStateAction<boolean>>
+}) {
 	const isMobile = useMobileView();
 
 	const [imageLoaded, setImageLoaded] = useState(false);
@@ -93,7 +128,7 @@ export default function ProductCard({crawlData}: {crawlData: CrawlResult}) {
 					</Skeleton>
 				</CardSection>
 				<CardSection mb="1rem">
-					<PriceCard crawlData={crawlData} />
+					<PriceCard crawlData={crawlData} viewProductPrice={viewProductPrice} setViewProductPrice={setViewProductPrice} />
 					<Flex bg={retailer.colourHex} pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center">
 						<Text
 							size={isMobile ? "sm" : "xs"}

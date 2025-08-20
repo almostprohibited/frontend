@@ -1,5 +1,7 @@
+"use client";
+
 import { useMobileView } from "@/utils/hooks/useMobileView";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import EmptySearch from "./emptySearch";
 import { SimpleGrid } from "@mantine/core";
 import ErrorSearch from "./errorSearch";
@@ -9,6 +11,7 @@ import { ApiResponse } from "@/utils/apiStructs";
 
 export default function useResultsBuilder(isLoading: boolean, data?: ApiResponse) {
 	const isSmallWindow = useMobileView();
+	const [viewProductPrice, setViewProductPrice] = useState(false);
 
 	if (data) {
 		const resultElements: Array<ReactElement> = [];
@@ -17,8 +20,16 @@ export default function useResultsBuilder(isLoading: boolean, data?: ApiResponse
 			return <EmptySearch />;
 		}
 
+		
 		data.items.forEach(apiResult => {
-			resultElements.push(<ProductCard key={apiResult.name} crawlData={apiResult}/>);
+			resultElements.push(
+				<ProductCard
+					key={apiResult.name + apiResult.url}
+					crawlData={apiResult}
+					viewProductPrice={viewProductPrice}
+					setViewProductPrice={setViewProductPrice}
+				/>
+			);
 		})
 
 		return (
