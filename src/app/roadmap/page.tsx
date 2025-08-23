@@ -14,9 +14,9 @@ export default function roadmapPage() {
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
-				<Text>Read my rants about what I want to add to the website below. Treat it as a blog if you will.</Text>
-				<Text>Do you want to influence this roadmap? Head over to the <Link style={{color: "revert"}} href="/contact">contact page</Link> and let me hear about it.</Text>
-				<Text>If anything on here is in progress, it'll probably be visible <Link style={{color: "revert"}} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
+				<Text>{"Read my rants about what I want to add to the website below. Treat it as a blog if you will."}</Text>
+				<Text>{"Do you want to influence this roadmap? Head over to the"} <Link style={{color: "revert"}} href="/contact">contact page</Link> {"and let me hear about it."}</Text>
+				<Text>{"If anything on here is in progress, it'll probably be visible"} <Link style={{color: "revert"}} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
 			</Group>
 			<Space h="xl" />
 			<Timeline active={1} bulletSize="2.5rem">
