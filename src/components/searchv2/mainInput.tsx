@@ -25,6 +25,10 @@ const placeHolderValues = [
 	"stripper clip",
 	"vortex venom",
 	"red dot",
+	"5.56 m855",
+	"22lr 40gr",
+	"holosun",
+	"30mm mount",
 ];
 
 export default function MainInput({
@@ -48,7 +52,7 @@ export default function MainInput({
 		name="query"
 		classNames={{input: styles.input, wrapper: styles.override}}
 		placeholder={placeHolderText}
-		size="lg"
+		size="md"
 		value={value}
 		onChange={(event) => setValue(event.currentTarget.value)}
 		rightSectionPointerEvents="auto"

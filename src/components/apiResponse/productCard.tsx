@@ -17,7 +17,7 @@ function finalStringFormatter(price: string, isPricePerRoundView: boolean): stri
 	let finalText = "$" + price;
 
 	if (isPricePerRoundView) {
-		finalText += " per round";
+		finalText += " / round";
 	}
 
 	return finalText;
@@ -37,13 +37,13 @@ function PriceCard({
 
 	let roundCount = 1;
 
-	if (viewProductPrice && crawlData.metadata && "Ammunition" in crawlData.metadata) {
+	if (!viewProductPrice && crawlData.metadata && "Ammunition" in crawlData.metadata) {
 		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
 		roundCount = crawlData.metadata["Ammunition"]["round_count"] || 1;
 	}
 	
 	const isAmmoProduct = crawlData.category === Category.Ammunition;
-	const displayAmmoPricing = isAmmoProduct && viewProductPrice;
+	const displayAmmoPricing = isAmmoProduct && !viewProductPrice;
 
 	const regularPrice = centsToHumanString(Math.round(regularPriceString / roundCount));
 

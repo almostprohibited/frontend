@@ -80,7 +80,7 @@ export default function SearchBar({
 					<ActionIcon
 						disabled={isLoading}
 						variant="default"
-						size="input-lg"
+						size="input-md"
 						mr="0.5rem"
 						onClick={() => setDropdownVisible(!dropdownVisible)}
 					>
@@ -90,7 +90,7 @@ export default function SearchBar({
 					<ActionIcon
 						disabled={isLoading}
 						variant="default"
-						size="input-lg"
+						size="input-md"
 						ml="0.5rem"
 						c="blue"
 						onClick={() => sendQuery()}
