@@ -10,16 +10,18 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Last updated: July 31st 2025"}
+				{"Roadmap last updated: August 23rd 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
-				<Text>Read my rants about what I want to add to the website below. Treat it as a blog if you will. Do you want to influence this roadmap? Head over to the <Link style={{color: "revert"}} href="/contact">contact page</Link> and let me hear about it.</Text>
+				<Text>Read my rants about what I want to add to the website below. Treat it as a blog if you will.</Text>
+				<Text>Do you want to influence this roadmap? Head over to the <Link style={{color: "revert"}} href="/contact">contact page</Link> and let me hear about it.</Text>
+				<Text>If anything on here is in progress, it'll probably be visible <Link style={{color: "revert"}} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
 			</Group>
 			<Space h="xl" />
 			<Timeline active={1} bulletSize="2.5rem">
 				<TimelineItem
-					title="Additional retailer support"
+					title="(ongoing) Additional retailer support"
 					bullet={
 						<IconPlus />
 					}
@@ -36,11 +38,13 @@ export default function roadmapPage() {
 						<List withPadding>
 							<ListItem>{"Great North Guns"}</ListItem>
 							<ListItem>{"Solely Outdoors"}</ListItem>
+							<ListItem>{"Clinton Sporting Goods"}</ListItem>
+							<ListItem>{"International Shooting Supplies"}</ListItem>
 						</List>
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
-					title="Support for searching ammunition"
+					title="(complete) Support for searching ammunition"
 					bullet={
 						<IconSearch />
 					}
@@ -69,18 +73,6 @@ export default function roadmapPage() {
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
-					title="Additional filters"
-					bullet={
-						<IconAdjustmentsAlt />
-					}
-				>
-					<Stack mt="1rem" c="dimmed">
-						<Text>{"There aren't many filters on the site. Sure you have price filters, very basic \"is gun\", and \"is not gun\" filters, but everything is currently designed in a way where you probably know what you want."}</Text>
-						<Text>{"What happens if I don't know what I want, but I know what type of firearm I want? Maybe I want to just look up all lever action rifles. Maybe I want all 1-6x LPVOs, but don't care about the brand."}</Text>
-						<Text>{"You might be able to search your way around, but in some cases you won't be able to."}</Text>
-					</Stack>
-				</TimelineItem>
-				<TimelineItem
 					title="Open source"
 					bullet={
 						<IconGitPullRequest />
@@ -90,6 +82,18 @@ export default function roadmapPage() {
 						<Text>{"I hope that I'll be able to maintain and keep this running for as long as I can (years)."}</Text>
 						<Text>{"Opening sourcing this project is one of the ways that I'll be able to make sure that if I can't continue this project, others can."}</Text>
 						<Text>{"I have API tokens and webhook URLs hard-coded in the code base, so I can't exactly just toggle the visibility on Github to make everything public right now."}</Text>
+					</Stack>
+				</TimelineItem>
+				<TimelineItem
+					title="Additional filters"
+					bullet={
+						<IconAdjustmentsAlt />
+					}
+				>
+					<Stack mt="1rem" c="dimmed">
+						<Text>{"There aren't many filters on the site. Sure you have price filters, very basic \"is gun\", and \"is not gun\" filters, but everything is currently designed in a way where you probably know what you want."}</Text>
+						<Text>{"What happens if I don't know what I want, but I know what type of firearm I want? Maybe I want to just look up all lever action rifles. Maybe I want all 1-6x LPVOs, but don't care about the brand."}</Text>
+						<Text>{"You might be able to search your way around, but in some cases you won't be able to."}</Text>
 					</Stack>
 				</TimelineItem>
 			</Timeline>
