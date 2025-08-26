@@ -32,25 +32,33 @@ function PriceCard({
 	viewProductPrice: boolean,
 	setViewProductPrice: Dispatch<SetStateAction<boolean>>
 }) {
-	const regularPriceString = crawlData.price.regular_price;
-	const salePriceString = crawlData.price.sale_price;
-
-	let roundCount = 1;
-
-	if (!viewProductPrice && crawlData.metadata && "Ammunition" in crawlData.metadata) {
-		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
-		roundCount = crawlData.metadata["Ammunition"]["round_count"] || 1;
-	}
-	
-	const isAmmoProduct = crawlData.category === Category.Ammunition;
+	const isAmmoProduct = (crawlData.metadata && "Ammunition" in crawlData.metadata) || false;
 	const displayAmmoPricing = isAmmoProduct && !viewProductPrice;
 
-	const regularPrice = centsToHumanString(Math.round(regularPriceString / roundCount));
+	let regularPriceString = crawlData.price.regular_price;
+	let salePriceString = crawlData.price.sale_price;
+
+	let roundCount: number | undefined = undefined;
+	
+	if (displayAmmoPricing) {
+		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
+		roundCount = crawlData.metadata["Ammunition"]["round_count"];
+	}
+	
+	if (roundCount) {
+		regularPriceString = Math.round(regularPriceString / roundCount);
+
+		if (salePriceString) {
+			salePriceString = Math.round(salePriceString / roundCount);
+		}
+	}
+	
+	const regularPrice = centsToHumanString(regularPriceString);
 
 	let priceBadgeChildren;
 
 	if (salePriceString) {
-		const salePrice = centsToHumanString(Math.round(salePriceString / roundCount));
+		const salePrice = centsToHumanString(salePriceString);
 
 		const regularPriceElement = <Text key={regularPrice + "regular"} inherit td="line-through" c="dimmed">{regularPrice}</Text>
 		const salePriceElement = <Text key={salePrice + "sale"} c="green" inherit>{finalStringFormatter(salePrice, displayAmmoPricing)}</Text>;
