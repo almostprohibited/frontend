@@ -10,7 +10,7 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Roadmap last updated: August 23rd 2025"}
+				{"Roadmap last updated: August 25th 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
@@ -39,6 +39,7 @@ export default function roadmapPage() {
 							<ListItem>{"Great North Guns"}</ListItem>
 							<ListItem>{"Solely Outdoors"}</ListItem>
 							<ListItem>{"Clinton Sporting Goods"}</ListItem>
+							<ListItem>{"InterSurplus"}</ListItem>
 						</List>
 					</Stack>
 				</TimelineItem>
