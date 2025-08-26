@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box, ActionIcon } from "@mantine/core";
-import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
+import { CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { IconClockCheck, IconClockQuestion, IconSwitchHorizontal } from "@tabler/icons-react";

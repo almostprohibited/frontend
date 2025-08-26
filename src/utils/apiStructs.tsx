@@ -160,6 +160,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly InternationalShootingSupplies = new Retailer(
+		"Int'l Shooting Supplies", // they have such a long name
+		"https://internationalshootingsupplies.com/",
+		"https://internationalshootingsupplies.com/wp-content/uploads/2014/04/IntlShootingSupplies_logo_col_small2.png",
+		"#e51936",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
