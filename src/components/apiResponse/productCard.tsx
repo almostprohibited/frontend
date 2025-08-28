@@ -1,11 +1,12 @@
 "use client";
 
-import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box, ActionIcon } from "@mantine/core";
+import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box, ActionIcon, useMantineTheme } from "@mantine/core";
 import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { IconBoom, IconBox, IconClockCheck, IconClockQuestion, IconLayersIntersect, IconSwitchHorizontal } from "@tabler/icons-react";
 import { useIsBeta } from "@/utils/hooks/useIsBeta";
+import ProductButtons from "./productButtons";
 
 function centsToHumanString(price: number): string {
 	const dollars = Math.floor(price / 100);
@@ -139,67 +140,72 @@ export default function ProductCard({
 	}
 
 	return (
-		<Anchor
+		<Card
 			key={crawlData.name + crawlData.query_time.toString()}
+			radius="lg"
+			withBorder={true}
+			h={isBeta ? "27rem" : "25rem"}
+			shadow="sm"
+			bg="#2e2e2e"
+
+			component="a"
 			href={crawlData.url}
 			target="_blank"
-			underline="never"
-			c="initial"
 		>
-			<Card radius="lg" withBorder={true} h="25rem" shadow="sm" bg="#2e2e2e">
-				<CardSection>
-					<Skeleton h="10rem" visible={!imageLoaded}>
-						<Image alt="" h="10rem" src={crawlData.image_url} onLoad={() => setImageLoaded(true)} />
-					</Skeleton>
-				</CardSection>
-				<CardSection mb="1rem">
-					<PriceCard crawlData={crawlData} viewProductPrice={viewProductPrice} setViewProductPrice={setViewProductPrice} />
-					<Flex bg={retailer.colourHex} pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center">
-						<Text
-							size={isMobile ? "sm" : "xs"}
-							c={retailer.textColourHex ? retailer.textColourHex : "gray"}
-							ta="center"
-							fw="bold"
-						>
-							{retailer.name}
-						</Text>
-					</Flex>
-				</CardSection>
-				<Flex
-					direction="column"
-					h="100%"
-					style={{zIndex: 1}}
-				>
-					<Box flex={1}>
-						<TooltipFloating
-							label={crawlData.name}
-							color="black"
-							multiline
-							w="15rem"
-							disabled={isMobile}
-						>
-							<Text size="sm" lineClamp={4}>{crawlData.name}</Text>
-						</TooltipFloating>
-					</Box>
-					<Box>
-						<TooltipFloating
-							label="It's been 24 hours since we've seen this item, it may be out of stock!"
-							color="black"
-							multiline
-							w="15rem"
-							disabled={isMobile || !isItemStale}
-						>
-							<Group gap="xs" c={isItemStale ? "#c77700ff" : "grey"}>
-								{clockIcon}
-								<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
-							</Group>
-						</TooltipFloating>
-					</Box>
+			<CardSection>
+				<Skeleton h="10rem" visible={!imageLoaded}>
+					<Image alt="" h="10rem" src={crawlData.image_url} onLoad={() => setImageLoaded(true)} />
+				</Skeleton>
+			</CardSection>
+			<CardSection mb="1rem">
+				<PriceCard crawlData={crawlData} viewProductPrice={viewProductPrice} setViewProductPrice={setViewProductPrice} />
+				<Flex bg={retailer.colourHex} pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center">
+					<Text
+						size={isMobile ? "sm" : "xs"}
+						c={retailer.textColourHex ? retailer.textColourHex : "gray"}
+						ta="center"
+						fw="bold"
+					>
+						{retailer.name}
+					</Text>
 				</Flex>
-				<Box pos="absolute" right={0} bottom={0} c="#363636">
+			</CardSection>
+			<Flex
+				direction="column"
+				h="100%"
+			>
+				<Box flex={1} style={{zIndex: 1}}>
+					<TooltipFloating
+						label={crawlData.name}
+						color="black"
+						multiline
+						w="15rem"
+						disabled={isMobile}
+					>
+						<Text size="sm" lineClamp={4}>{crawlData.name}</Text>
+					</TooltipFloating>
+				</Box>
+				<Box style={{zIndex: 1}}>
+					<TooltipFloating
+						label="It's been 24 hours since we've seen this item, it may be out of stock!"
+						color="black"
+						multiline
+						w="15rem"
+						disabled={isMobile || !isItemStale}
+					>
+						<Group gap="xs" c={isItemStale ? "#c77700ff" : "grey"}>
+							{clockIcon}
+							<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
+						</Group>
+					</TooltipFloating>
+				</Box>
+				<Box pos="absolute" right={0} bottom="2rem" c="#333333">
 					{itemIcon}
 				</Box>
-			</Card>
-		</Anchor>
+			</Flex>
+			<CardSection mt="1rem">
+				{isBeta ? <ProductButtons /> : <></>}
+			</CardSection>
+		</Card>
 	);
 }
