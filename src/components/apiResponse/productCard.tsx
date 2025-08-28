@@ -1,10 +1,11 @@
 "use client";
 
 import { Card, Text, Image, CardSection, Skeleton, Anchor, Group, TooltipFloating, Flex, Box, ActionIcon } from "@mantine/core";
-import { CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
-import { IconClockCheck, IconClockQuestion, IconSwitchHorizontal } from "@tabler/icons-react";
+import { IconBoom, IconBox, IconClockCheck, IconClockQuestion, IconLayersIntersect, IconSwitchHorizontal } from "@tabler/icons-react";
+import { useIsBeta } from "@/utils/hooks/useIsBeta";
 
 function centsToHumanString(price: number): string {
 	const dollars = Math.floor(price / 100);
@@ -107,6 +108,7 @@ export default function ProductCard({
 	setViewProductPrice: Dispatch<SetStateAction<boolean>>
 }) {
 	const isMobile = useMobileView();
+	const isBeta = useIsBeta();
 
 	const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -121,6 +123,21 @@ export default function ProductCard({
 
 	const clockIcon = isItemStale ? <IconClockQuestion /> : <IconClockCheck />;
 
+	let itemIcon: ReactNode = <></>;
+	const itemSize = "5rem";
+
+	if (isBeta) {
+		const mappings: {
+			[key in Category]: ReactNode
+		} = {
+			[Category.Firearm]: <IconBoom size={itemSize} />,
+			[Category.Ammunition]: <IconBox size={itemSize} />,
+			[Category.Other]: <IconLayersIntersect size={itemSize} />,
+		}
+
+		itemIcon = mappings[crawlData.category];
+	}
+
 	return (
 		<Anchor
 			key={crawlData.name + crawlData.query_time.toString()}
@@ -129,7 +146,7 @@ export default function ProductCard({
 			underline="never"
 			c="initial"
 		>
-			<Card radius="lg" withBorder={true} h="25rem" shadow="sm">
+			<Card radius="lg" withBorder={true} h="25rem" shadow="sm" bg="#2e2e2e">
 				<CardSection>
 					<Skeleton h="10rem" visible={!imageLoaded}>
 						<Image alt="" h="10rem" src={crawlData.image_url} onLoad={() => setImageLoaded(true)} />
@@ -151,6 +168,7 @@ export default function ProductCard({
 				<Flex
 					direction="column"
 					h="100%"
+					style={{zIndex: 1}}
 				>
 					<Box flex={1}>
 						<TooltipFloating
@@ -178,6 +196,9 @@ export default function ProductCard({
 						</TooltipFloating>
 					</Box>
 				</Flex>
+				<Box pos="absolute" right={0} bottom={0} c="#363636">
+					{itemIcon}
+				</Box>
 			</Card>
 		</Anchor>
 	);
