@@ -10,7 +10,7 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Roadmap last updated: August 25th 2025"}
+				{"Roadmap last updated: August 27th 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
@@ -19,7 +19,7 @@ export default function roadmapPage() {
 				<Text>{"If anything on here is in progress, it'll probably be visible"} <Link style={{color: "revert"}} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
 			</Group>
 			<Space h="xl" />
-			<Timeline active={1} bulletSize="2.5rem">
+			<Timeline active={2} bulletSize="2.5rem">
 				<TimelineItem
 					title="(ongoing) Additional retailer support"
 					bullet={
@@ -62,7 +62,7 @@ export default function roadmapPage() {
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
-					title="Pricing history"
+					title="(in progress) Pricing history"
 					bullet={
 						<IconChartHistogram />
 					}
