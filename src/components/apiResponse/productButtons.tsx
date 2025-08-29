@@ -1,7 +1,10 @@
 "use client";
 
+import "./styles.css";
+
 import { Button, ButtonGroup, useMantineTheme } from "@mantine/core";
-import { IconChartHistogram, IconAlertTriangle } from "@tabler/icons-react";
+import { IconAlertTriangle } from "@tabler/icons-react";
+import PriceHistory from "./priceHistory";
 
 export default function ProductButtons() {
 	const theme = useMantineTheme();
@@ -11,9 +14,7 @@ export default function ProductButtons() {
 
 	return (
 		<ButtonGroup>
-			<Button fullWidth color={bgColour} radius="xs">
-				<IconChartHistogram color={iconColour} />
-			</Button>
+			<PriceHistory bgColour={bgColour} iconColour={iconColour} />
 			<Button fullWidth color={bgColour} radius="xs">
 				<IconAlertTriangle color={iconColour} />
 			</Button>

@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import '@mantine/charts/styles.css';
 import "./globals.css";
 
 import { Affix, Alert, Box, ColorSchemeScript, MantineProvider, Stack, Text, mantineHtmlProps } from '@mantine/core';
