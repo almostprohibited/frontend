@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box, ActionIcon, useMantineTheme } from "@mantine/core";
+import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box, ActionIcon } from "@mantine/core";
 import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
@@ -140,7 +140,6 @@ export default function ProductCard({
 	}
 
 	const linkProperties = {
-		component: "a",
 		href: crawlData.url,
 		target: "_blank",
 	}
@@ -154,12 +153,12 @@ export default function ProductCard({
 			shadow="sm"
 			bg="#2e2e2e"
 		>
-			<CardSection<any> {...linkProperties}>
+			<CardSection component="a" {...linkProperties}>
 				<Skeleton h="10rem" visible={!imageLoaded}>
 					<Image alt="" h="10rem" src={crawlData.image_url} onLoad={() => setImageLoaded(true)} />
 				</Skeleton>
 			</CardSection>
-			<CardSection<any> pb="1rem" {...linkProperties}>
+			<CardSection pb="1rem" component="a" {...linkProperties}>
 				<PriceCard crawlData={crawlData} viewProductPrice={viewProductPrice} setViewProductPrice={setViewProductPrice} />
 				<Flex bg={retailer.colourHex} pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center">
 					<Text
@@ -172,7 +171,7 @@ export default function ProductCard({
 					</Text>
 				</Flex>
 			</CardSection>
-			<Flex<any> direction="column" h="100%" {...linkProperties}>
+			<Flex direction="column" h="100%" component="a" {...linkProperties}>
 				<Box flex={1} style={{zIndex: 1}}>
 					<TooltipFloating
 						label={crawlData.name}
