@@ -1,103 +1,13 @@
 "use client";
 
-import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box, ActionIcon } from "@mantine/core";
+import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box } from "@mantine/core";
 import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
-import { IconBoom, IconBox, IconClockCheck, IconClockQuestion, IconLayersIntersect, IconSwitchHorizontal } from "@tabler/icons-react";
+import { IconBoom, IconBox, IconClockCheck, IconClockQuestion, IconLayersIntersect } from "@tabler/icons-react";
 import { useIsBeta } from "@/utils/hooks/useIsBeta";
 import ProductButtons from "./productButtons";
-
-function centsToHumanString(price: number): string {
-	const dollars = Math.floor(price / 100);
-	const cents = String(price % 100).padEnd(2, "0");
-
-	return `${dollars}.${cents}`;
-}
-
-function finalStringFormatter(price: string, isPricePerRoundView: boolean): string {
-	let finalText = "$" + price;
-
-	if (isPricePerRoundView) {
-		finalText += " / round";
-	}
-
-	return finalText;
-}
-
-function PriceCard({
-	crawlData,
-	viewProductPrice,
-	setViewProductPrice
-}: {
-	crawlData: CrawlResult,
-	viewProductPrice: boolean,
-	setViewProductPrice: Dispatch<SetStateAction<boolean>>
-}) {
-	const isAmmoProduct = (crawlData.metadata && "Ammunition" in crawlData.metadata) || false;
-	const displayAmmoPricing = isAmmoProduct && !viewProductPrice;
-
-	let regularPriceString = crawlData.price.regular_price;
-	let salePriceString = crawlData.price.sale_price;
-
-	let roundCount: number | undefined = undefined;
-	
-	if (displayAmmoPricing) {
-		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
-		roundCount = crawlData.metadata["Ammunition"]["round_count"];
-	}
-	
-	if (roundCount) {
-		regularPriceString = Math.round(regularPriceString / roundCount);
-
-		if (salePriceString) {
-			salePriceString = Math.round(salePriceString / roundCount);
-		}
-	}
-	
-	const regularPrice = centsToHumanString(regularPriceString);
-
-	let priceBadgeChildren;
-
-	if (salePriceString) {
-		const salePrice = centsToHumanString(salePriceString);
-
-		const regularPriceElement = <Text key={regularPrice + "regular"} inherit td="line-through" c="dimmed">{regularPrice}</Text>
-		const salePriceElement = <Text key={salePrice + "sale"} c="green" inherit>{finalStringFormatter(salePrice, displayAmmoPricing)}</Text>;
-
-		priceBadgeChildren = [salePriceElement];
-
-		if (!displayAmmoPricing) {
-			priceBadgeChildren.push(regularPriceElement);
-		}
-	} else {
-		priceBadgeChildren = [<Text key={regularPrice + "regular"} inherit>{finalStringFormatter(regularPrice, displayAmmoPricing)}</Text>];
-	}
-
-	let priceToggle = <></>;
-
-	if (isAmmoProduct) {
-		priceToggle = (
-			<ActionIcon
-				variant="transparent"
-				size="sm"
-				color={viewProductPrice ? "blue" : "grey"}
-				onClick={(e) => {setViewProductPrice(!viewProductPrice); e.preventDefault()}}
-				pos="absolute"
-				right="0.5rem"
-			>
-				<IconSwitchHorizontal />
-			</ActionIcon>
-		);
-	}
-
-	return (
-		<Flex pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center" gap="sm">
-			{...priceBadgeChildren}
-			{priceToggle}
-		</Flex>
-	);
-}
+import PriceCard from "./priceCard";
 
 export default function ProductCard({
 	crawlData,
