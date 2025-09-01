@@ -7,9 +7,9 @@ import { SimpleGrid } from "@mantine/core";
 import ErrorSearch from "./errorSearch";
 import LoadingSearch from "./loadingSearch";
 import ProductCard from "./productCard";
-import { ApiResponse } from "@/utils/apiStructs";
+import { SearchApiResponse } from "@/utils/apiStructs";
 
-export default function useResultsBuilder(isLoading: boolean, data?: ApiResponse) {
+export default function useResultsBuilder(isLoading: boolean, data?: SearchApiResponse) {
 	const isSmallWindow = useMobileView();
 	const [viewProductPrice, setViewProductPrice] = useState(false);
 
@@ -20,7 +20,6 @@ export default function useResultsBuilder(isLoading: boolean, data?: ApiResponse
 			return <EmptySearch />;
 		}
 
-		
 		data.items.forEach(apiResult => {
 			resultElements.push(
 				<ProductCard

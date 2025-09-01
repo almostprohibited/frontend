@@ -205,12 +205,13 @@ export enum Category {
 	Other = "other"
 }
 
-export interface ApiResponse {
+export interface SearchApiResponse {
 	items: Array<CrawlResult>,
 	total_count: number
 }
 
 export interface CrawlResult {
+	id: string,
     name: string,
     url: string,
     price: Price,
@@ -222,4 +223,16 @@ export interface CrawlResult {
 	// TODO: fix this, this is
 	// suppose to represent metadata
     metadata?: object,
+}
+
+
+export interface HistoryApiResponse {
+	history: Array<HistoryPrice>,
+	lowest_price: HistoryPrice,
+	highest_price: HistoryPrice,
+}
+
+export interface HistoryPrice {
+	normalized_timestamp: number,
+	price: number,
 }

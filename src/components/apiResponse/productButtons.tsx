@@ -3,21 +3,38 @@
 import "./styles.css";
 
 import { Button, ButtonGroup, useMantineTheme } from "@mantine/core";
-import { IconAlertTriangle } from "@tabler/icons-react";
+import { IconAlertTriangle, IconChartHistogram } from "@tabler/icons-react";
 import PriceHistory from "./priceHistory";
+import { CrawlResult } from "@/utils/apiStructs";
+import { useDisclosure } from "@mantine/hooks";
 
-export default function ProductButtons() {
+export default function ProductButtons({
+	crawlResult,
+}: {
+	crawlResult: CrawlResult,
+}) {
+	const [isGraphOpen, {open: openGraph, close: closeGraph}] = useDisclosure(false);
+	
 	const theme = useMantineTheme();
 
 	const bgColour = theme.colors.dark[7];
 	const iconColour = theme.colors.gray[5];
 
 	return (
-		<ButtonGroup>
-			<PriceHistory bgColour={bgColour} iconColour={iconColour} />
-			<Button fullWidth color={bgColour} radius="xs">
-				<IconAlertTriangle color={iconColour} />
-			</Button>
-		</ButtonGroup>
+		<>
+			{
+				isGraphOpen ? 
+					<PriceHistory isGraphOpen={isGraphOpen} closeGraph={closeGraph} crawlResult={crawlResult} /> : 
+					<></>
+			}
+			<ButtonGroup>
+				<Button fullWidth color={bgColour} radius="xs" onClick={openGraph}>
+					<IconChartHistogram color={iconColour} />
+				</Button>
+				<Button fullWidth color={bgColour} radius="xs">
+					<IconAlertTriangle color={iconColour} />
+				</Button>
+			</ButtonGroup>
+		</>
 	);
 }
