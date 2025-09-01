@@ -68,7 +68,7 @@ export default function roadmapPage() {
 					}
 				>
 					<Stack mt="1rem" c="dimmed">
-						<Text>{"You know what would be cool? If there was a histogram that plotted the historical price of a particular product, for a particular retailer."}</Text>
+						<Text>{"You know what would be cool? If there was a chart that plotted the historical price of a particular product, for a particular retailer."}</Text>
 						<Text>{"The way that I store the costs of products should let me do this pretty easily. Just have to find the time to do this now."}</Text>
 					</Stack>
 				</TimelineItem>
