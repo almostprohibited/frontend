@@ -167,6 +167,14 @@ export class RetailerEnum {
 		"#e51936",
 		"#fff"
 	)
+	
+	static readonly InterSurplus = new Retailer(
+		"InterSurplus",
+		"https://intersurplus.com/",
+		"/retailers/intersurplus.webp",
+		"#162950",
+		"#fff"
+	)
 
 	private constructor(
 		private readonly key: string,
