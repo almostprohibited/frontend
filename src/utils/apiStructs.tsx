@@ -176,6 +176,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly GreatNorthGun = new Retailer(
+		"Great North Gun",
+		"https://greatnorthgunco.ca/",
+		"https://greatnorthgunco.ca/wp-content/uploads/2022/09/cropped-corp-logo-1.png",
+		"#009EE6",
+		"#000"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
