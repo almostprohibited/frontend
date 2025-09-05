@@ -184,6 +184,14 @@ export class RetailerEnum {
 		"#000"
 	)
 
+	static readonly ClintonSportingGoods = new Retailer(
+		"Clinton Sporting Goods",
+		"https://clintonsporting.com/",
+		"https://clintonsporting.com/wp-content/uploads/2020/06/logo.png.webp",
+		"#ed831d",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

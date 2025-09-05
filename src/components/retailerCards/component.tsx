@@ -40,7 +40,7 @@ export default function RetailerCards() {
 
 	return (
 		<Box w={"100%"} p={"var(--content-side-padding)"}>
-			<Title order={3} ta={"center"}>Supported Retailers</Title>
+			<Title order={3} ta={"center"}>{`${RetailerEnum.getRetailers().length} Supported Retailers`}</Title>
 			<Space h={"xl"} />
 			<SimpleGrid cols={isMobile ? 2 : 4}>
 				{retailerCards}
