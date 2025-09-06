@@ -3,7 +3,7 @@
 import "./styles.css";
 
 import { Button, ButtonGroup, useMantineTheme } from "@mantine/core";
-import { IconAlertTriangle, IconChartHistogram } from "@tabler/icons-react";
+import { IconChartHistogram } from "@tabler/icons-react";
 import PriceHistory from "./priceHistory";
 import { CrawlResult } from "@/utils/apiStructs";
 import { useDisclosure } from "@mantine/hooks";
@@ -31,9 +31,9 @@ export default function ProductButtons({
 				<Button fullWidth color={bgColour} radius="xs" onClick={openGraph}>
 					<IconChartHistogram color={iconColour} />
 				</Button>
-				<Button fullWidth color={bgColour} radius="xs">
+				{/* <Button fullWidth color={bgColour} radius="xs">
 					<IconAlertTriangle color={iconColour} />
-				</Button>
+				</Button> */}
 			</ButtonGroup>
 		</>
 	);
