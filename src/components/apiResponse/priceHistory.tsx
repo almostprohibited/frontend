@@ -50,7 +50,6 @@ export default function PriceHistory({
 	
 	const params = new URLSearchParams();
 	params.append("id", crawlResult.id);
-	params.append("time-range", "one-week");
 
 	const {data, isLoading} = useHistoryApi(params);
 
