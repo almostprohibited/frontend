@@ -9,6 +9,12 @@ import { Modal, Flex, Text, Container, Divider, Stack, Title, SegmentedControl, 
 import { IconCaretDown, IconCaretUp } from "@tabler/icons-react";
 import { useState } from "react";
 
+interface ChartData {
+	_timestamp: number,
+	date: string,
+	price: string | null,
+}
+
 // TODO: improve this, currently if the result has gaps
 // eg. the product was taken down, and then added back
 // then there will be gaps in the graph
@@ -16,9 +22,9 @@ import { useState } from "react";
 // this was going to originally be used to limit API response
 // size, still probably will, but will fix later
 const mapping: {[key: string]: number} = {
-	"1 Week": 7,
-	"1 Month": 30,
 	"1 Year": 365,
+	"1 Month": 30,
+	"1 Week": 7,
 }
 
 const DOMAIN_DEVIATION = 100;
@@ -53,31 +59,57 @@ export default function PriceHistory({
 
 	const {data, isLoading} = useHistoryApi(params);
 
-	const graphData = [];
+	let graphData: object[] = [];
+
 	let minPriceRelative: HistoryPrice = {normalized_timestamp: 0, price: Number.MAX_SAFE_INTEGER};
 	let maxPriceRelative: HistoryPrice = {normalized_timestamp: 0, price: 0};
 
 	if (data) {
+		const preprocessedData: {[key: string]: ChartData} = {};
+		
 		data.history.sort((a, b) => a.normalized_timestamp - b.normalized_timestamp);
 
-		const historySize = data.history.length;
-		const startIndex = Math.max(0, historySize - historyRange);
-		const endIndex = historySize;
+		for (const history of data.history) {
+			const humanDate = convertToHumanReadable(history.normalized_timestamp, {month: "short", day: "numeric"});
 
-		for (const history of data.history.slice(startIndex, endIndex)) {
-			graphData.push({
-				date: convertToHumanReadable(history.normalized_timestamp, {month: "short", day: "numeric"}),
+			preprocessedData[humanDate] = {
+				_timestamp: history.normalized_timestamp,
+				date: humanDate,
 				price: centsToHumanString(history.price),
-			});
-
+			};
+			
 			if (history.price < minPriceRelative.price) {
 				minPriceRelative = history;
 			}
-
+			
 			if (history.price > maxPriceRelative.price) {
 				maxPriceRelative = history;
 			}
 		}
+		
+		
+		const firstTimeStamp = data.history.at(0)!.normalized_timestamp;
+		let currentTimestamp = data.history.at(-1)!.normalized_timestamp;
+		
+		while (currentTimestamp > firstTimeStamp) {
+			const humanDate = convertToHumanReadable(currentTimestamp, {month: "short", day: "numeric"});
+			
+			if (preprocessedData[humanDate] === undefined) {
+				preprocessedData[humanDate] = {
+					_timestamp: currentTimestamp,
+					date: humanDate,
+					price: null,
+				};
+			}
+
+			currentTimestamp -= 86400;
+		}
+
+		const historySize = Object.values(preprocessedData).length;
+		const startIndex = Math.max(0, historySize - historyRange);
+		const endIndex = historySize;
+		
+		graphData = Object.values(preprocessedData).sort((a, b) => a._timestamp - b._timestamp).slice(startIndex, endIndex);
 	}
 	
 	const graphPadding = isMobile ? 10 : 30;
@@ -110,7 +142,7 @@ export default function PriceHistory({
 				<SegmentedControl
 					size="xs"
 					fullWidth
-					data={["1 Year", "1 Month", "1 Week"]}
+					data={Object.keys(mapping)}
 					value={timeRange}
 					onChange={setTimeRange}
 				/>
@@ -135,7 +167,7 @@ export default function PriceHistory({
 				<Container>
 					<Stack ta="center">
 						<Title order={4}>{"Current Price"}</Title>
-						<Text>{"$" + centsToHumanString(crawlResult.price.regular_price)}</Text>
+						<Text>{"$" + centsToHumanString(crawlResult.price.sale_price || crawlResult.price.regular_price)}</Text>
 					</Stack>
 				</Container>
 				<Container>
