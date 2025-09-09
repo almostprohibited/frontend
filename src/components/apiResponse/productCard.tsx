@@ -59,7 +59,7 @@ export default function ProductCard({
 			key={crawlData.id}
 			radius="lg"
 			withBorder={true}
-			h={isBeta ? "27rem" : "25rem"}
+			h={"27rem"}
 			shadow="sm"
 			bg="#2e2e2e"
 		>
@@ -112,7 +112,7 @@ export default function ProductCard({
 				</Box>
 			</Flex>
 			<CardSection mt="1rem">
-				{isBeta ? <ProductButtons crawlResult={crawlData} /> : <></>}
+				<ProductButtons crawlResult={crawlData} />
 			</CardSection>
 		</Card>
 	);

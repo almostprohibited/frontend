@@ -59,7 +59,7 @@ export default function roadmapPage() {
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
-					title="(in progress) Pricing history"
+					title="(complete) Pricing history"
 					bullet={
 						<IconChartHistogram />
 					}

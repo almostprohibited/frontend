@@ -3,10 +3,11 @@
 import "./styles.css";
 
 import { Button, ButtonGroup, useMantineTheme } from "@mantine/core";
-import { IconChartHistogram } from "@tabler/icons-react";
+import { IconAlertTriangle, IconChartHistogram } from "@tabler/icons-react";
 import PriceHistory from "./priceHistory";
 import { CrawlResult } from "@/utils/apiStructs";
 import { useDisclosure } from "@mantine/hooks";
+import { useIsBeta } from "@/utils/hooks/useIsBeta";
 
 export default function ProductButtons({
 	crawlResult,
@@ -16,6 +17,8 @@ export default function ProductButtons({
 	const [isGraphOpen, {open: openGraph, close: closeGraph}] = useDisclosure(false);
 	
 	const theme = useMantineTheme();
+
+	const isBeta = useIsBeta();
 
 	const bgColour = theme.colors.dark[7];
 	const iconColour = theme.colors.gray[5];
@@ -31,9 +34,13 @@ export default function ProductButtons({
 				<Button fullWidth color={bgColour} radius="xs" onClick={openGraph}>
 					<IconChartHistogram color={iconColour} />
 				</Button>
-				{/* <Button fullWidth color={bgColour} radius="xs">
-					<IconAlertTriangle color={iconColour} />
-				</Button> */}
+				{
+					isBeta ?
+					<Button fullWidth color={bgColour} radius="xs">
+						<IconAlertTriangle color={iconColour} />
+					</Button> :
+					<></>
+				}
 			</ButtonGroup>
 		</>
 	);
