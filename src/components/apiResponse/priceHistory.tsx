@@ -1,19 +1,13 @@
 "use client";
 
 import { useHistoryApi } from "@/utils/apiRequest";
-import { CrawlResult, HistoryPrice } from "@/utils/apiStructs";
+import { CrawlResult } from "@/utils/apiStructs";
 import { centsToHumanString } from "@/utils/format";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { LineChart } from "@mantine/charts";
 import { Modal, Flex, Text, Container, Divider, Stack, Title, SegmentedControl, Skeleton } from "@mantine/core";
 import { IconCaretDown, IconCaretUp } from "@tabler/icons-react";
 import { useState } from "react";
-
-interface ChartData {
-	_timestamp: number,
-	date: string,
-	price: string | null,
-}
 
 // TODO: improve this, currently if the result has gaps
 // eg. the product was taken down, and then added back
@@ -34,10 +28,13 @@ function convertToHumanReadable(timestamp: number, options: Intl.DateTimeFormatO
 }
 
 function getRange(minPrice: number, maxPrice: number) {
-	return [
-		Math.max(0, Number.parseInt(centsToHumanString(minPrice)) - DOMAIN_DEVIATION),
-		Number.parseInt(centsToHumanString(maxPrice)) + DOMAIN_DEVIATION
-	];
+	const roundedMin = Number.parseInt(centsToHumanString(minPrice));
+	const roundedMax = Number.parseInt(centsToHumanString(maxPrice));
+
+	const min = Math.max(0, roundedMin - DOMAIN_DEVIATION);
+	const max = min === 0 ? roundedMax * 2 : roundedMax + DOMAIN_DEVIATION;
+
+	return [min, max];
 }
 
 export default function PriceHistory({
@@ -61,55 +58,38 @@ export default function PriceHistory({
 
 	let graphData: object[] = [];
 
-	let minPriceRelative: HistoryPrice = {normalized_timestamp: 0, price: Number.MAX_SAFE_INTEGER};
-	let maxPriceRelative: HistoryPrice = {normalized_timestamp: 0, price: 0};
+	let minPriceRelative = Number.MAX_SAFE_INTEGER;
+	let maxPriceRelative = 0;
 
 	if (data) {
-		const preprocessedData: {[key: string]: ChartData} = {};
-		
+		// I don't 100% trust my own API to give me sorted data
 		data.history.sort((a, b) => a.normalized_timestamp - b.normalized_timestamp);
 
 		for (const history of data.history) {
 			const humanDate = convertToHumanReadable(history.normalized_timestamp, {month: "short", day: "numeric"});
+			const humanPrice = history.price ? centsToHumanString(history.price) : null;
 
-			preprocessedData[humanDate] = {
-				_timestamp: history.normalized_timestamp,
+			graphData.push({
 				date: humanDate,
-				price: centsToHumanString(history.price),
-			};
-			
-			if (history.price < minPriceRelative.price) {
-				minPriceRelative = history;
-			}
-			
-			if (history.price > maxPriceRelative.price) {
-				maxPriceRelative = history;
+				price: humanPrice,
+			});
+
+			if (history.price) {
+				if (history.price < minPriceRelative) {
+					minPriceRelative = history.price;
+				}
+				
+				if (history.price > maxPriceRelative) {
+					maxPriceRelative = history.price;
+				}
 			}
 		}
-		
-		
-		const firstTimeStamp = data.history.at(0)!.normalized_timestamp;
-		let currentTimestamp = data.history.at(-1)!.normalized_timestamp;
-		
-		while (currentTimestamp > firstTimeStamp) {
-			const humanDate = convertToHumanReadable(currentTimestamp, {month: "short", day: "numeric"});
-			
-			if (preprocessedData[humanDate] === undefined) {
-				preprocessedData[humanDate] = {
-					_timestamp: currentTimestamp,
-					date: humanDate,
-					price: null,
-				};
-			}
 
-			currentTimestamp -= 86400;
-		}
-
-		const historySize = Object.values(preprocessedData).length;
+		const historySize = Object.values(graphData).length;
 		const startIndex = Math.max(0, historySize - historyRange);
 		const endIndex = historySize;
 		
-		graphData = Object.values(preprocessedData).sort((a, b) => a._timestamp - b._timestamp).slice(startIndex, endIndex);
+		graphData = graphData.slice(startIndex, endIndex);
 	}
 	
 	const graphPadding = isMobile ? 10 : 30;
@@ -127,7 +107,7 @@ export default function PriceHistory({
 					h={300}
 					data={graphData}
 					xAxisProps={{padding: {left: graphPadding, right: graphPadding}}}
-					yAxisProps={{domain: getRange(minPriceRelative.price, maxPriceRelative.price)}}
+					yAxisProps={{domain: getRange(minPriceRelative, maxPriceRelative)}}
 					dataKey="date"
 					curveType="linear"
 					series={[{name: "price"}]}

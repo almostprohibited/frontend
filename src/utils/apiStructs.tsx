@@ -258,5 +258,5 @@ export interface HistoryApiResponse {
 
 export interface HistoryPrice {
 	normalized_timestamp: number,
-	price: number,
+	price?: number,
 }
