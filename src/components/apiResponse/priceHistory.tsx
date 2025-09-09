@@ -71,7 +71,8 @@ export default function PriceHistory({
 
 			graphData.push({
 				date: humanDate,
-				price: humanPrice,
+				// capital P is on purpose for the chart label
+				Price: humanPrice,
 			});
 
 			if (history.price) {
@@ -110,14 +111,15 @@ export default function PriceHistory({
 					yAxisProps={{domain: getRange(minPriceRelative, maxPriceRelative)}}
 					dataKey="date"
 					curveType="linear"
-					series={[{name: "price"}]}
+					series={[{name: "Price"}]}
+					withLegend
 					connectNulls={false}
 					tooltipAnimationDuration={200}
 					withPointLabels={historyRange === 7}
+					valueFormatter={(value) => `$${value}`}
 					gridProps={{yAxisId: "left"}} // Missing y axis line fix: https://github.com/mantinedev/mantine/issues/8110#issuecomment-3140063560
-					pr="2rem"
-					mt="1rem"
-					mb="1.5rem"
+					pr="1.2rem"
+					mb="1rem"
 				/>
 				<SegmentedControl
 					size="xs"
