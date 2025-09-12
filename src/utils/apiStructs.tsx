@@ -192,13 +192,13 @@ export class RetailerEnum {
 		"#fff"
 	)
 
-	// static readonly AlSimmons = new Retailer(
-	// 	"Al Simmons",
-	// 	"https://alsimmonsgunshop.com/",
-	// 	"https://i0.wp.com/alsimmonsgunshop.com/wp-content/uploads/2023/06/cropped-ASG-LogoWHT_.png?w=578&ssl=1",
-	// 	"#1f1d1d",
-	// 	"#fff"
-	// )
+	static readonly AlSimmons = new Retailer(
+		"Al Simmons",
+		"https://alsimmonsgunshop.com/",
+		"https://i0.wp.com/alsimmonsgunshop.com/wp-content/uploads/2023/06/cropped-ASG-LogoWHT_.png?w=578&ssl=1",
+		"#1f1d1d",
+		"#fff"
+	)
 
 	private constructor(
 		private readonly key: string,
