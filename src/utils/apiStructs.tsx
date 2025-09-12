@@ -200,6 +200,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly SJHardware = new Retailer(
+		"S&J Hardware",
+		"https://sjhardware.com/",
+		"https://cdn11.bigcommerce.com/s-advgsvi7u1/images/stencil/200x90/sjh-logo-2022-white_1731700459__59017.original.png",
+		"#5b6073",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
