@@ -39,7 +39,6 @@ export default function PriceCard({
 	}
 	
 	if (roundCount) {
-		// regularPriceString = Math.round(regularPriceString / roundCount);
 		regularPriceString = regularPriceString / roundCount;
 
 		if (salePriceString) {
