@@ -10,13 +10,13 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Roadmap last updated: September 12th 2025"}
+				{"Roadmap last updated: September 20th 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
 				<Text>{"Read my rants about what I want to add to the website below. Treat it as a blog if you will."}</Text>
-				<Text>{"Do you want to influence this roadmap? Head over to the"} <Link style={{color: "revert"}} href="/contact">contact page</Link> {"and let me hear about it."}</Text>
-				<Text>{"If anything on here is in progress, it'll probably be visible"} <Link style={{color: "revert"}} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
+				<Text>{"Do you want to influence this roadmap? Head over to the"} <Link style={{ color: "revert" }} href="/contact">contact page</Link> {"and let me hear about it."}</Text>
+				<Text>{"If anything on here is in progress, it'll probably be visible"} <Link style={{ color: "revert" }} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
 			</Group>
 			<Space h="xl" />
 			<Timeline active={2} bulletSize="2.5rem">
@@ -30,9 +30,9 @@ export default function roadmapPage() {
 						<Text>{"We could always add support for more retailers, after all, most of us are here to find the lowest prices across ALL stores in Canada right?"}</Text>
 						<Text>{"Recently added retailers:"}</Text>
 						<List withPadding>
+							<ListItem>{"Victory Ridge Sports"}</ListItem>
 							<ListItem>{"S&J Hardware"}</ListItem>
 							<ListItem>{"Al Simmons"}</ListItem>
-							<ListItem>{"Clinton Sporting Goods"}</ListItem>
 						</List>
 						<Text>{"The short list of retailers to add (non-exhaustive, and in no particular order):"}</Text>
 						<List withPadding>
