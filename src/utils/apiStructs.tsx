@@ -216,6 +216,14 @@ export class RetailerEnum {
 		"#fff"
 	)
 
+	static readonly Marstar = new Retailer(
+		"Marstar",
+		"https://marstar.ca/",
+		"https://marstar.ca/wp-content/uploads/2019/03/cropped-MARSTAR-LOGO-LONG.png.webp",
+		"#111",
+		"#fff"
+	)
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
