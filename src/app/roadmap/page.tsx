@@ -10,7 +10,7 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Roadmap last updated: September 21th 2025"}
+				{"Roadmap last updated: September 21st 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
