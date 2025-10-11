@@ -17,7 +17,7 @@ runs:
     - uses: actions/download-artifact@v4
       name: Download built files
       with:
-        artifact-ids: ${{ inputs.artifact-id }}
+        artifact-id: ${{ inputs.artifact-id }}
         path: ${{ inputs.workspace-path }}/download
     - name: Replace static files
       run: |
