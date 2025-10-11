@@ -10,7 +10,7 @@ export default function roadmapPage() {
 			<Title order={1} ta="center">{"Roadmap"}</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{"Roadmap last updated: September 21st 2025"}
+				{"Roadmap last updated: October 11th 2025"}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
@@ -19,7 +19,7 @@ export default function roadmapPage() {
 				<Text>{"If anything on here is in progress, it'll probably be visible"} <Link style={{ color: "revert" }} href="https://beta.almostprohibited.ca">at the beta site</Link>.</Text>
 			</Group>
 			<Space h="xl" />
-			<Timeline active={2} bulletSize="2.5rem">
+			<Timeline active={3} bulletSize="2.5rem">
 				<TimelineItem
 					title="(ongoing) Additional retailer support"
 					bullet={
@@ -30,14 +30,13 @@ export default function roadmapPage() {
 						<Text>{"We could always add support for more retailers, after all, most of us are here to find the lowest prices across ALL stores in Canada right?"}</Text>
 						<Text>{"Recently added retailers:"}</Text>
 						<List withPadding>
+							<ListItem>{"Map Dump"}</ListItem>
 							<ListItem>{"Marstar"}</ListItem>
 							<ListItem>{"Victory Ridge Sports"}</ListItem>
-							<ListItem>{"S&J Hardware"}</ListItem>
 						</List>
 						<Text>{"The short list of retailers to add (non-exhaustive, and in no particular order):"}</Text>
 						<List withPadding>
 							<ListItem>{"Solely Outdoors"}</ListItem>
-							<ListItem>{"Map Dump"}</ListItem>
 						</List>
 					</Stack>
 				</TimelineItem>
@@ -71,7 +70,7 @@ export default function roadmapPage() {
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
-					title="Open source"
+					title="(in progress) Open source"
 					bullet={
 						<IconGitPullRequest />
 					}

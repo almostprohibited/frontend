@@ -1,7 +1,7 @@
 "use client";
 
-import { RetailerEnum } from "@/utils/apiStructs";
 import { useMobileView } from "@/utils/hooks/useMobileView";
+import { RetailerEnum } from "@/utils/retailerConstants";
 import { Box, SimpleGrid, Space, Text, Title, Image, Card, CardSection, Center, Anchor } from "@mantine/core";
 
 export default function RetailerCards() {

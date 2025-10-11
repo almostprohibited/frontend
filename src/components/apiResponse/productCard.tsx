@@ -1,13 +1,14 @@
 "use client";
 
 import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box } from "@mantine/core";
-import { Category, CrawlResult, Retailer, RetailerEnum } from "../../utils/apiStructs";
+import { Category, CrawlResult } from "../../utils/apiStructs";
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { IconBoom, IconBox, IconClockCheck, IconClockQuestion, IconLayersIntersect } from "@tabler/icons-react";
 import { useIsBeta } from "@/utils/hooks/useIsBeta";
 import ProductButtons from "./productButtons";
 import PriceCard from "./priceCard";
+import { Retailer, RetailerEnum } from "@/utils/retailerConstants";
 
 export default function ProductCard({
 	crawlData,
@@ -82,7 +83,7 @@ export default function ProductCard({
 				</Flex>
 			</CardSection>
 			<Flex direction="column" h="100%" component="a" {...linkProperties}>
-				<Box flex={1} style={{zIndex: 1}}>
+				<Box flex={1} style={{ zIndex: 1 }}>
 					<TooltipFloating
 						label={crawlData.name}
 						color="black"
@@ -93,7 +94,7 @@ export default function ProductCard({
 						<Text size="sm" lineClamp={4}>{crawlData.name}</Text>
 					</TooltipFloating>
 				</Box>
-				<Box style={{zIndex: 1}}>
+				<Box style={{ zIndex: 1 }}>
 					<TooltipFloating
 						label="It's been 24 hours since we've seen this item, it may be out of stock!"
 						color="black"
