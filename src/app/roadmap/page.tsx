@@ -30,7 +30,7 @@ export default function roadmapPage() {
 						<Text>{"We could always add support for more retailers, after all, most of us are here to find the lowest prices across ALL stores in Canada right?"}</Text>
 						<Text>{"Recently added retailers:"}</Text>
 						<List withPadding>
-							<ListItem>{"Map Dump"}</ListItem>
+							<ListItem>{"MagDump"}</ListItem>
 							<ListItem>{"Marstar"}</ListItem>
 							<ListItem>{"Victory Ridge Sports"}</ListItem>
 						</List>
