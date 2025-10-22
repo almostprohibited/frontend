@@ -4,11 +4,12 @@ import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex,
 import { Category, CrawlResult } from "../../utils/apiStructs";
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
-import { IconBoom, IconBox, IconClockCheck, IconClockQuestion, IconLayersIntersect } from "@tabler/icons-react";
-import { useIsBeta } from "@/utils/hooks/useIsBeta";
+import { IconBox, IconClockCheck, IconClockQuestion } from "@tabler/icons-react";
 import ProductButtons from "./productButtons";
 import PriceCard from "./priceCard";
 import { Retailer, RetailerEnum } from "@/utils/retailerConstants";
+import IconFirearm from "../icons/firearm";
+import IconAmmo from "../icons/ammo";
 
 export default function ProductCard({
 	crawlData,
@@ -20,7 +21,6 @@ export default function ProductCard({
 	setViewProductPrice: Dispatch<SetStateAction<boolean>>
 }) {
 	const isMobile = useMobileView();
-	const isBeta = useIsBeta();
 
 	const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -38,17 +38,15 @@ export default function ProductCard({
 	let itemIcon: ReactNode = <></>;
 	const itemSize = "5rem";
 
-	if (isBeta) {
-		const mappings: {
-			[key in Category]: ReactNode
-		} = {
-			[Category.Firearm]: <IconBoom size={itemSize} />,
-			[Category.Ammunition]: <IconBox size={itemSize} />,
-			[Category.Other]: <IconLayersIntersect size={itemSize} />,
-		}
-
-		itemIcon = mappings[crawlData.category];
+	const mappings: {
+		[key in Category]: ReactNode
+	} = {
+		[Category.Firearm]: <IconFirearm size={itemSize} />,
+		[Category.Ammunition]: <IconAmmo size={itemSize} />,
+		[Category.Other]: <IconBox size={itemSize} />,
 	}
+
+	itemIcon = mappings[crawlData.category];
 
 	const linkProperties = {
 		href: crawlData.url,

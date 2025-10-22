@@ -2,8 +2,10 @@
 
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { SegmentedControl, Center } from "@mantine/core";
-import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconLayersIntersect, IconBoom, IconBox } from "@tabler/icons-react";
+import { IconStar, IconSortAscendingNumbers, IconSortDescendingNumbers, IconAsterisk, IconBox } from "@tabler/icons-react";
 import { Dispatch, SetStateAction } from "react";
+import IconFirearm from "../icons/firearm";
+import IconAmmo from "../icons/ammo";
 
 export default function SortOptions({
 	sortValue,
@@ -28,7 +30,7 @@ export default function SortOptions({
 		{
 			value: "all",
 			label: (
-				<Center style={{gap: "0.5rem"}}>
+				<Center style={{ gap: "0.5rem" }}>
 					<IconAsterisk size="1rem" />
 					<span>All</span>
 				</Center>
@@ -37,17 +39,17 @@ export default function SortOptions({
 		{
 			value: "firearm",
 			label: (
-				<Center style={{gap: "0.5rem"}}>
-					<IconBoom size="1rem" />
+				<Center style={{ gap: "0.5rem" }}>
+					<IconFirearm size="1rem" />
 					<span>Firearms</span>
 				</Center>
 			)
 		},
 		{
-		value: "ammunition",
+			value: "ammunition",
 			label: (
-				<Center style={{gap: "0.5rem"}}>
-					<IconBox size="1rem" />
+				<Center style={{ gap: "0.5rem" }}>
+					<IconAmmo size="1rem" />
 					<span>Ammo</span>
 				</Center>
 			)
@@ -55,8 +57,8 @@ export default function SortOptions({
 		{
 			value: "other",
 			label: (
-				<Center style={{gap: "0.5rem"}}>
-					<IconLayersIntersect size="1rem" />
+				<Center style={{ gap: "0.5rem" }}>
+					<IconBox size="1rem" />
 					<span>Other</span>
 				</Center>
 			)
@@ -75,11 +77,11 @@ export default function SortOptions({
 				}}
 				name="sort"
 				withItemsBorders={false}
-				data = {[
+				data={[
 					{
 						value: "relevant",
 						label: (
-							<Center style={{gap: "0.5rem"}}>
+							<Center style={{ gap: "0.5rem" }}>
 								<IconStar size="1rem" />
 								<span>Relevant</span>
 							</Center>
@@ -88,7 +90,7 @@ export default function SortOptions({
 					{
 						value: "price-asc",
 						label: (
-							<Center style={{gap: "0.5rem"}}>
+							<Center style={{ gap: "0.5rem" }}>
 								<IconSortAscendingNumbers size="1rem" />
 								<span>Price Asc</span>
 							</Center>
@@ -97,7 +99,7 @@ export default function SortOptions({
 					{
 						value: "price-desc",
 						label: (
-							<Center style={{gap: "0.5rem"}}>
+							<Center style={{ gap: "0.5rem" }}>
 								<IconSortDescendingNumbers size="1rem" />
 								<span>Price Desc</span>
 							</Center>
@@ -115,7 +117,7 @@ export default function SortOptions({
 				}}
 				name="category"
 				withItemsBorders={false}
-				data = {categories}
+				data={categories}
 			/>
 		</>
 	);
