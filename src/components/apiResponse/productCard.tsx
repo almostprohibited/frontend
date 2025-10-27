@@ -2,7 +2,7 @@
 
 import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box } from "@mantine/core";
 import { Category, CrawlResult } from "../../utils/apiStructs";
-import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import React, { AnchorHTMLAttributes, Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { useMobileView } from "@/utils/hooks/useMobileView";
 import { IconBox, IconClockCheck, IconClockQuestion } from "@tabler/icons-react";
 import ProductButtons from "./productButtons";
@@ -48,9 +48,10 @@ export default function ProductCard({
 
 	itemIcon = mappings[crawlData.category];
 
-	const linkProperties = {
+	const linkProperties: AnchorHTMLAttributes<HTMLAnchorElement> = {
 		href: crawlData.url,
 		target: "_blank",
+		referrerPolicy: "no-referrer",
 	}
 
 	return (
@@ -80,36 +81,38 @@ export default function ProductCard({
 					</Text>
 				</Flex>
 			</CardSection>
-			<Flex direction="column" h="100%" component="a" {...linkProperties}>
-				<Box flex={1} style={{ zIndex: 1 }}>
-					<TooltipFloating
-						label={crawlData.name}
-						color="black"
-						multiline
-						w="15rem"
-						disabled={isMobile}
-					>
-						<Text size="sm" lineClamp={4}>{crawlData.name}</Text>
-					</TooltipFloating>
-				</Box>
-				<Box style={{ zIndex: 1 }}>
-					<TooltipFloating
-						label="It's been 24 hours since we've seen this item, it may be out of stock!"
-						color="black"
-						multiline
-						w="15rem"
-						disabled={isMobile || !isItemStale}
-					>
-						<Group gap="xs" c={isItemStale ? "#c77700ff" : "grey"}>
-							{clockIcon}
-							<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
-						</Group>
-					</TooltipFloating>
-				</Box>
-				<Box pos="absolute" right={0} bottom="2rem" c="#333333">
-					{itemIcon}
-				</Box>
-			</Flex>
+			<Box h="100%" component="a" {...linkProperties}>
+				<Flex direction="column" h="100%">
+					<Box flex={1} style={{ zIndex: 1 }}>
+						<TooltipFloating
+							label={crawlData.name}
+							color="black"
+							multiline
+							w="15rem"
+							disabled={isMobile}
+						>
+							<Text size="sm" lineClamp={4}>{crawlData.name}</Text>
+						</TooltipFloating>
+					</Box>
+					<Box style={{ zIndex: 1 }}>
+						<TooltipFloating
+							label="It's been 24 hours since we've seen this item, it may be out of stock!"
+							color="black"
+							multiline
+							w="15rem"
+							disabled={isMobile || !isItemStale}
+						>
+							<Group gap="xs" c={isItemStale ? "#c77700ff" : "grey"}>
+								{clockIcon}
+								<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
+							</Group>
+						</TooltipFloating>
+					</Box>
+					<Box pos="absolute" right={0} bottom="2rem" c="#333333">
+						{itemIcon}
+					</Box>
+				</Flex>
+			</Box>
 			<CardSection mt="1rem">
 				<ProductButtons crawlResult={crawlData} />
 			</CardSection>

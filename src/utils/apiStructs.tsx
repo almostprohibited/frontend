@@ -34,11 +34,12 @@ export interface CrawlResult {
 
 export interface HistoryApiResponse {
 	history: Array<HistoryPrice>,
-	lowest_price: HistoryPrice,
-	highest_price: HistoryPrice,
+	min_price: HistoryPrice,
+	max_price: HistoryPrice,
 }
 
 export interface HistoryPrice {
-	normalized_timestamp: number,
-	price?: number,
+	query_time: number,
+	regular_price: number,
+	sale_price?: number,
 }
