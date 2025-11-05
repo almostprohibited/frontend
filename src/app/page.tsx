@@ -4,9 +4,12 @@ import { Box, Center, Divider, Skeleton, Space, Text, Title, useMantineTheme } f
 import SearchBar from "@/components/searchv2/component";
 import RetailerCards from "@/components/retailerCards/component";
 import { Suspense } from "react";
+import { isBirthday } from "@/utils/birthday";
+import BirthdayAlert from "@/components/birthday/component";
 
 export default function Home() {
 	const theme = useMantineTheme();
+	const birthday = isBirthday();
 
 	return (
 		<>
@@ -25,6 +28,12 @@ export default function Home() {
 				</Box>
 			</Center>
 			<Divider />
+			{
+				birthday && <>
+					<Space h={"xl"} />
+					<BirthdayAlert />
+				</>
+			}
 			<Space h={"xl"} />
 			<Center>
 				<RetailerCards />
