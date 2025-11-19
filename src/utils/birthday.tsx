@@ -5,7 +5,10 @@ export function isBirthday(): boolean {
 	const parsedBirthday = new Date(birthday);
 	const currentDate = new Date();
 
-	return parsedBirthday.getUTCMonth() === currentDate.getUTCMonth() && parsedBirthday.getUTCDate() === currentDate.getUTCDate();
+	return (
+		parsedBirthday.getUTCMonth() === currentDate.getUTCMonth() &&
+		parsedBirthday.getUTCDate() === currentDate.getUTCDate()
+	);
 }
 
 export function getYearsOld(): number {

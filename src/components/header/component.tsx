@@ -1,12 +1,10 @@
-"use client";
+import { Box, Flex, Tooltip } from '@mantine/core';
+import styles from './component.module.css';
+import { IconBrandGithub, IconHome } from '@tabler/icons-react';
+import { useIsBeta } from '@/utils/hooks/useIsBeta';
+import { Link } from '@tanstack/react-router';
 
-import { Box, Flex, Tooltip } from "@mantine/core";
-import Link from "next/link";
-import styles from "./component.module.css";
-import { IconBrandGithub, IconHome } from "@tabler/icons-react";
-import { useIsBeta } from "@/utils/hooks/useIsBeta";
-
-const iconSize = "2rem";
+const iconSize = '2rem';
 
 export default function Header() {
 	const isBeta = useIsBeta();
@@ -16,16 +14,24 @@ export default function Header() {
 		<Flex className={styles.header} align="center" justify="center">
 			<Box w="100%">
 				<Tooltip label="Home">
-					<Link href={"/"}><IconHome size={iconSize} /></Link>
+					<Link to="/">
+						<IconHome size={iconSize} />
+					</Link>
 				</Tooltip>
 			</Box>
-			{isBeta &&
+			{isBeta && (
 				<Box>
 					<Tooltip label="Github source code">
-						<a href="https://github.com/almostprohibited" target="_blank" referrerPolicy="no-referrer"><IconBrandGithub size={iconSize} /></a>
+						<a
+							href="https://github.com/almostprohibited"
+							target="_blank"
+							referrerPolicy="no-referrer"
+						>
+							<IconBrandGithub size={iconSize} />
+						</a>
 					</Tooltip>
 				</Box>
-			}
+			)}
 		</Flex>
 	);
 }

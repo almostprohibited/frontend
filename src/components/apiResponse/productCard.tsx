@@ -1,24 +1,42 @@
-"use client";
-
-import { Card, Text, Image, CardSection, Skeleton, Group, TooltipFloating, Flex, Box } from "@mantine/core";
-import { Category, CrawlResult } from "../../utils/apiStructs";
-import React, { AnchorHTMLAttributes, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { useMobileView } from "@/utils/hooks/useMobileView";
-import { IconBox, IconClockCheck, IconClockQuestion } from "@tabler/icons-react";
-import ProductButtons from "./productButtons";
-import PriceCard from "./priceCard";
-import { Retailer, RetailerEnum } from "@/utils/retailerConstants";
-import IconFirearm from "../icons/firearm";
-import IconAmmo from "../icons/ammo";
+import {
+	Card,
+	Text,
+	Image,
+	CardSection,
+	Skeleton,
+	Group,
+	TooltipFloating,
+	Flex,
+	Box,
+} from '@mantine/core';
+import { Category, type CrawlResult } from '../../utils/apiStructs';
+import type {
+	AnchorHTMLAttributes,
+	Dispatch,
+	ReactNode,
+	SetStateAction,
+} from 'react';
+import { useState } from 'react';
+import { useMobileView } from '@/utils/hooks/useMobileView';
+import {
+	IconBox,
+	IconClockCheck,
+	IconClockQuestion,
+} from '@tabler/icons-react';
+import ProductButtons from './productButtons';
+import PriceCard from './priceCard';
+import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
+import IconFirearm from '../icons/firearm';
+import IconAmmo from '../icons/ammo';
 
 export default function ProductCard({
 	crawlData,
 	viewProductPrice,
-	setViewProductPrice
+	setViewProductPrice,
 }: {
-	crawlData: CrawlResult,
-	viewProductPrice: boolean,
-	setViewProductPrice: Dispatch<SetStateAction<boolean>>
+	crawlData: CrawlResult;
+	viewProductPrice: boolean;
+	setViewProductPrice: Dispatch<SetStateAction<boolean>>;
 }) {
 	const isMobile = useMobileView();
 
@@ -36,44 +54,65 @@ export default function ProductCard({
 	const clockIcon = isItemStale ? <IconClockQuestion /> : <IconClockCheck />;
 
 	let itemIcon: ReactNode = <></>;
-	const itemSize = "5rem";
+	const itemSize = '5rem';
 
 	const mappings: {
-		[key in Category]: ReactNode
+		[key in Category]: ReactNode;
 	} = {
 		[Category.Firearm]: <IconFirearm size={itemSize} />,
 		[Category.Ammunition]: <IconAmmo size={itemSize} />,
 		[Category.Other]: <IconBox size={itemSize} />,
-	}
+		[Category.All]: <></>,
+	};
 
 	itemIcon = mappings[crawlData.category];
 
 	const linkProperties: AnchorHTMLAttributes<HTMLAnchorElement> = {
 		href: crawlData.url,
-		target: "_blank",
-		referrerPolicy: "no-referrer",
-	}
+		target: '_blank',
+		referrerPolicy: 'no-referrer',
+	};
 
 	return (
 		<Card
 			key={crawlData.id}
 			radius="lg"
 			withBorder={true}
-			h={"27rem"}
+			h={'27rem'}
 			shadow="sm"
 			bg="#2e2e2e"
 		>
 			<CardSection component="a" {...linkProperties}>
 				<Skeleton h="10rem" visible={!imageLoaded}>
-					<Image alt="" h="10rem" src={crawlData.image_url} onLoad={() => setImageLoaded(true)} />
+					<Image
+						alt=""
+						h="10rem"
+						src={crawlData.image_url}
+						onLoad={() => setImageLoaded(true)}
+					/>
 				</Skeleton>
 			</CardSection>
 			<CardSection pb="1rem" component="a" {...linkProperties}>
-				<PriceCard crawlData={crawlData} viewProductPrice={viewProductPrice} setViewProductPrice={setViewProductPrice} />
-				<Flex bg={retailer.colourHex} pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center">
+				<PriceCard
+					crawlData={crawlData}
+					viewProductPrice={viewProductPrice}
+					setViewProductPrice={setViewProductPrice}
+				/>
+				<Flex
+					bg={retailer.colourHex}
+					pt="0.5rem"
+					pb="0.5rem"
+					direction="row"
+					fw="bold"
+					justify="center"
+				>
 					<Text
-						size={isMobile ? "sm" : "xs"}
-						c={retailer.textColourHex ? retailer.textColourHex : "gray"}
+						size={isMobile ? 'sm' : 'xs'}
+						c={
+							retailer.textColourHex
+								? retailer.textColourHex
+								: 'gray'
+						}
 						ta="center"
 						fw="bold"
 					>
@@ -91,7 +130,9 @@ export default function ProductCard({
 							w="15rem"
 							disabled={isMobile}
 						>
-							<Text size="sm" lineClamp={4}>{crawlData.name}</Text>
+							<Text size="sm" lineClamp={4}>
+								{crawlData.name}
+							</Text>
 						</TooltipFloating>
 					</Box>
 					<Box style={{ zIndex: 1 }}>
@@ -102,9 +143,14 @@ export default function ProductCard({
 							w="15rem"
 							disabled={isMobile || !isItemStale}
 						>
-							<Group gap="xs" c={isItemStale ? "#c77700ff" : "grey"}>
+							<Group
+								gap="xs"
+								c={isItemStale ? '#c77700ff' : 'grey'}
+							>
 								{clockIcon}
-								<Text size="sm">{timeDiffHours.toFixed(2)} hours ago</Text>
+								<Text size="sm">
+									{timeDiffHours.toFixed(2)} hours ago
+								</Text>
 							</Group>
 						</TooltipFloating>
 					</Box>

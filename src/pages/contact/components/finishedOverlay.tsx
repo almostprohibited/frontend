@@ -1,7 +1,7 @@
-import { Overlay, Stack } from "@mantine/core";
-import { IconCheck, IconX } from "@tabler/icons-react";
+import { Overlay, Stack } from '@mantine/core';
+import { IconCheck, IconX } from '@tabler/icons-react';
 
-export function FinishedOverlay({wasSuccess}: {wasSuccess: boolean}) {
+export function FinishedOverlay({ wasSuccess }: { wasSuccess: boolean }) {
 	return (
 		<Overlay backgroundOpacity={0.5}>
 			<Stack justify="center" align="center" h="100%">

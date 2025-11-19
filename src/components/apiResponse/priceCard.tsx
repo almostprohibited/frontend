@@ -1,16 +1,17 @@
-"use client";
+import type { CrawlResult } from '@/utils/apiStructs';
+import { centsToHumanString } from '@/utils/format';
+import { ActionIcon, Flex, Text } from '@mantine/core';
+import { IconSwitchHorizontal } from '@tabler/icons-react';
+import type { Dispatch, SetStateAction } from 'react';
 
-import { CrawlResult } from "@/utils/apiStructs";
-import { centsToHumanString } from "@/utils/format";
-import { ActionIcon, Flex, Text } from "@mantine/core";
-import { IconSwitchHorizontal } from "@tabler/icons-react";
-import { Dispatch, SetStateAction } from "react";
-
-function finalStringFormatter(price: string, isPricePerRoundView: boolean): string {
-	let finalText = "$" + price;
+function finalStringFormatter(
+	price: string,
+	isPricePerRoundView: boolean,
+): string {
+	let finalText = '$' + price;
 
 	if (isPricePerRoundView) {
-		finalText += " / round";
+		finalText += ' / round';
 	}
 
 	return finalText;
@@ -19,25 +20,26 @@ function finalStringFormatter(price: string, isPricePerRoundView: boolean): stri
 export default function PriceCard({
 	crawlData,
 	viewProductPrice,
-	setViewProductPrice
+	setViewProductPrice,
 }: {
-	crawlData: CrawlResult,
-	viewProductPrice: boolean,
-	setViewProductPrice: Dispatch<SetStateAction<boolean>>
+	crawlData: CrawlResult;
+	viewProductPrice: boolean;
+	setViewProductPrice: Dispatch<SetStateAction<boolean>>;
 }) {
-	const isAmmoProduct = (crawlData.metadata && "Ammunition" in crawlData.metadata) || false;
+	const isAmmoProduct =
+		(crawlData.metadata && 'Ammunition' in crawlData.metadata) || false;
 	const displayAmmoPricing = isAmmoProduct && !viewProductPrice;
 
 	let regularPriceString = crawlData.price.regular_price;
 	let salePriceString = crawlData.price.sale_price;
 
 	let roundCount: number | undefined = undefined;
-	
+
 	if (displayAmmoPricing) {
 		// @ts-expect-error: TODO: fix this issue where the metadata object is not typed
-		roundCount = crawlData.metadata["Ammunition"]["round_count"];
+		roundCount = crawlData.metadata['Ammunition']['round_count'];
 	}
-	
+
 	if (roundCount) {
 		regularPriceString = regularPriceString / roundCount;
 
@@ -45,7 +47,7 @@ export default function PriceCard({
 			salePriceString = salePriceString / roundCount;
 		}
 	}
-	
+
 	const regularPrice = centsToHumanString(regularPriceString);
 
 	let priceBadgeChildren;
@@ -53,8 +55,21 @@ export default function PriceCard({
 	if (salePriceString) {
 		const salePrice = centsToHumanString(salePriceString);
 
-		const regularPriceElement = <Text key={regularPrice + "regular"} inherit td="line-through" c="dimmed">{regularPrice}</Text>
-		const salePriceElement = <Text key={salePrice + "sale"} c="green" inherit>{finalStringFormatter(salePrice, displayAmmoPricing)}</Text>;
+		const regularPriceElement = (
+			<Text
+				key={regularPrice + 'regular'}
+				inherit
+				td="line-through"
+				c="dimmed"
+			>
+				{regularPrice}
+			</Text>
+		);
+		const salePriceElement = (
+			<Text key={salePrice + 'sale'} c="green" inherit>
+				{finalStringFormatter(salePrice, displayAmmoPricing)}
+			</Text>
+		);
 
 		priceBadgeChildren = [salePriceElement];
 
@@ -62,7 +77,11 @@ export default function PriceCard({
 			priceBadgeChildren.push(regularPriceElement);
 		}
 	} else {
-		priceBadgeChildren = [<Text key={regularPrice + "regular"} inherit>{finalStringFormatter(regularPrice, displayAmmoPricing)}</Text>];
+		priceBadgeChildren = [
+			<Text key={regularPrice + 'regular'} inherit>
+				{finalStringFormatter(regularPrice, displayAmmoPricing)}
+			</Text>,
+		];
 	}
 
 	let priceToggle = <></>;
@@ -72,8 +91,11 @@ export default function PriceCard({
 			<ActionIcon
 				variant="transparent"
 				size="sm"
-				color={viewProductPrice ? "blue" : "grey"}
-				onClick={(e) => {setViewProductPrice(!viewProductPrice); e.preventDefault()}}
+				color={viewProductPrice ? 'blue' : 'grey'}
+				onClick={(e) => {
+					setViewProductPrice(!viewProductPrice);
+					e.preventDefault();
+				}}
 				pos="absolute"
 				right="0.5rem"
 			>
@@ -83,7 +105,14 @@ export default function PriceCard({
 	}
 
 	return (
-		<Flex pt="0.5rem" pb="0.5rem" direction="row" fw="bold" justify="center" gap="sm">
+		<Flex
+			pt="0.5rem"
+			pb="0.5rem"
+			direction="row"
+			fw="bold"
+			justify="center"
+			gap="sm"
+		>
 			{...priceBadgeChildren}
 			{priceToggle}
 		</Flex>

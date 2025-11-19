@@ -1,21 +1,30 @@
-import { Button, Fieldset, LoadingOverlay, Stack, Textarea, TextInput } from "@mantine/core";
-import { Turnstile } from "@marsidev/react-turnstile";
-import { IconMailForward } from "@tabler/icons-react";
-import { useState } from "react";
-import { FinishedOverlay } from "./finishedOverlay";
+import {
+	Button,
+	Fieldset,
+	LoadingOverlay,
+	Stack,
+	Textarea,
+	TextInput,
+} from '@mantine/core';
+import { Turnstile } from '@marsidev/react-turnstile';
+import { IconMailForward } from '@tabler/icons-react';
+import { useState } from 'react';
+import { FinishedOverlay } from './finishedOverlay';
+import { getApiDomain, getCfSiteKey } from '@/utils/environment';
 
 export function ContactForm() {
-	const siteKey = process.env.NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY || "";
+	const siteKey = getCfSiteKey();
+	const apiDomain = getApiDomain();
 
-	const [email, setEmail] = useState<string>("");
+	const [email, setEmail] = useState<string>('');
 	const [emailContainsError, setEmailContainsError] = useState(false);
 
-	const [subject, setSubject] = useState<string>("");
+	const [subject, setSubject] = useState<string>('');
 
 	const [body, setBody] = useState<string>();
 	const [bodyContainsError, setBodyContainsError] = useState(false);
 
-	const [cfToken, setCfToken] = useState<string>("");
+	const [cfToken, setCfToken] = useState<string>('');
 
 	const [isSendingRequest, setSendingRequest] = useState(false);
 
@@ -23,10 +32,10 @@ export function ContactForm() {
 	const [requestSuccess, setRequestSuccess] = useState(true);
 
 	function submitForm() {
-		const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact`;
+		const url = `${apiDomain}/api/contact`;
 
 		if (!body || !cfToken || bodyContainsError || emailContainsError) {
-			console.log("Form contains problems");
+			console.error('Form contains problems');
 			return;
 		}
 
@@ -34,16 +43,16 @@ export function ContactForm() {
 		setHasSentRequest(true);
 
 		fetch(url, {
-			method: "POST",
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json"
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				"cf-turnstile-response": cfToken,
+				'cf-turnstile-response': cfToken,
 				body,
 				email,
-				subject
-			})
+				subject,
+			}),
 		}).then((response) => {
 			setRequestSuccess(response.status === 200);
 			setSendingRequest(false);
@@ -76,21 +85,25 @@ export function ContactForm() {
 		<Fieldset pos="relative">
 			<LoadingOverlay
 				visible={isSendingRequest}
-				loaderProps={{type: "oval"}}
+				loaderProps={{ type: 'oval' }}
 			/>
-			{!isSendingRequest && hasSentRequest && <FinishedOverlay wasSuccess={requestSuccess} />}
+			{!isSendingRequest && hasSentRequest && (
+				<FinishedOverlay wasSuccess={requestSuccess} />
+			)}
 			<Stack gap="md">
 				<TextInput
 					label="Email"
 					placeholder="your@email.com"
 					description="Optional. Only required if you want a reply"
 					value={email}
-					onChange={(event) => validateEmail(event.currentTarget.value)}
+					onChange={(event) =>
+						validateEmail(event.currentTarget.value)
+					}
 					error={emailContainsError}
 					disabled={hasSentRequest}
 				/>
 				<TextInput
-					label="Subject" 
+					label="Subject"
 					placeholder="summary of your message"
 					description="Optional."
 					value={subject}
@@ -105,7 +118,9 @@ export function ContactForm() {
 					placeholder="complain to me here"
 					resize="vertical"
 					value={body}
-					onChange={(event) => validateBody(event.currentTarget.value)}
+					onChange={(event) =>
+						validateBody(event.currentTarget.value)
+					}
 					error={bodyContainsError}
 					disabled={hasSentRequest}
 				/>
@@ -116,17 +131,19 @@ export function ContactForm() {
 					onClick={submitForm}
 					disabled={
 						hasSentRequest ||
-						cfToken === "" ||
-						(body === "" || body === undefined || bodyContainsError)
+						cfToken === '' ||
+						body === '' ||
+						body === undefined ||
+						bodyContainsError
 					}
 				>
 					Submit
 				</Button>
 				<Turnstile
-					style={{width: "100%"}}
+					style={{ width: '100%' }}
 					siteKey={siteKey}
 					options={{
-						size: "flexible"
+						size: 'flexible',
 					}}
 					onSuccess={setCfToken}
 				/>

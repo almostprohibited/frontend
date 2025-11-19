@@ -13,12 +13,8 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/dist/
-
 # production
-/build
+/dist
 
 # misc
 .DS_Store
@@ -29,10 +25,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
