@@ -19,8 +19,7 @@ runs:
       run: |
         set -ueo pipefail
         
-        export NEXT_TELEMETRY_DISABLED=1
-        export NEXT_PUBLIC_STAGE=${{ inputs.stage }}
+        export VITE_STAGE=${{ inputs.stage }}
 
         npm ci
         npm run build
