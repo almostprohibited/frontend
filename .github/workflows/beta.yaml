@@ -21,6 +21,7 @@ jobs:
   deploy:
     needs: [build]
     runs-on: self-hosted
+    if: github.repository == 'almostprohibited/frontend'
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/deploy
