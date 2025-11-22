@@ -3,11 +3,13 @@ import styles from './component.module.css';
 import { IconBrandGithub, IconHome } from '@tabler/icons-react';
 import { useIsBeta } from '@/utils/hooks/useIsBeta';
 import { Link } from '@tanstack/react-router';
-
-const iconSize = '2rem';
+import { useMobileView } from '@/utils/hooks/useMobileView';
 
 export default function Header() {
 	const isBeta = useIsBeta();
+	const isMobile = useMobileView();
+
+	const iconSize = isMobile ? '1.7rem' : '2rem';
 
 	// Don't think I need the extra flex here
 	return (
