@@ -20,6 +20,7 @@ export default function FormattedNumberInput({
 
 	return (
 		<NumberInput
+			w="100%"
 			placeholder={placeholder}
 			value={value}
 			onChange={(val) => {

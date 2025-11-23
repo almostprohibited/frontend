@@ -19,6 +19,9 @@ import SortOptionsRadio from './searchOptionsRadio';
 import { Category, SortOptions } from '@/utils/apiStructs';
 import PaginationButtons from './pagination';
 import type { SearchRouteSchema } from '@/routes';
+import RetailerSelector from './retailerSelector';
+import { useMobileView } from '@/utils/hooks/useMobileView';
+import { useIsBeta } from '@/utils/hooks/useIsBeta';
 
 export default function SearchBar({
 	child = <></>,
@@ -29,6 +32,9 @@ export default function SearchBar({
 	isLoading?: boolean;
 	totalItems?: number;
 }) {
+	const isMobile = useMobileView();
+	const isBeta = useIsBeta();
+
 	const navigateSearch = useNavigate({ from: '/search' });
 	const currentRoute = useLocation().pathname;
 	const searchParams = useSearch({ from: '/search', shouldThrow: false });
@@ -144,24 +150,32 @@ export default function SearchBar({
 				</Group>
 
 				<Collapse mt="1rem" in={dropDownVisible}>
-					<Fieldset
-						disabled={isLoading}
-						legend="Price"
-						display="initial"
-					>
-						<Group>
-							<FormattedNumberInput
-								value={minPriceValue}
-								placeholder="minimum price"
-								setValue={updateMinPriceValue}
-							/>
-							<FormattedNumberInput
-								value={maxPriceValue}
-								placeholder="maximum price"
-								setValue={updateMaxPriceValue}
-							/>
-						</Group>
-					</Fieldset>
+					<Flex gap="md" direction={isMobile ? 'column' : 'row'}>
+						<Fieldset disabled={isLoading} legend="Price" w="100%">
+							<Flex gap="md">
+								<FormattedNumberInput
+									value={minPriceValue}
+									placeholder="minimum price"
+									setValue={updateMinPriceValue}
+								/>
+								<FormattedNumberInput
+									value={maxPriceValue}
+									placeholder="maximum price"
+									setValue={updateMaxPriceValue}
+								/>
+							</Flex>
+						</Fieldset>
+
+						{isBeta && (
+							<Fieldset
+								disabled={isLoading}
+								legend="Retailers"
+								w="100%"
+							>
+								<RetailerSelector />
+							</Fieldset>
+						)}
+					</Flex>
 				</Collapse>
 			</Box>
 
