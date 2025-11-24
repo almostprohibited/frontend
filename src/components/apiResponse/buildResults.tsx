@@ -1,12 +1,12 @@
 import { useMobileView } from '@/utils/hooks/useMobileView';
 import type { ReactElement } from 'react';
 import { useState } from 'react';
-import EmptySearch from './emptySearch';
 import { SimpleGrid } from '@mantine/core';
-import ErrorSearch from './errorSearch';
+import ErrorResult from '../fallbacks/errorResult';
 import LoadingSearch from './loadingSearch';
 import ProductCard from './productCard';
 import type { SearchApiResponse } from '@/utils/apiStructs';
+import EmptyResult from '../fallbacks/emptyResult';
 
 export default function useResultsBuilder(
 	isLoading: boolean,
@@ -19,7 +19,7 @@ export default function useResultsBuilder(
 		const resultElements: Array<ReactElement> = [];
 
 		if (data.total_count === 0) {
-			return <EmptySearch />;
+			return <EmptyResult />;
 		}
 
 		data.items.forEach((apiResult) => {
@@ -44,5 +44,5 @@ export default function useResultsBuilder(
 		return <LoadingSearch />;
 	}
 
-	return <ErrorSearch />;
+	return <ErrorResult />;
 }

@@ -1,7 +1,7 @@
 import { Box, Center, Flex, Text } from '@mantine/core';
 import { IconDatabaseExclamation } from '@tabler/icons-react';
 
-export default function ErrorSearch() {
+export default function ErrorResult() {
 	return (
 		<Center h="100%">
 			<Flex c="dark" justify="center" align="center" gap="sm">

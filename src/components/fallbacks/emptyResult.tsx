@@ -1,7 +1,7 @@
 import { Box, Center, Flex, Text } from '@mantine/core';
 import { IconZoomQuestion } from '@tabler/icons-react';
 
-export default function EmptySearch() {
+export default function EmptyResult() {
 	return (
 		<Center h="100%">
 			<Flex c="dark" justify="center" align="center" gap="sm">

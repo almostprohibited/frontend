@@ -5,6 +5,8 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import reportWebVitals from './reportWebVitals.ts';
 
 import { routeTree } from './routes.tsx';
+import ErrorResult from './components/fallbacks/errorResult.tsx';
+import EmptyResult from './components/fallbacks/emptyResult.tsx';
 
 const router = createRouter({
 	routeTree,
@@ -14,6 +16,12 @@ const router = createRouter({
 	defaultStructuralSharing: true,
 	defaultPreloadStaleTime: 0,
 	trailingSlash: 'always',
+	defaultErrorComponent: () => {
+		return <ErrorResult />;
+	},
+	defaultNotFoundComponent: () => {
+		return <EmptyResult />;
+	},
 });
 
 declare module '@tanstack/react-router' {
