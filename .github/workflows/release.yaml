@@ -27,5 +27,5 @@ jobs:
       - uses: ./.github/actions/deploy
         name: Deploy
         with:
-          artifact-ids: ${{ steps.build.outputs.artifact-id }}
+          artifact-id: ${{ steps.build.outputs.artifact-id }}
           workspace-path: ${{ vars.WORKSPACE_PATH }}
