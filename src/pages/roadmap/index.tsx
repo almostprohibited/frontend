@@ -31,7 +31,7 @@ function RoadmapPage() {
 			</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{'Roadmap last updated: October 11th 2025'}
+				{'Roadmap last updated: November 23rd 2025'}
 			</Text>
 			<Space h="md" />
 			<Group gap="xs">
@@ -61,7 +61,7 @@ function RoadmapPage() {
 				</Text>
 			</Group>
 			<Space h="xl" />
-			<Timeline active={3} bulletSize="2.5rem">
+			<Timeline active={4} bulletSize="2.5rem">
 				<TimelineItem
 					title="(ongoing) Additional retailer support"
 					bullet={<IconPlus />}
@@ -86,6 +86,28 @@ function RoadmapPage() {
 						<List withPadding>
 							<ListItem>{'Solely Outdoors'}</ListItem>
 						</List>
+					</Stack>
+				</TimelineItem>
+				<TimelineItem
+					title="(ongoing) Additional filters"
+					bullet={<IconAdjustmentsAlt />}
+				>
+					<Stack mt="1rem" c="dimmed">
+						<Text>
+							{
+								'There aren\'t many filters on the site. Sure you have price filters, very basic "is gun", and "is not gun" filters, but everything is currently designed in a way where you probably know what you want.'
+							}
+						</Text>
+						<Text>
+							{
+								"What happens if I don't know what I want, but I know what type of firearm I want? Maybe I want to just look up all lever action rifles. Maybe I want all 1-6x LPVOs, but don't care about the brand."
+							}
+						</Text>
+						<Text>
+							{
+								"You might be able to search your way around, but in some cases you won't be able to."
+							}
+						</Text>
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
@@ -132,7 +154,7 @@ function RoadmapPage() {
 					</Stack>
 				</TimelineItem>
 				<TimelineItem
-					title="(in progress) Open source"
+					title="(complete) Open source"
 					bullet={<IconGitPullRequest />}
 				>
 					<Stack mt="1rem" c="dimmed">
@@ -149,28 +171,6 @@ function RoadmapPage() {
 						<Text>
 							{
 								"I have API tokens and webhook URLs hard-coded in the code base, so I can't exactly just toggle the visibility on Github to make everything public right now."
-							}
-						</Text>
-					</Stack>
-				</TimelineItem>
-				<TimelineItem
-					title="Additional filters"
-					bullet={<IconAdjustmentsAlt />}
-				>
-					<Stack mt="1rem" c="dimmed">
-						<Text>
-							{
-								'There aren\'t many filters on the site. Sure you have price filters, very basic "is gun", and "is not gun" filters, but everything is currently designed in a way where you probably know what you want.'
-							}
-						</Text>
-						<Text>
-							{
-								"What happens if I don't know what I want, but I know what type of firearm I want? Maybe I want to just look up all lever action rifles. Maybe I want all 1-6x LPVOs, but don't care about the brand."
-							}
-						</Text>
-						<Text>
-							{
-								"You might be able to search your way around, but in some cases you won't be able to."
 							}
 						</Text>
 					</Stack>
