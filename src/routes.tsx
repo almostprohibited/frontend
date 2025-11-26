@@ -83,6 +83,7 @@ const searchRouteSchema = z.object({
 	'min-price': z.optional(z.number().check(z.minimum(0))),
 	'max-price': z.optional(z.number().check(z.minimum(0))),
 	page: z.optional(z.number().check(z.minimum(0))),
+	retailers: z.optional(z.array(z.string().check(z.trim()))),
 });
 
 export type SearchRouteSchema = z.infer<typeof searchRouteSchema>;

@@ -63,6 +63,10 @@ export default function SearchBar({
 
 	const [pageValue, updatePageValue] = useState(searchParams?.page || 0);
 
+	const [retailersValue, updateRetailersValue] = useState(
+		searchParams?.retailers || [],
+	);
+
 	const maxPages = Math.ceil(totalItems / 32);
 
 	function sendQuery(forceSend: boolean = false) {
@@ -70,10 +74,12 @@ export default function SearchBar({
 			navigateSearch({
 				search: (oldParams) => {
 					const shouldReset = shouldResetPage(oldParams);
-					const newPageVal = shouldReset ? 0 : pageValue;
+
+					let newPageVal: number = pageValue;
 
 					if (shouldReset) {
 						updatePageValue(0);
+						newPageVal = 0;
 					}
 
 					return {
@@ -83,6 +89,10 @@ export default function SearchBar({
 						'min-price': minPriceValue,
 						'max-price': maxPriceValue,
 						page: newPageVal,
+						retailers:
+							retailersValue.length === 0
+								? undefined
+								: retailersValue,
 					};
 				},
 			});
@@ -172,7 +182,10 @@ export default function SearchBar({
 								legend="Retailers"
 								w="100%"
 							>
-								<RetailerSelector />
+								<RetailerSelector
+									value={retailersValue}
+									setValue={updateRetailersValue}
+								/>
 							</Fieldset>
 						)}
 					</Flex>

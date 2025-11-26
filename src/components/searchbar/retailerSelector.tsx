@@ -21,12 +21,13 @@ import {
 	Flex,
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 function createOption(retailer: Retailer, isSelected: boolean) {
 	const theme = useMantineTheme();
 
 	return (
-		<ComboboxOption value={retailer.name} key={retailer.name}>
+		<ComboboxOption value={retailer.apiName} key={retailer.name}>
 			<Group>
 				{isSelected ? <CheckIcon size="0.5rem" /> : null}
 				<Text
@@ -51,18 +52,26 @@ function createOptionGroups(retailers: Retailer[], selectedOptions: string[]) {
 	return Object.entries(mapping).map(([location, retailers]) => (
 		<ComboboxGroup label={location} key={location}>
 			{retailers.map((retailer) =>
-				createOption(retailer, selectedOptions.includes(retailer.name)),
+				createOption(
+					retailer,
+					selectedOptions.includes(retailer.apiName),
+				),
 			)}
 		</ComboboxGroup>
 	));
 }
 
-export default function RetailerSelector() {
+export default function RetailerSelector({
+	value,
+	setValue,
+}: {
+	value: string[];
+	setValue: Dispatch<SetStateAction<string[]>>;
+}) {
 	const theme = useMantineTheme();
 	const isMobile = useMobileView();
 
 	const [searchFilter, setSearchFilter] = useState('');
-	const [selectedOptions, updateSelectedOptions] = useState<string[]>([]);
 
 	const comboBox = useCombobox({
 		onDropdownClose: () => {
@@ -90,11 +99,11 @@ export default function RetailerSelector() {
 				.includes(searchFilter.toLowerCase());
 		});
 
-	const dropdownOptions = createOptionGroups(
-		filteredRetailers,
-		selectedOptions,
-	);
+	const dropdownOptions = createOptionGroups(filteredRetailers, value);
 
+	// TODO: react is complaining that this is
+	// causing problems whenever you type
+	// should probably fix it
 	useEffect(() => {
 		comboBox.selectFirstOption();
 	}, [searchFilter]);
@@ -104,7 +113,7 @@ export default function RetailerSelector() {
 			<Combobox
 				store={comboBox}
 				onOptionSubmit={(retailer) => {
-					let options = [...selectedOptions];
+					let options = [...value];
 
 					if (options.includes(retailer)) {
 						options = options.filter(
@@ -114,7 +123,7 @@ export default function RetailerSelector() {
 						options.push(retailer);
 					}
 
-					updateSelectedOptions(options);
+					setValue(options);
 					setSearchFilter('');
 				}}
 			>
@@ -145,14 +154,14 @@ export default function RetailerSelector() {
 						>
 							<Flex w="100%" gap="md">
 								<Text size="xs">
-									{selectedOptions.length} currently selected
+									{value.length} currently selected
 								</Text>
 								{/* we have a button at home */}
 								<Text
 									size="xs"
 									style={{ cursor: 'pointer' }}
 									onClick={() => {
-										updateSelectedOptions([]);
+										setValue([]);
 									}}
 								>
 									[ clear ]
