@@ -1,26 +1,25 @@
-import { useMobileView } from '@/utils/hooks/useMobileView';
 import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
 import {
 	Box,
 	CheckIcon,
 	Combobox,
 	ComboboxDropdown,
-	ComboboxDropdownTarget,
 	ComboboxEmpty,
 	ComboboxGroup,
 	ComboboxOption,
 	ComboboxOptions,
 	Group,
 	ScrollAreaAutosize,
-	TextInput,
 	Text,
 	useCombobox,
 	useMantineTheme,
-	ComboboxEventsTarget,
-	ComboboxHeader,
 	Flex,
+	ComboboxTarget,
+	Button,
+	ComboboxSearch,
 } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { IconTrash } from '@tabler/icons-react';
+import { useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 
 function createOption(retailer: Retailer, isSelected: boolean) {
@@ -69,7 +68,6 @@ export default function RetailerSelector({
 	setValue: Dispatch<SetStateAction<string[]>>;
 }) {
 	const theme = useMantineTheme();
-	const isMobile = useMobileView();
 
 	const [searchFilter, setSearchFilter] = useState('');
 
@@ -79,11 +77,7 @@ export default function RetailerSelector({
 			comboBox.resetSelectedOption();
 		},
 		onDropdownOpen: () => {
-			if (searchFilter !== '') {
-				comboBox.selectFirstOption();
-			} else {
-				comboBox.resetSelectedOption();
-			}
+			comboBox.selectFirstOption();
 		},
 	});
 
@@ -100,13 +94,6 @@ export default function RetailerSelector({
 		});
 
 	const dropdownOptions = createOptionGroups(filteredRetailers, value);
-
-	// TODO: react is complaining that this is
-	// causing problems whenever you type
-	// should probably fix it
-	useEffect(() => {
-		comboBox.selectFirstOption();
-	}, [searchFilter]);
 
 	return (
 		<Box w="100%">
@@ -127,50 +114,43 @@ export default function RetailerSelector({
 					setSearchFilter('');
 				}}
 			>
-				<ComboboxDropdownTarget>
-					<ComboboxEventsTarget>
-						<TextInput
-							onBlur={() => {
-								comboBox.closeDropdown();
-							}}
-							onFocus={() => comboBox.openDropdown()}
-							value={searchFilter}
-							placeholder="filter retailers"
-							onChange={(event) => {
-								comboBox.updateSelectedOptionIndex();
-								setSearchFilter(event.currentTarget.value);
-							}}
-						/>
-					</ComboboxEventsTarget>
-				</ComboboxDropdownTarget>
-				<ComboboxDropdown>
-					<ComboboxOptions>
-						<ComboboxHeader
-							styles={{
-								header: {
-									borderBottom: `1px solid ${theme.colors.gray[7]}`,
-								},
-							}}
+				<ComboboxTarget>
+					<Flex gap="md" justify="center">
+						<Button
+							w="100%"
+							variant="light"
+							onClick={() => comboBox.toggleDropdown()}
+							color={theme.colors.indigo[3]}
 						>
-							<Flex w="100%" gap="md">
-								<Text size="xs">
-									{value.length} currently selected
-								</Text>
-								{/* we have a button at home */}
-								<Text
-									size="xs"
-									style={{ cursor: 'pointer' }}
-									onClick={() => {
-										setValue([]);
-									}}
-								>
-									[ clear ]
-								</Text>
-							</Flex>
-						</ComboboxHeader>
+							{`Filter retailers (${value.length} selected)`}
+						</Button>
+						<Button
+							variant="light"
+							color={theme.colors.indigo[3]}
+							onClick={() => setValue([])}
+						>
+							<IconTrash />
+						</Button>
+					</Flex>
+				</ComboboxTarget>
+				<ComboboxDropdown>
+					<ComboboxSearch
+						value={searchFilter}
+						onBlur={() => {
+							comboBox.closeDropdown();
+						}}
+						placeholder="search for a retailer"
+						onChange={(event) => {
+							setSearchFilter(event.currentTarget.value);
+
+							comboBox.selectFirstOption();
+							comboBox.updateSelectedOptionIndex();
+						}}
+					/>
+					<ComboboxOptions>
 						<ScrollAreaAutosize
 							type="always"
-							mah={isMobile ? '15rem' : '20rem'}
+							mah="20rem"
 							scrollbars="y"
 						>
 							{Object.keys(dropdownOptions).length === 0 ? (

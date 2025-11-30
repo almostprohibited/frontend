@@ -7,6 +7,8 @@ import {
 	Divider,
 	Box,
 	Group,
+	Indicator,
+	useMantineTheme,
 } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
 import { IconAdjustmentsHorizontal, IconSend2 } from '@tabler/icons-react';
@@ -32,6 +34,7 @@ export default function SearchBar({
 	isLoading?: boolean;
 	totalItems?: number;
 }) {
+	const theme = useMantineTheme();
 	const isMobile = useMobileView();
 	const isBeta = useIsBeta();
 
@@ -68,6 +71,11 @@ export default function SearchBar({
 	);
 
 	const maxPages = Math.ceil(totalItems / 32);
+
+	const showExtraOptionsIndicator =
+		retailersValue.length > 0 ||
+		minPriceValue !== undefined ||
+		maxPriceValue !== undefined;
 
 	function sendQuery(forceSend: boolean = false) {
 		if (forceSend || currentRoute !== '/') {
@@ -122,15 +130,22 @@ export default function SearchBar({
 					loaderProps={{ type: 'oval' }}
 				/>
 				<Flex align="center" justify="center">
-					<ActionIcon
-						disabled={isLoading}
-						variant="default"
-						size="input-md"
-						mr="0.5rem"
-						onClick={() => dropDownToggle()}
+					<Indicator
+						position="top-start"
+						size={12}
+						color={theme.colors.yellow[7]}
+						disabled={!showExtraOptionsIndicator}
 					>
-						<IconAdjustmentsHorizontal />
-					</ActionIcon>
+						<ActionIcon
+							disabled={isLoading}
+							variant="default"
+							size="input-md"
+							mr="0.5rem"
+							onClick={() => dropDownToggle()}
+						>
+							<IconAdjustmentsHorizontal />
+						</ActionIcon>
+					</Indicator>
 					<MainInput
 						disabled={isLoading}
 						value={searchQuery}
