@@ -3,6 +3,7 @@ import {
 	Alert,
 	Box,
 	ColorSchemeScript,
+	createTheme,
 	Flex,
 	MantineProvider,
 	Stack,
@@ -23,11 +24,15 @@ import './globals.css';
 export default function App() {
 	const isBeta = useIsBeta();
 
+	const theme = createTheme({
+		fontFamily: 'Arial, Helvetica, sans-serif',
+	});
+
 	return (
 		<>
 			<HeadContent />
 			<ColorSchemeScript />
-			<MantineProvider defaultColorScheme="dark">
+			<MantineProvider defaultColorScheme="dark" theme={theme}>
 				{isBeta && (
 					<Affix position={{ bottom: 20, right: 20 }}>
 						<a href="https://almostprohibited.ca">
