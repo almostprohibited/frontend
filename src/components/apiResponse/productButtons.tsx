@@ -1,5 +1,3 @@
-import './styles.css';
-
 import { Button, ButtonGroup, useMantineTheme } from '@mantine/core';
 import { IconAlertTriangle, IconChartHistogram } from '@tabler/icons-react';
 import PriceHistory from './priceHistory';

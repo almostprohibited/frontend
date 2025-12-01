@@ -17,6 +17,8 @@ import {
 import { IconCaretDown, IconCaretUp } from '@tabler/icons-react';
 import { useState } from 'react';
 
+import './styles.css';
+
 // TODO: improve this, currently if the result has gaps
 // eg. the product was taken down, and then added back
 // then there will be gaps in the graph
