@@ -48,16 +48,18 @@ function createOptionGroups(retailers: Retailer[], selectedOptions: string[]) {
 		mapping[retailer.location].push(retailer);
 	});
 
-	return Object.entries(mapping).map(([location, retailers]) => (
-		<ComboboxGroup label={location} key={location}>
-			{retailers.map((retailer) =>
-				createOption(
-					retailer,
-					selectedOptions.includes(retailer.apiName),
-				),
-			)}
-		</ComboboxGroup>
-	));
+	return Object.keys(mapping)
+		.sort()
+		.map((location) => (
+			<ComboboxGroup label={location} key={location}>
+				{mapping[location].map((retailer) =>
+					createOption(
+						retailer,
+						selectedOptions.includes(retailer.apiName),
+					),
+				)}
+			</ComboboxGroup>
+		));
 }
 
 export default function RetailerSelector({
