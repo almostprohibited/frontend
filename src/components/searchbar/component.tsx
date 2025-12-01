@@ -23,7 +23,6 @@ import PaginationButtons from './pagination';
 import type { SearchRouteSchema } from '@/routes';
 import RetailerSelector from './retailerSelector';
 import { useMobileView } from '@/utils/hooks/useMobileView';
-import { useIsBeta } from '@/utils/hooks/useIsBeta';
 
 export default function SearchBar({
 	child = <></>,
@@ -36,7 +35,6 @@ export default function SearchBar({
 }) {
 	const theme = useMantineTheme();
 	const isMobile = useMobileView();
-	const isBeta = useIsBeta();
 
 	const navigateSearch = useNavigate({ from: '/search' });
 	const currentRoute = useLocation().pathname;
