@@ -83,11 +83,6 @@ const privacyRoute = createRoute({
 	path: '/privacy',
 }).lazy(() => import('./pages/privacy/index').then((d) => d.privacyLazyRoute));
 
-const roadmapRoute = createRoute({
-	getParentRoute: () => rootRoute,
-	path: '/roadmap',
-}).lazy(() => import('./pages/roadmap/index').then((d) => d.roadmapLazyRoute));
-
 const searchRouteSchema = z.object({
 	query: z.string().check(z.trim()),
 	sort: z.optional(z.enum(SortOptions)),
@@ -110,6 +105,5 @@ export const routeTree = rootRoute.addChildren([
 	indexRoute,
 	contactRoute,
 	privacyRoute,
-	roadmapRoute,
 	searchRoute,
 ]);
