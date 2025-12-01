@@ -32,8 +32,8 @@ export default function getActiveAnnouncements() {
 				return (
 					<Text>
 						I've added a new retailer filtering option! Filter
-						results from retailers located in your province, or look
-						up products across retailers you've seen have sales.
+						results from retailers located in your province, or
+						cross check product pricing against specific retailers.
 					</Text>
 				);
 			},
@@ -46,7 +46,7 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						{"I've open sourced the project on "}
+						{'AlmostProhibited is now open source on '}
 						<Anchor
 							href="https://github.com/almostprohibited"
 							target="_blank"

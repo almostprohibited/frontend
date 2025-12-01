@@ -1,3 +1,4 @@
+import { useMobileView } from '@/utils/hooks/useMobileView';
 import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
 import {
 	Box,
@@ -70,6 +71,7 @@ export default function RetailerSelector({
 	setValue: Dispatch<SetStateAction<string[]>>;
 }) {
 	const theme = useMantineTheme();
+	const isMobile = useMobileView();
 
 	const [searchFilter, setSearchFilter] = useState('');
 
@@ -77,9 +79,6 @@ export default function RetailerSelector({
 		onDropdownClose: () => {
 			setSearchFilter('');
 			comboBox.resetSelectedOption();
-		},
-		onDropdownOpen: () => {
-			comboBox.selectFirstOption();
 		},
 	});
 
@@ -136,19 +135,20 @@ export default function RetailerSelector({
 					</Flex>
 				</ComboboxTarget>
 				<ComboboxDropdown>
-					<ComboboxSearch
-						value={searchFilter}
-						onBlur={() => {
-							comboBox.closeDropdown();
-						}}
-						placeholder="search for a retailer"
-						onChange={(event) => {
-							setSearchFilter(event.currentTarget.value);
+					{!isMobile && (
+						<ComboboxSearch
+							value={searchFilter}
+							onBlur={() => {
+								comboBox.closeDropdown();
+							}}
+							placeholder="search for a retailer"
+							onChange={(event) => {
+								setSearchFilter(event.currentTarget.value);
 
-							comboBox.selectFirstOption();
-							comboBox.updateSelectedOptionIndex();
-						}}
-					/>
+								comboBox.updateSelectedOptionIndex();
+							}}
+						/>
+					)}
 					<ComboboxOptions>
 						<ScrollAreaAutosize
 							type="always"
