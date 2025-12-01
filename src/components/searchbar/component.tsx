@@ -190,19 +190,16 @@ export default function SearchBar({
 								/>
 							</Flex>
 						</Fieldset>
-
-						{isBeta && (
-							<Fieldset
-								disabled={isLoading}
-								legend="Retailers"
-								w="100%"
-							>
-								<RetailerSelector
-									value={retailersValue}
-									setValue={updateRetailersValue}
-								/>
-							</Fieldset>
-						)}
+						<Fieldset
+							disabled={isLoading}
+							legend="Retailers"
+							w="100%"
+						>
+							<RetailerSelector
+								value={retailersValue}
+								setValue={updateRetailersValue}
+							/>
+						</Fieldset>
 					</Flex>
 				</Collapse>
 			</Box>
