@@ -2,6 +2,7 @@ import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
 	IconAdjustmentsHorizontal,
 	IconBrandGithub,
+	IconBuildingStore,
 	IconConfetti,
 } from '@tabler/icons-react';
 import { Anchor, Text } from '@mantine/core';
@@ -25,6 +26,20 @@ export default function getActiveAnnouncements() {
 			colour: 'orange',
 			icon: <IconConfetti size="2rem" />,
 			shouldDisplay: () => isBirthdayWeek(),
+		},
+		{
+			title: 'Recently added retailers',
+			content: () => {
+				return (
+					<Text>
+						Soley Outdoors was recently added! Their products are
+						now available in the search pool.
+					</Text>
+				);
+			},
+			colour: 'teal',
+			icon: <IconBuildingStore size="2rem" />,
+			shouldDisplay: () => true,
 		},
 		{
 			title: 'New retailer filtering!',

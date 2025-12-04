@@ -317,6 +317,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly SoleyOutdoors = new Retailer(
+		'Soley Outdoors',
+		'SoleyOutdoors',
+		'https://www.solelyoutdoors.com/',
+		'https://cdn.shoplightspeed.com/shops/613284/themes/10999/assets/logo.png?20241108172650',
+		'#35a963',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
