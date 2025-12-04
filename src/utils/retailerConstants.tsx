@@ -327,6 +327,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly BartonsBigCountry = new Retailer(
+		'Bartons Big Country',
+		'BartonsBigCountry',
+		'https://www.bartonsbigcountry.ca/',
+		'https://cdn.shoplightspeed.com/shops/632049/themes/12523/v/74327/assets/logo.png?20200806191031',
+		'#382a1f',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

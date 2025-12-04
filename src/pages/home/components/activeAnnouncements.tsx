@@ -32,8 +32,8 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						Soley Outdoors was recently added! Their products are
-						now available in the search pool.
+						Bartons Big Country and Soley Outdoors have been added!
+						Their products are now available in the search pool.
 					</Text>
 				);
 			},
