@@ -26,6 +26,28 @@ const rootRoute = createRootRoute({
 				name: 'theme-color',
 				content: '#364fc7',
 			},
+			{
+				property: 'og:title',
+				content:
+					'Almost Prohibited - Browse items from your favourite retailers',
+			},
+			{
+				property: 'og:url',
+				content: 'https://almostprohibited.ca',
+			},
+			{
+				property: 'og:description',
+				content:
+					"Canada's upcoming aggregator for firearms, parts, and accessories",
+			},
+			{
+				property: 'og:image',
+				content: 'https://almostprohibited.ca/favicon.svg',
+			},
+			{
+				property: 'og:type',
+				content: 'website',
+			},
 		],
 		links: [
 			{
