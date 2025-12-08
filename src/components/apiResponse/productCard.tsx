@@ -28,6 +28,8 @@ import PriceCard from './priceCard';
 import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
 import IconFirearm from '../icons/firearm';
 import IconAmmo from '../icons/ammo';
+import { getApiDomain } from '@/utils/environment';
+import { useIsBeta } from '@/utils/hooks/useIsBeta';
 
 export default function ProductCard({
 	crawlData,
@@ -39,6 +41,7 @@ export default function ProductCard({
 	setViewProductPrice: Dispatch<SetStateAction<boolean>>;
 }) {
 	const isMobile = useMobileView();
+	const isBeta = useIsBeta();
 
 	const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -73,6 +76,11 @@ export default function ProductCard({
 		referrerPolicy: 'no-referrer',
 	};
 
+	let imageUrl = crawlData.image_url!;
+	if (isBeta) {
+		imageUrl = `${getApiDomain()}/api/image?id=${crawlData.id}`;
+	}
+
 	return (
 		<Card
 			key={crawlData.id}
@@ -87,7 +95,7 @@ export default function ProductCard({
 					<Image
 						alt=""
 						h="10rem"
-						src={crawlData.image_url}
+						src={imageUrl}
 						onLoad={() => setImageLoaded(true)}
 					/>
 				</Skeleton>
