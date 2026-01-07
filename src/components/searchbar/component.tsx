@@ -8,6 +8,7 @@ import {
 	Box,
 	Group,
 	Indicator,
+	Text,
 	useMantineTheme,
 } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
@@ -23,6 +24,8 @@ import PaginationButtons from './pagination';
 import type { SearchRouteSchema } from '@/routes';
 import RetailerSelector from './retailerSelector';
 import { useMobileView } from '@/utils/hooks/useMobileView';
+
+const MAX_ITEMS_PER_PAGE = 32;
 
 export default function SearchBar({
 	child = <></>,
@@ -68,7 +71,12 @@ export default function SearchBar({
 		searchParams?.retailers || [],
 	);
 
-	const maxPages = Math.ceil(totalItems / 32);
+	const maxPages = Math.ceil(totalItems / MAX_ITEMS_PER_PAGE);
+	const lowerboundItemCount = MAX_ITEMS_PER_PAGE * pageValue + 1;
+	const upperboundItemCount = Math.min(
+		MAX_ITEMS_PER_PAGE * (pageValue + 1),
+		totalItems,
+	);
 
 	const showExtraOptionsIndicator =
 		retailersValue.length > 0 ||
@@ -205,13 +213,26 @@ export default function SearchBar({
 			{searchParams !== undefined && (
 				<>
 					<Flex direction="column" gap="md">
-						<Divider mt="1rem" mb="1rem" />
-						<PaginationButtons
-							page={pageValue + 1}
-							maxPages={maxPages}
-							setPage={updatePageValue}
-							isSendingRequest={isLoading}
-						/>
+						<Divider mt="1rem" />
+						<Flex
+							direction={isMobile ? 'column-reverse' : 'row'}
+							gap="md"
+							justify="center"
+							align={isMobile ? 'flex-end' : 'center'}
+						>
+							{totalItems > 0 && (
+								<Text
+									c="grey"
+									size="sm"
+								>{`${lowerboundItemCount} - ${upperboundItemCount} (${totalItems} total items)`}</Text>
+							)}
+							<PaginationButtons
+								page={pageValue + 1}
+								maxPages={maxPages}
+								setPage={updatePageValue}
+								isSendingRequest={isLoading}
+							/>
+						</Flex>
 						{child}
 						<PaginationButtons
 							page={pageValue + 1}

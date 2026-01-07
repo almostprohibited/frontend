@@ -13,7 +13,7 @@ export default function PaginationButtons({
 	isSendingRequest: boolean;
 }) {
 	return (
-		<Flex w="100%" justify="flex-end" pos="relative">
+		<Flex justify="flex-end" pos="relative" flex="1">
 			<LoadingOverlay
 				overlayProps={{ radius: 'md', backgroundOpacity: 0.5 }}
 				visible={isSendingRequest}
