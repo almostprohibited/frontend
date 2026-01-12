@@ -337,6 +337,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly FrontierFirearms = new Retailer(
+		'Frontier Firearms',
+		'FrontierFirearms',
+		'https://frontierfirearms.ca/',
+		'/retailers/frontierfirearms.png',
+		'#3d451d',
+		RetailerLocation.Saskatchewan,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
