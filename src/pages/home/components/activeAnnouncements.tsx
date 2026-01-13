@@ -1,6 +1,5 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
-	IconAdjustmentsHorizontal,
 	IconBrandGithub,
 	IconBuildingStore,
 	IconConfetti,
@@ -32,28 +31,12 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						Bartons Big Country and Soley Outdoors have been added!
-						Their products are now available in the search pool.
+						Frontier Firearms has been added to the crawler!
 					</Text>
 				);
 			},
-			colour: 'teal',
+			colour: 'olive',
 			icon: <IconBuildingStore size="2rem" />,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'New retailer filtering!',
-			content: () => {
-				return (
-					<Text>
-						I've added a new retailer filtering option! Filter
-						results from retailers located in your province, or
-						cross check product pricing against specific retailers.
-					</Text>
-				);
-			},
-			colour: 'green',
-			icon: <IconAdjustmentsHorizontal size="2rem" />,
 			shouldDisplay: () => true,
 		},
 		{
