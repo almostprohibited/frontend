@@ -347,6 +347,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly GoldNLoan = new Retailer(
+		"Gold'n Loan Outfitters",
+		'GoldNLoan',
+		'https://outfitters.goldnloan.com/',
+		'/retailers/goldnloan.webp',
+		'#6c765e',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

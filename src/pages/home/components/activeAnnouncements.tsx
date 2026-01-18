@@ -31,11 +31,12 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						Frontier Firearms has been added to the crawler!
+						Frontier Firearms and Gold'n Loan Outfitters have been
+						added to the crawler!
 					</Text>
 				);
 			},
-			colour: 'olive',
+			colour: 'green',
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
