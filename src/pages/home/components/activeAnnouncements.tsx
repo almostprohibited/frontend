@@ -29,14 +29,9 @@ export default function getActiveAnnouncements() {
 		{
 			title: 'Recently added retailers',
 			content: () => {
-				return (
-					<Text>
-						Frontier Firearms and Gold'n Loan Outfitters have been
-						added to the crawler!
-					</Text>
-				);
+				return <Text>CRAFM has been added to the site!</Text>;
 			},
-			colour: 'green',
+			colour: 'blue',
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},

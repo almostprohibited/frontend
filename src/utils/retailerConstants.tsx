@@ -357,6 +357,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly Crafm = new Retailer(
+		'CRAFM',
+		'Crafm',
+		'https://crafm.com/',
+		'/retailers/crafm.png',
+		'#2A2B2A',
+		RetailerLocation.Quebec,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
