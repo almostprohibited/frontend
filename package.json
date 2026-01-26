@@ -12,33 +12,33 @@
 		"check": "prettier --write . && eslint --fix"
 	},
 	"dependencies": {
-		"@mantine/charts": "^8.3.12",
+		"@mantine/charts": "^8.3.13",
 		"@mantine/core": "^8.2.7",
 		"@mantine/hooks": "^8.0.0",
 		"@marsidev/react-turnstile": "^1.4.1",
 		"@tabler/icons-react": "^3.36.1",
 		"@tanstack/react-devtools": "^0.9.2",
-		"@tanstack/react-router": "^1.153.1",
-		"@tanstack/react-router-devtools": "^1.153.1",
+		"@tanstack/react-router": "^1.157.15",
+		"@tanstack/react-router-devtools": "^1.157.15",
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",
-		"recharts": "^3.6.0",
+		"recharts": "^3.7.0",
 		"swr": "^2.3.8",
-		"zod": "^4.3.5"
+		"zod": "^4.3.6"
 	},
 	"devDependencies": {
 		"@tanstack/eslint-config": "^0.3.4",
 		"@testing-library/dom": "^10.4.0",
 		"@testing-library/react": "^16.3.2",
-		"@types/node": "^25.0.9",
-		"@types/react": "^19.2.8",
+		"@types/node": "^25.0.10",
+		"@types/react": "^19.2.9",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^5.1.2",
 		"jsdom": "^27.4.0",
-		"prettier": "^3.8.0",
+		"prettier": "^3.8.1",
 		"typescript": "^5.7.2",
 		"vite": "^7.3.1",
-		"vitest": "^4.0.17",
+		"vitest": "^4.0.18",
 		"web-vitals": "^5.1.0"
 	}
 }
