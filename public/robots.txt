@@ -1,11 +1,2 @@
 User-Agent: *
-Disallow: /contact
-Disallow: /privacy
-Disallow: /search
-Disallow: /api
-Disallow: /roadmap
-Disallow: *.png
-Disallow: *.svg
-Disallow: *.jpeg
-Disallow: *.jpg
-Disallow: *.webp
+Crawl-delay: 10

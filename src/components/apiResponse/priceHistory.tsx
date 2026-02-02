@@ -4,7 +4,6 @@ import { centsToHumanString } from '@/utils/format';
 import { useMobileView } from '@/utils/hooks/useMobileView';
 import { LineChart } from '@mantine/charts';
 import {
-	Modal,
 	Flex,
 	Text,
 	Container,
@@ -13,11 +12,20 @@ import {
 	Title,
 	SegmentedControl,
 	Skeleton,
+	ModalRoot,
+	ModalContent,
+	ModalOverlay,
+	ModalHeader,
+	ModalTitle,
+	ModalCloseButton,
+	ModalBody,
 } from '@mantine/core';
 import { IconCaretDown, IconCaretUp } from '@tabler/icons-react';
 import { useState } from 'react';
 
 import './styles.css';
+import { RetailerNameContainer } from './retailerNameContainer';
+import type { Retailer } from '@/utils/retailerConstants';
 
 // TODO: improve this, currently if the result has gaps
 // eg. the product was taken down, and then added back
@@ -57,10 +65,12 @@ export default function PriceHistory({
 	isGraphOpen,
 	closeGraph,
 	crawlResult,
+	retailer,
 }: {
 	isGraphOpen: boolean;
 	closeGraph: () => void;
 	crawlResult: CrawlResult;
+	retailer: Retailer;
 }) {
 	const isMobile = useMobileView();
 
@@ -149,128 +159,158 @@ export default function PriceHistory({
 	}
 
 	const graphPadding = isMobile ? 10 : 30;
-	//https://github.com/recharts/recharts/issues/6064
+
 	return (
-		<Modal
+		<ModalRoot
 			opened={isGraphOpen}
 			onClose={closeGraph}
-			title={`${crawlResult.name} - Pricing History`}
 			centered
 			size={isMobile ? '95%' : '70%'}
 		>
-			<Skeleton visible={isLoading}>
-				<LineChart
-					h={300}
-					data={graphData}
-					xAxisProps={{
-						padding: { left: graphPadding, right: graphPadding },
-					}}
-					yAxisProps={{
-						domain: getRange(minPriceRelative, maxPriceRelative),
-					}}
-					dataKey="date"
-					curveType="linear"
-					series={[
-						{ name: LABEL_REGULAR, color: 'blue' },
-						{ name: LABEL_SALE, color: 'teal' },
-					]}
-					withLegend
-					connectNulls={false}
-					tooltipAnimationDuration={200}
-					withPointLabels={historyRange === 7}
-					valueFormatter={(value) => `$${value}`}
-					gridProps={{ yAxisId: 'left' }} // Missing y axis line fix: https://github.com/mantinedev/mantine/issues/8110#issuecomment-3140063560
-					pr="1.2rem"
-					mb="1rem"
-					styles={{
-						// https://github.com/recharts/recharts/issues/6064
-						// Not sure why this is the case since tooltip is placed after
-						// the legend in Mantine, but this fixes the indexing problem
-						// ref: https://github.com/mantinedev/mantine/blob/e1239ef0c5dd920967814d85ffe0b8ba4488a269/packages/%40mantine/charts/src/LineChart/LineChart.tsx#L451
-						tooltip: {
-							zIndex: 1,
-						},
-					}}
-				/>
-				<SegmentedControl
-					size="xs"
-					fullWidth
-					data={Object.keys(mapping)}
-					value={timeRange}
-					onChange={setTimeRange}
-				/>
-			</Skeleton>
-			<Divider my="md" />
-			<Flex direction={isMobile ? 'column' : 'row'} gap="md">
-				<Container>
-					<Skeleton visible={isLoading}>
-						<Stack ta="center">
+			<ModalOverlay blur={3} />
+			<ModalContent>
+				<ModalHeader>
+					<ModalTitle w="100%">
+						<Stack gap="xs">
 							<Flex>
-								<Title order={4}>{'Lowest Price'}</Title>
-								<IconCaretDown />
+								<Title order={2}>Price History</Title>
+								<ModalCloseButton />
 							</Flex>
-							<Text>
-								{'$' +
-									centsToHumanString(
-										data?.min_price.sale_price ||
-											data?.min_price.regular_price ||
-											0,
-									)}
-							</Text>
-							<Text size="xs" c="dimmed">
-								{convertToHumanReadable(
-									data?.min_price.query_time || 0,
-									{
-										month: 'short',
-										day: 'numeric',
-										year: 'numeric',
-									},
-								)}
-							</Text>
+							<Text>{crawlResult.name}</Text>
+							<RetailerNameContainer retailer={retailer} />
 						</Stack>
-					</Skeleton>
-				</Container>
-				<Container>
-					<Stack ta="center">
-						<Title order={4}>{'Current Price'}</Title>
-						<Text>
-							{'$' +
-								centsToHumanString(
-									crawlResult.price.sale_price ||
-										crawlResult.price.regular_price,
-								)}
-						</Text>
-					</Stack>
-				</Container>
-				<Container>
+					</ModalTitle>
+				</ModalHeader>
+				<ModalBody>
 					<Skeleton visible={isLoading}>
-						<Stack ta="center">
-							<Flex>
-								<Title order={4}>{'Highest Price'}</Title>
-								<IconCaretUp style={{ marginTop: '0.1rem' }} />
-							</Flex>
-							<Text>
-								{'$' +
-									centsToHumanString(
-										data?.max_price.sale_price ||
-											data?.max_price.regular_price ||
-											0,
-									)}
-							</Text>
-							<Text size="xs" c="dimmed">
-								{convertToHumanReadable(
-									data?.max_price.query_time || 0,
-									{
-										month: 'short',
-										day: 'numeric',
-										year: 'numeric',
-									},
-								)}
-							</Text>
-						</Stack>
+						<LineChart
+							h={300}
+							data={graphData}
+							xAxisProps={{
+								padding: {
+									left: graphPadding,
+									right: graphPadding,
+								},
+							}}
+							yAxisProps={{
+								domain: getRange(
+									minPriceRelative,
+									maxPriceRelative,
+								),
+							}}
+							dataKey="date"
+							curveType="linear"
+							series={[
+								{ name: LABEL_REGULAR, color: 'blue' },
+								{ name: LABEL_SALE, color: 'teal' },
+							]}
+							withLegend
+							connectNulls={false}
+							tooltipAnimationDuration={200}
+							withPointLabels={historyRange === 7}
+							valueFormatter={(value) => `$${value}`}
+							gridProps={{ yAxisId: 'left' }} // Missing y axis line fix: https://github.com/mantinedev/mantine/issues/8110#issuecomment-3140063560
+							pr="1.2rem"
+							mb="1rem"
+							styles={{
+								// https://github.com/recharts/recharts/issues/6064
+								// Not sure why this is the case since tooltip is placed after
+								// the legend in Mantine, but this fixes the indexing problem
+								// ref: https://github.com/mantinedev/mantine/blob/e1239ef0c5dd920967814d85ffe0b8ba4488a269/packages/%40mantine/charts/src/LineChart/LineChart.tsx#L451
+								tooltip: {
+									zIndex: 1,
+								},
+							}}
+						/>
+						<SegmentedControl
+							size="xs"
+							fullWidth
+							data={Object.keys(mapping)}
+							value={timeRange}
+							onChange={setTimeRange}
+						/>
 					</Skeleton>
-				</Container>
-			</Flex>
-		</Modal>
+					<Divider my="md" />
+					<Flex direction={isMobile ? 'column' : 'row'} gap="md">
+						<Container>
+							<Skeleton visible={isLoading}>
+								<Stack ta="center">
+									<Flex>
+										<Title order={4}>
+											{'Lowest Price'}
+										</Title>
+										<IconCaretDown />
+									</Flex>
+									<Text>
+										{'$' +
+											centsToHumanString(
+												data?.min_price.sale_price ||
+													data?.min_price
+														.regular_price ||
+													0,
+											)}
+									</Text>
+									<Text size="xs" c="dimmed">
+										{convertToHumanReadable(
+											data?.min_price.query_time || 0,
+											{
+												month: 'short',
+												day: 'numeric',
+												year: 'numeric',
+											},
+										)}
+									</Text>
+								</Stack>
+							</Skeleton>
+						</Container>
+						<Container>
+							<Stack ta="center">
+								<Title order={4}>{'Current Price'}</Title>
+								<Text>
+									{'$' +
+										centsToHumanString(
+											crawlResult.price.sale_price ||
+												crawlResult.price.regular_price,
+										)}
+								</Text>
+							</Stack>
+						</Container>
+						<Container>
+							<Skeleton visible={isLoading}>
+								<Stack ta="center">
+									<Flex>
+										<Title order={4}>
+											{'Highest Price'}
+										</Title>
+										<IconCaretUp
+											style={{ marginTop: '0.1rem' }}
+										/>
+									</Flex>
+									<Text>
+										{'$' +
+											centsToHumanString(
+												data?.max_price.sale_price ||
+													data?.max_price
+														.regular_price ||
+													0,
+											)}
+									</Text>
+									<Text size="xs" c="dimmed">
+										{convertToHumanReadable(
+											data?.max_price.query_time || 0,
+											{
+												month: 'short',
+												day: 'numeric',
+												year: 'numeric',
+											},
+										)}
+									</Text>
+								</Stack>
+							</Skeleton>
+						</Container>
+					</Flex>
+				</ModalBody>
+			</ModalContent>
+		</ModalRoot>
 	);
 }

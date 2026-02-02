@@ -29,6 +29,7 @@ import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
 import IconFirearm from '../icons/firearm';
 import IconAmmo from '../icons/ammo';
 import { getApiDomain } from '@/utils/environment';
+import { RetailerNameContainer } from './retailerNameContainer';
 
 export default function ProductCard({
 	crawlData,
@@ -100,27 +101,7 @@ export default function ProductCard({
 					viewProductPrice={viewProductPrice}
 					setViewProductPrice={setViewProductPrice}
 				/>
-				<Flex
-					bg={retailer.colourHex}
-					pt="0.5rem"
-					pb="0.5rem"
-					direction="row"
-					fw="bold"
-					justify="center"
-				>
-					<Text
-						size={isMobile ? 'sm' : 'xs'}
-						c={
-							retailer.textColourHex
-								? retailer.textColourHex
-								: 'gray'
-						}
-						ta="center"
-						fw="bold"
-					>
-						{retailer.name}
-					</Text>
-				</Flex>
+				<RetailerNameContainer retailer={retailer} />
 			</CardSection>
 			<Box h="100%" component="a" {...linkProperties}>
 				<Flex direction="column" h="100%">

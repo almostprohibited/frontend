@@ -119,6 +119,14 @@ export type SearchRouteSchema = z.infer<typeof searchRouteSchema>;
 
 const searchRoute = createRoute({
 	getParentRoute: () => rootRoute,
+	head: () => ({
+		meta: [
+			{
+				name: 'robots',
+				content: 'noindex',
+			},
+		],
+	}),
 	path: '/search',
 	validateSearch: (search) => searchRouteSchema.parse(search),
 }).lazy(() => import('./pages/search/index').then((d) => d.searchLazyRoute));

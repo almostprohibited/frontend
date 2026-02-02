@@ -4,6 +4,7 @@ import PriceHistory from './priceHistory';
 import type { CrawlResult } from '@/utils/apiStructs';
 import { useDisclosure } from '@mantine/hooks';
 import { useIsBeta } from '@/utils/hooks/useIsBeta';
+import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
 
 export default function ProductButtons({
 	crawlResult,
@@ -12,6 +13,9 @@ export default function ProductButtons({
 }) {
 	const [isGraphOpen, { open: openGraph, close: closeGraph }] =
 		useDisclosure(false);
+
+	// @ts-expect-error: enum is of type object, required to ignore to get working
+	const retailer: Retailer = RetailerEnum[crawlResult.retailer];
 
 	const theme = useMantineTheme();
 
@@ -27,6 +31,7 @@ export default function ProductButtons({
 					isGraphOpen={isGraphOpen}
 					closeGraph={closeGraph}
 					crawlResult={crawlResult}
+					retailer={retailer}
 				/>
 			) : (
 				<></>
