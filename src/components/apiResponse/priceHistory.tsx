@@ -39,24 +39,50 @@ const mapping: { [key: string]: number } = {
 	'1 Week': 7,
 };
 
-const DOMAIN_DEVIATION = 100;
-
 const LABEL_REGULAR = 'Regular Price';
 const LABEL_SALE = 'Sale Price';
+
+interface Data {
+	readonly date: number;
+	readonly [LABEL_REGULAR]: number | undefined;
+	readonly [LABEL_SALE]: number | undefined;
+}
+
+function convertToDate(timestamp: number) {
+	return new Date(timestamp * 1000);
+}
 
 function convertToHumanReadable(
 	timestamp: number,
 	options: Intl.DateTimeFormatOptions,
 ): string {
-	return new Date(timestamp * 1000).toLocaleDateString('en-US', options);
+	return convertToDate(timestamp).toLocaleDateString('en-US', options);
+}
+
+function getReferenceLineProps(timestamp: number) {
+	const dateObj = convertToDate(timestamp);
+
+	if (dateObj.getDate() === 1) {
+		return {
+			x: timestamp,
+			color: dateObj.getMonth() === 0 ? 'grey' : null,
+			label:
+				dateObj.getMonth() === 0
+					? dateObj.getFullYear().toString()
+					: convertToHumanReadable(timestamp, {
+							month: 'short',
+						}),
+		};
+	}
+
+	return null;
 }
 
 function getRange(minPrice: number, maxPrice: number) {
-	const roundedMin = Number.parseInt(centsToHumanString(minPrice));
-	const roundedMax = Number.parseInt(centsToHumanString(maxPrice));
+	const deviation = maxPrice - minPrice;
 
-	const min = Math.max(0, roundedMin - DOMAIN_DEVIATION);
-	const max = min === 0 ? roundedMax * 2 : roundedMax + DOMAIN_DEVIATION;
+	const min = Math.max(0, minPrice - deviation);
+	const max = maxPrice + deviation;
 
 	return [min, max];
 }
@@ -79,10 +105,8 @@ export default function PriceHistory({
 
 	const { data, isLoading } = useHistoryApi(crawlResult.id);
 
-	let graphData: object[] = [];
-
-	let minPriceRelative = Number.MAX_SAFE_INTEGER;
-	let maxPriceRelative = 0;
+	let graphData: Data[] = [];
+	let graphXLabels: object[] = [];
 
 	let previousHumanDate = null;
 
@@ -96,24 +120,32 @@ export default function PriceHistory({
 			if (previousHumanDate) {
 				let index = 1;
 
-				const emptyDatapoints = [];
+				const emptyDatapoints: Data[] = [];
 
 				while (true) {
 					const currentEmpty = history.query_time - 86400 * index++;
-					const localEmptyHumanDate = convertToHumanReadable(
-						currentEmpty,
-						{ month: 'short', day: 'numeric' },
-					);
 
-					if (localEmptyHumanDate === previousHumanDate) {
+					if (
+						convertToHumanReadable(currentEmpty, {
+							month: 'short',
+							day: 'numeric',
+						}) === previousHumanDate
+					) {
 						break;
 					}
 
 					emptyDatapoints.push({
-						date: localEmptyHumanDate,
-						[LABEL_REGULAR]: null,
-						[LABEL_SALE]: null,
+						date: currentEmpty,
+						[LABEL_REGULAR]: undefined,
+						[LABEL_SALE]: undefined,
 					});
+
+					const referenceLineProps =
+						getReferenceLineProps(currentEmpty);
+
+					if (referenceLineProps) {
+						graphXLabels.push(referenceLineProps);
+					}
 				}
 
 				graphData = graphData.concat(emptyDatapoints.reverse());
@@ -126,28 +158,17 @@ export default function PriceHistory({
 			previousHumanDate = humanDate;
 
 			graphData.push({
-				date: humanDate,
-				[LABEL_REGULAR]: centsToHumanString(history.regular_price),
-				[LABEL_SALE]: history.sale_price
-					? centsToHumanString(history.sale_price)
-					: null,
+				date: history.query_time,
+				[LABEL_REGULAR]: history.regular_price,
+				[LABEL_SALE]: history.sale_price,
 			});
 
-			const localMinPrice = Math.min(
-				history.regular_price,
-				history.sale_price || history.regular_price,
-			);
-			const localMaxPrice = Math.max(
-				history.regular_price,
-				history.sale_price || history.regular_price,
+			const referenceLineProps = getReferenceLineProps(
+				history.query_time,
 			);
 
-			if (localMinPrice < minPriceRelative) {
-				minPriceRelative = localMinPrice;
-			}
-
-			if (localMaxPrice > maxPriceRelative) {
-				maxPriceRelative = localMaxPrice;
+			if (referenceLineProps) {
+				graphXLabels.push(referenceLineProps);
 			}
 		}
 
@@ -157,6 +178,19 @@ export default function PriceHistory({
 
 		graphData = graphData.slice(startIndex, endIndex);
 	}
+
+	let minPriceRelative = Math.min(
+		...graphData
+			.filter((data) => data[LABEL_REGULAR] !== undefined)
+			.map((data) => data[LABEL_SALE] || data[LABEL_REGULAR]!),
+	);
+
+	const sortedMaxPrice = graphData
+		.filter((data) => data[LABEL_REGULAR] !== undefined)
+		.sort((a, b) => b[LABEL_REGULAR]! - a[LABEL_REGULAR]!);
+
+	let maxPriceRelative =
+		sortedMaxPrice.length > 0 ? sortedMaxPrice[0][LABEL_REGULAR]! : 0;
 
 	const graphPadding = isMobile ? 10 : 30;
 
@@ -185,18 +219,34 @@ export default function PriceHistory({
 					<Skeleton visible={isLoading}>
 						<LineChart
 							h={300}
+							w="100%"
 							data={graphData}
 							xAxisProps={{
 								padding: {
 									left: graphPadding,
 									right: graphPadding,
 								},
+								type: 'number',
+								scale: 'time',
+								domain: ['dataMin', 'dataMax'],
+								tickFormatter: (value) =>
+									convertToHumanReadable(value, {
+										month: 'short',
+										day: 'numeric',
+									}),
 							}}
 							yAxisProps={{
 								domain: getRange(
 									minPriceRelative,
 									maxPriceRelative,
 								),
+							}}
+							tooltipProps={{
+								labelFormatter: (value) =>
+									convertToHumanReadable(value, {
+										month: 'short',
+										day: 'numeric',
+									}),
 							}}
 							dataKey="date"
 							curveType="linear"
@@ -208,7 +258,9 @@ export default function PriceHistory({
 							connectNulls={false}
 							tooltipAnimationDuration={200}
 							withPointLabels={historyRange === 7}
-							valueFormatter={(value) => `$${value}`}
+							valueFormatter={(value) =>
+								`$${centsToHumanString(value)}`
+							}
 							gridProps={{ yAxisId: 'left' }} // Missing y axis line fix: https://github.com/mantinedev/mantine/issues/8110#issuecomment-3140063560
 							pr="1.2rem"
 							mb="1rem"
@@ -221,6 +273,7 @@ export default function PriceHistory({
 									zIndex: 1,
 								},
 							}}
+							referenceLines={graphXLabels}
 						/>
 						<SegmentedControl
 							size="xs"
