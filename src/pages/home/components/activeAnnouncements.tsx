@@ -1,13 +1,11 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
-import {
-	IconBrandGithub,
-	IconBuildingStore,
-	IconConfetti,
-} from '@tabler/icons-react';
-import { Anchor, Text } from '@mantine/core';
+import { IconConfetti, IconMessage } from '@tabler/icons-react';
+import { Anchor, Text, useMantineTheme } from '@mantine/core';
 import type { AnnouncementObject } from './announcements';
 
 export default function getActiveAnnouncements() {
+	const theme = useMantineTheme();
+
 	const announcements: AnnouncementObject[] = [
 		{
 			title: 'Happy birthday to us!',
@@ -27,36 +25,60 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
-			title: 'Recently added retailers',
-			content: () => {
-				return <Text>CRAFM has been added to the site!</Text>;
-			},
-			colour: 'blue',
-			icon: <IconBuildingStore size="2rem" />,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'Open source',
+			title: 'Google Form Feedback',
 			content: () => {
 				return (
 					<Text>
-						{'AlmostProhibited is now open source on '}
+						{
+							'Hey you! I have some features that I want to add to the site and wanted some light feedback. Feel free to take a minute and fill out the '
+						}
 						<Anchor
-							href="https://github.com/almostprohibited"
+							href="https://forms.gle/vRjUKfENuUDkMh4n6"
 							target="_blank"
 						>
-							Github
+							{'Google Form'}
 						</Anchor>
 						{
-							'! What this means is that the source code that powers this site, and the backend, are now free to view and use.'
+							'. This form will remain open for some time, likely until one of those features gets added.'
 						}
 					</Text>
 				);
 			},
-			colour: 'gray',
-			icon: <IconBrandGithub size="2rem" />,
+			colour: theme.colors.grape[3],
+			icon: <IconMessage size="2rem" />,
 			shouldDisplay: () => true,
 		},
+		// {
+		// 	title: 'Recently added retailers',
+		// 	content: () => {
+		// 		return <Text>CRAFM has been added to the site!</Text>;
+		// 	},
+		// 	colour: 'blue',
+		// 	icon: <IconBuildingStore size="2rem" />,
+		// 	shouldDisplay: () => true,
+		// },
+		// {
+		// 	title: 'Open source',
+		// 	content: () => {
+		// 		return (
+		// 			<Text>
+		// 				{'AlmostProhibited is now open source on '}
+		// 				<Anchor
+		// 					href="https://github.com/almostprohibited"
+		// 					target="_blank"
+		// 				>
+		// 					Github
+		// 				</Anchor>
+		// 				{
+		// 					'! What this means is that the source code that powers this site, and the backend, are now free to view and use.'
+		// 				}
+		// 			</Text>
+		// 		);
+		// 	},
+		// 	colour: 'gray',
+		// 	icon: <IconBrandGithub size="2rem" />,
+		// 	shouldDisplay: () => true,
+		// },
 	];
 
 	return announcements.filter((announcement) => announcement.shouldDisplay());
