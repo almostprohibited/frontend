@@ -367,6 +367,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly CabinCreekSupply = new Retailer(
+		'Cabin Creek Supply',
+		'CabinCreekSupply',
+		'https://www.cabincreeksupply.ca/',
+		'/retailers/cabincreeksupply.png',
+		'#25282a',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

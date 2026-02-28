@@ -1,6 +1,10 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
-import { IconConfetti, IconMessage } from '@tabler/icons-react';
-import { Anchor, Text, useMantineTheme } from '@mantine/core';
+import {
+	IconBuildingStore,
+	IconConfetti,
+	IconMessage,
+} from '@tabler/icons-react';
+import { Anchor, Stack, Text, useMantineTheme } from '@mantine/core';
 import type { AnnouncementObject } from './announcements';
 
 export default function getActiveAnnouncements() {
@@ -25,38 +29,45 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
-			title: 'Google Form Feedback',
+			title: 'Google Form Feedback - Update',
 			content: () => {
 				return (
-					<Text>
-						{
-							'Hey you! I have some features that I want to add to the site and wanted some light feedback. Feel free to take a minute and fill out the '
-						}
-						<Anchor
-							href="https://forms.gle/vRjUKfENuUDkMh4n6"
-							target="_blank"
-						>
-							{'Google Form'}
-						</Anchor>
-						{
-							'. This form will remain open for some time, likely until one of those features gets added.'
-						}
-					</Text>
+					<Stack>
+						<Text>
+							{
+								"I hear you all loud and clear: you want more retailers. I'll make sure to expand the supported retailers above all else for the time being."
+							}
+						</Text>
+						<Text>
+							{"If you haven't yet, check out the "}
+							<Anchor
+								href="https://forms.gle/vRjUKfENuUDkMh4n6"
+								target="_blank"
+							>
+								{'Google Form'}
+							</Anchor>
+							{
+								' to provide your feedback on the site. This form will still remain open for more responses.'
+							}
+						</Text>
+					</Stack>
 				);
 			},
-			colour: theme.colors.grape[3],
+			colour: theme.colors.orange[3],
 			icon: <IconMessage size="2rem" />,
 			shouldDisplay: () => true,
 		},
-		// {
-		// 	title: 'Recently added retailers',
-		// 	content: () => {
-		// 		return <Text>CRAFM has been added to the site!</Text>;
-		// 	},
-		// 	colour: 'blue',
-		// 	icon: <IconBuildingStore size="2rem" />,
-		// 	shouldDisplay: () => true,
-		// },
+		{
+			title: 'Recently added retailers',
+			content: () => {
+				return (
+					<Text>Cabin Creek Supply has been added to the site!</Text>
+				);
+			},
+			colour: theme.colors.pink[3],
+			icon: <IconBuildingStore size="2rem" />,
+			shouldDisplay: () => true,
+		},
 		// {
 		// 	title: 'Open source',
 		// 	content: () => {
