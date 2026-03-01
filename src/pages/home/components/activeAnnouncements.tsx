@@ -61,7 +61,10 @@ export default function getActiveAnnouncements() {
 			title: 'Recently added retailers',
 			content: () => {
 				return (
-					<Text>Cabin Creek Supply has been added to the site!</Text>
+					<Text>
+						Cabin Creek Supply and Latulippe have been added to the
+						site!
+					</Text>
 				);
 			},
 			colour: theme.colors.pink[3],

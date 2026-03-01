@@ -377,6 +377,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly Latulippe = new Retailer(
+		'Latulippe',
+		'Latulippe',
+		'https://latulippe.com/',
+		'/retailers/latulippe.svg',
+		'#006569',
+		RetailerLocation.Quebec,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
