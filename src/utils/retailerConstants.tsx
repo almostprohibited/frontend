@@ -387,6 +387,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly TheGunDealer = new Retailer(
+		'The Gun Dealer',
+		'TheGunDealer',
+		'https://thegundealer.ca/',
+		'/retailers/thegundealer.png',
+		'#eb1e24',
+		RetailerLocation.NewBrunswick,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
