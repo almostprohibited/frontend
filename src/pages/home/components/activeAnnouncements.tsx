@@ -29,6 +29,19 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
+			title: 'Recently added retailers',
+			content: () => {
+				return (
+					<Text>
+						{'P & D Enterprises has been added to the site!'}
+					</Text>
+				);
+			},
+			colour: theme.colors.yellow[3],
+			icon: <IconBuildingStore size="2rem" />,
+			shouldDisplay: () => true,
+		},
+		{
 			title: 'Google Form Feedback - Update',
 			content: () => {
 				return (
@@ -55,15 +68,6 @@ export default function getActiveAnnouncements() {
 			},
 			colour: theme.colors.orange[3],
 			icon: <IconMessage size="2rem" />,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'Recently added retailers',
-			content: () => {
-				return <Text>The Gun Dealer has been added to the site!</Text>;
-			},
-			colour: theme.colors.green[3],
-			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
 		// {

@@ -61,15 +61,15 @@ export default function Announcements() {
 			<Title order={3} mb="1rem">
 				Announcements
 			</Title>
+			<Breadcrumbs separator="-" mb="1rem">
+				{breadcrumbs}
+			</Breadcrumbs>
 			<Box
 				w={isMobile ? '100%' : '75%'}
 				m={'var(--content-side-padding)'}
 			>
 				<AnnouncementElement data={announcements[activeIndex]} />
 			</Box>
-			<Breadcrumbs separator="-" mt="1rem">
-				{breadcrumbs}
-			</Breadcrumbs>
 		</Flex>
 	);
 }

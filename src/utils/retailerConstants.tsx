@@ -397,6 +397,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly PDEnterprises = new Retailer(
+		'P & D Enterprises',
+		'PDEnterprises',
+		'https://pdent.ca/',
+		'/retailers/pdenterprises.svg',
+		'#214400',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
