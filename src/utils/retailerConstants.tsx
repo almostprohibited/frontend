@@ -407,6 +407,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly EllwoodEpps = new Retailer(
+		'Ellwood Epps',
+		'EllwoodEpps',
+		'https://ellwoodepps.com/',
+		'/retailers/ellwoodepps.png',
+		'#3d3625',
+		RetailerLocation.Ontario,
+		'#e6dbc2',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

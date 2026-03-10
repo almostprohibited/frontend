@@ -33,11 +33,13 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						{'P & D Enterprises has been added to the site!'}
+						{
+							'Ellwood Epps and P & D Enterprises have been added to the site!'
+						}
 					</Text>
 				);
 			},
-			colour: theme.colors.yellow[3],
+			colour: theme.colors.red[3],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
