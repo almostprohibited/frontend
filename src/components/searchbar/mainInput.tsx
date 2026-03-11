@@ -1,6 +1,6 @@
 import styles from './mainInput.module.css';
 
-import { CloseButton, TextInput } from '@mantine/core';
+import { CloseButton, TextInput, useMantineTheme } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
@@ -33,14 +33,18 @@ const placeHolderValues = [
 export default function MainInput({
 	value,
 	setValue,
+	isError,
 	onSubmit,
 	disabled = false,
 }: {
 	value: string;
 	setValue: Dispatch<SetStateAction<string>>;
+	isError: boolean;
 	onSubmit: () => void;
 	disabled?: boolean;
 }) {
+	const theme = useMantineTheme();
+
 	const [placeHolderText] = useState(
 		placeHolderValues[Math.floor(Math.random() * placeHolderValues.length)],
 	);
@@ -70,6 +74,11 @@ export default function MainInput({
 			rightSection={closeButton}
 			leftSection={searchIcon}
 			flex="1"
+			data-error={isError}
+			error={isError ? 'Input should not be empty' : undefined}
+			styles={{
+				error: { textAlign: 'center', color: theme.colors.red[6] },
+			}}
 		/>
 	);
 }

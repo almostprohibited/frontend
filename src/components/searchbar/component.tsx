@@ -49,6 +49,8 @@ export default function SearchBar({
 		searchParams?.query || '',
 	);
 
+	const [showEmptyInputError, updateShowEmptyInputError] = useState(false);
+
 	const [sortValue, updateSortValue] = useState(
 		searchParams?.sort || SortOptions.Relevant,
 	);
@@ -84,6 +86,11 @@ export default function SearchBar({
 		maxPriceValue !== undefined;
 
 	function sendQuery(forceSend: boolean = false) {
+		if (forceSend && searchQuery.length === 0) {
+			updateShowEmptyInputError(true);
+			return;
+		}
+
 		if (forceSend || currentRoute !== '/') {
 			navigateSearch({
 				search: (oldParams) => {
@@ -127,6 +134,10 @@ export default function SearchBar({
 		sendQuery();
 	}, [sortValue, categoryValue, pageValue]);
 
+	useEffect(() => {
+		updateShowEmptyInputError(false);
+	}, [searchQuery]);
+
 	return (
 		<>
 			<Box pos="relative">
@@ -135,7 +146,7 @@ export default function SearchBar({
 					visible={isLoading}
 					loaderProps={{ type: 'oval' }}
 				/>
-				<Flex align="center" justify="center">
+				<Flex align="flex-start" justify="center">
 					<Indicator
 						position="top-start"
 						size={12}
@@ -156,6 +167,7 @@ export default function SearchBar({
 						disabled={isLoading}
 						value={searchQuery}
 						setValue={updateSearchQuery}
+						isError={showEmptyInputError}
 						onSubmit={() => sendQuery(true)}
 					/>
 					<ActionIcon
