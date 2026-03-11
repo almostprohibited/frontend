@@ -86,12 +86,12 @@ export default function SearchBar({
 		maxPriceValue !== undefined;
 
 	function sendQuery(forceSend: boolean = false) {
-		if (forceSend && searchQuery.length === 0) {
-			updateShowEmptyInputError(true);
-			return;
-		}
-
 		if (forceSend || currentRoute !== '/') {
+			if (searchQuery.length === 0) {
+				updateShowEmptyInputError(true);
+				return;
+			}
+
 			navigateSearch({
 				search: (oldParams) => {
 					const shouldReset = shouldResetPage(oldParams);
