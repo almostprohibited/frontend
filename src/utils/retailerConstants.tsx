@@ -417,6 +417,16 @@ export class RetailerEnum {
 		'#e6dbc2',
 	);
 
+	static readonly BudgetShooterSupply = new Retailer(
+		'Budget Shooter Supply',
+		'BudgetShooterSupply',
+		'https://budgetshootersupply.ca/',
+		'/retailers/budgetshootersupply.png',
+		'#dd0000',
+		RetailerLocation.BritishColumbia,
+		'#f3f3f3',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
