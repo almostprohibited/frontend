@@ -9,7 +9,7 @@ import EmptyResult from './components/fallbacks/emptyResult.tsx';
 const router = createRouter({
 	routeTree,
 	context: {},
-	defaultPreload: 'intent',
+	defaultPreload: 'viewport',
 	scrollRestoration: true,
 	defaultStructuralSharing: true,
 	defaultPreloadStaleTime: 0,
