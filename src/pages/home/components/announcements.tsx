@@ -15,6 +15,7 @@ import AnnouncementElement from './announcementElement';
 export interface AnnouncementObject {
 	title: string;
 	content: () => React.ReactNode;
+	date: string | undefined;
 	colour: string;
 	icon: React.ReactNode;
 	shouldDisplay: () => boolean;

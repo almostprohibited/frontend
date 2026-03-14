@@ -17,7 +17,7 @@ import './globals.css';
 
 export default function App() {
 	const theme = createTheme({
-		fontFamily: 'Arial, Helvetica, sans-serif',
+		fontFamily: 'Google Sans, Arial, Helvetica, sans-serif',
 	});
 
 	return (

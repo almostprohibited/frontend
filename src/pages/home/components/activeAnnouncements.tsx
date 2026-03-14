@@ -2,6 +2,7 @@ import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
 	IconBuildingStore,
 	IconConfetti,
+	IconLetterCase,
 	IconMessage,
 } from '@tabler/icons-react';
 import { Anchor, Stack, Text, useMantineTheme } from '@mantine/core';
@@ -24,12 +25,13 @@ export default function getActiveAnnouncements() {
 					</Text>
 				);
 			},
+			date: undefined,
 			colour: 'orange',
 			icon: <IconConfetti size="2rem" />,
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
-			title: 'Recently added retailers',
+			title: 'Recently Added Retailers',
 			content: () => {
 				return (
 					<Text>
@@ -37,8 +39,25 @@ export default function getActiveAnnouncements() {
 					</Text>
 				);
 			},
+			date: 'Mar 13, 2026',
 			colour: theme.colors.green[3],
 			icon: <IconBuildingStore size="2rem" />,
+			shouldDisplay: () => true,
+		},
+		{
+			title: 'Font Change',
+			content: () => {
+				return (
+					<Text>
+						{
+							"No, your eyes are not playing games with you. I've finally configured a font for the website after nearly 9 months of using Arial."
+						}
+					</Text>
+				);
+			},
+			date: 'Mar 13, 2026',
+			colour: theme.colors.red[3],
+			icon: <IconLetterCase size="2rem" />,
 			shouldDisplay: () => true,
 		},
 		{
@@ -66,6 +85,7 @@ export default function getActiveAnnouncements() {
 					</Stack>
 				);
 			},
+			date: 'Feb 28, 2026',
 			colour: theme.colors.orange[3],
 			icon: <IconMessage size="2rem" />,
 			shouldDisplay: () => true,

@@ -1,5 +1,5 @@
 import type { AnnouncementObject } from './announcements';
-import { Alert, Box, useMantineTheme } from '@mantine/core';
+import { Alert, Box, Text, useMantineTheme, Stack } from '@mantine/core';
 
 export default function AnnouncementElement({
 	data,
@@ -27,13 +27,22 @@ export default function AnnouncementElement({
 			m={'var(--content-side-padding)'}
 			icon={data.icon}
 		>
-			<Box c={theme.colors.gray[4]}>{data.content()}</Box>
-			{/* <Progress
-				mt="1rem"
-				size="xs"
-				color={data.colour}
-				value={progressBarLength}
-			/> */}
+			<Stack>
+				<Box c={theme.colors.gray[4]}>{data.content()}</Box>
+				{/* <Progress
+    				mt="1rem"
+    				size="xs"
+    				color={data.colour}
+    				value={progressBarLength}
+    			/> */}
+				{data.date ? (
+					<Text size="xs" c="grey">
+						{data.date}
+					</Text>
+				) : (
+					<></>
+				)}
+			</Stack>
 		</Alert>
 	);
 }
