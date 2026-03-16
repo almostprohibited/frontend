@@ -9,9 +9,9 @@ import type { Plugin } from 'vite';
 const MAX_PRELOADED_IMAGES = 5;
 
 const metaTags = [
-	{
-		title: 'Almost Prohibited - Browse items from your favourite retailers',
-	},
+	// {
+	// 	title: 'Almost Prohibited - Browse items from your favourite retailers',
+	// },
 	{
 		name: 'description',
 		content:
@@ -110,6 +110,8 @@ function generateImageRetailerPreloads(): Array<string> {
 
 	return preloadTags;
 }
+
+// @ts-expect-error
 function preloadAssets(): Plugin {
 	return {
 		name: 'preload-images',
@@ -139,6 +141,7 @@ function insertTags(): Plugin {
 		name: 'insert-tags',
 		transformIndexHtml(html, _) {
 			const tags = [
+				'<title>Almost Prohibited - Browse items from your favourite retailers</title>',
 				...generateTags('meta', metaTags),
 				...generateTags('link', linkTags),
 			];
