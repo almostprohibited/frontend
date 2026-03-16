@@ -150,7 +150,7 @@ function insertTags(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [viteReact(), preload(), insertTags(), preloadAssets()],
+	plugins: [viteReact(), preload(), insertTags()],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
