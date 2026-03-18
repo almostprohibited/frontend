@@ -35,12 +35,12 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						{'Budget Shooter Supply has been added to the site!'}
+						{'Wolverine Supplies has been added to the site!'}
 					</Text>
 				);
 			},
-			date: 'Mar 13, 2026',
-			colour: theme.colors.green[3],
+			date: 'Mar 17, 2026',
+			colour: theme.colors.grape[3],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},

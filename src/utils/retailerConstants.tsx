@@ -427,6 +427,16 @@ export class RetailerEnum {
 		'#f3f3f3',
 	);
 
+	static readonly WolverineSupplies = new Retailer(
+		'Wolverine Supplies',
+		'WolverineSupplies',
+		'https://wolverinesupplies.com/',
+		'/retailers/wolverinesupplies.png',
+		'#1d2930',
+		RetailerLocation.Manitoba,
+		'#caa47d',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
