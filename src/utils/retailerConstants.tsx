@@ -437,6 +437,16 @@ export class RetailerEnum {
 		'#caa47d',
 	);
 
+	static readonly CanFirearm = new Retailer(
+		'Canfirearm',
+		'CanFirearm',
+		'https://canfirearm.com/',
+		'/retailers/canfirearm.webp',
+		'#1f4268',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

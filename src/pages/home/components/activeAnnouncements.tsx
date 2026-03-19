@@ -2,7 +2,6 @@ import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
 	IconBuildingStore,
 	IconConfetti,
-	IconLetterCase,
 	IconMessage,
 } from '@tabler/icons-react';
 import { Anchor, Stack, Text, useMantineTheme } from '@mantine/core';
@@ -35,29 +34,15 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Text>
-						{'Wolverine Supplies has been added to the site!'}
-					</Text>
-				);
-			},
-			date: 'Mar 17, 2026',
-			colour: theme.colors.grape[3],
-			icon: <IconBuildingStore size="2rem" />,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'Font Change',
-			content: () => {
-				return (
-					<Text>
 						{
-							"No, your eyes are not playing games with you. I've finally configured a font for the website after nearly 9 months of using Arial."
+							'Canfirearms and Wolverine Supplies have been added to the site!'
 						}
 					</Text>
 				);
 			},
-			date: 'Mar 13, 2026',
-			colour: theme.colors.red[3],
-			icon: <IconLetterCase size="2rem" />,
+			date: 'Mar 18, 2026',
+			colour: theme.colors.grape[3],
+			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
 		{

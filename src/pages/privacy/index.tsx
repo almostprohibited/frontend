@@ -22,7 +22,7 @@ function PrivacyPage() {
 			</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{'Last updated: June 22th 2025'}
+				{'Last updated: June 22, 2025'}
 			</Text>
 			<Space h="md" />
 			<Stack gap="xl">
