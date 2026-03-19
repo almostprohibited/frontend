@@ -35,7 +35,7 @@ export default function getActiveAnnouncements() {
 				return (
 					<Text>
 						{
-							'Canfirearms and Wolverine Supplies have been added to the site!'
+							'Canfirearm and Wolverine Supplies have been added to the site!'
 						}
 					</Text>
 				);
