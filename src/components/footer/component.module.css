@@ -1,3 +1,5 @@
 .footer {
-	padding: 2rem 0rem 2rem 0rem;
+	padding: var(--content-side-padding);
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
