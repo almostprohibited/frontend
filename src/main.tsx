@@ -5,10 +5,13 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routes.tsx';
 import ErrorResult from './components/fallbacks/errorResult.tsx';
 import EmptyResult from './components/fallbacks/emptyResult.tsx';
+import { AuthProvider, useAuth } from './auth.tsx';
 
 const router = createRouter({
 	routeTree,
-	context: {},
+	context: {
+		auth: undefined!,
+	},
 	defaultPreload: 'viewport',
 	scrollRestoration: true,
 	defaultStructuralSharing: true,
@@ -28,12 +31,22 @@ declare module '@tanstack/react-router' {
 	}
 }
 
+function Wrapper() {
+	const auth = useAuth();
+
+	return <RouterProvider router={router} context={{ auth }} />;
+}
+
 const rootElement = document.getElementById('app');
+
 if (rootElement && !rootElement.innerHTML) {
 	const root = ReactDOM.createRoot(rootElement);
+
 	root.render(
 		<StrictMode>
-			<RouterProvider router={router} />
+			<AuthProvider>
+				<Wrapper />
+			</AuthProvider>
 		</StrictMode>,
 	);
 }

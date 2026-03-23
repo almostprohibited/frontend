@@ -4,7 +4,7 @@ import {
 	IconConfetti,
 	IconMessage,
 } from '@tabler/icons-react';
-import { Anchor, Stack, Text, useMantineTheme } from '@mantine/core';
+import { Stack, Text, useMantineTheme } from '@mantine/core';
 import type { AnnouncementObject } from './announcements';
 
 export default function getActiveAnnouncements() {
@@ -30,6 +30,30 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
+			title: 'Google Form Feedback - Thanks',
+			content: () => {
+				return (
+					<Stack>
+						<Text>
+							Thanks to those that took the time to fill out the
+							feedback form, your feedback and extra comments are
+							much appreciated!
+						</Text>
+						<Text>
+							Judging from the form, the next new feature that
+							people want to see the most is the stock and price
+							drop notification system. Stay tuned for updates on
+							this.
+						</Text>
+					</Stack>
+				);
+			},
+			date: 'Mar 21, 2026',
+			colour: theme.colors.teal[3],
+			icon: <IconMessage size="2rem" />,
+			shouldDisplay: () => true,
+		},
+		{
 			title: 'Recently Added Retailers',
 			content: () => {
 				return (
@@ -45,58 +69,6 @@ export default function getActiveAnnouncements() {
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
-		{
-			title: 'Google Form Feedback - Update',
-			content: () => {
-				return (
-					<Stack>
-						<Text>
-							{
-								"I hear you all loud and clear: you want more retailers. I'll make sure to expand the supported retailers above all else for the time being."
-							}
-						</Text>
-						<Text>
-							{"If you haven't yet, check out the "}
-							<Anchor
-								href="https://forms.gle/vRjUKfENuUDkMh4n6"
-								target="_blank"
-							>
-								{'Google Form'}
-							</Anchor>
-							{
-								' to provide your feedback on the site. This form will still remain open for more responses.'
-							}
-						</Text>
-					</Stack>
-				);
-			},
-			date: 'Feb 28, 2026',
-			colour: theme.colors.orange[3],
-			icon: <IconMessage size="2rem" />,
-			shouldDisplay: () => true,
-		},
-		// {
-		// 	title: 'Open source',
-		// 	content: () => {
-		// 		return (
-		// 			<Text>
-		// 				{'AlmostProhibited is now open source on '}
-		// 				<Anchor
-		// 					href="https://github.com/almostprohibited"
-		// 					target="_blank"
-		// 				>
-		// 					Github
-		// 				</Anchor>
-		// 				{
-		// 					'! What this means is that the source code that powers this site, and the backend, are now free to view and use.'
-		// 				}
-		// 			</Text>
-		// 		);
-		// 	},
-		// 	colour: 'gray',
-		// 	icon: <IconBrandGithub size="2rem" />,
-		// 	shouldDisplay: () => true,
-		// },
 	];
 
 	return announcements.filter((announcement) => announcement.shouldDisplay());

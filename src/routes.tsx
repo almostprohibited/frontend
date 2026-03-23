@@ -1,9 +1,19 @@
-import { createRootRoute, createRoute } from '@tanstack/react-router';
+import {
+	createRootRouteWithContext,
+	createRoute,
+	redirect,
+} from '@tanstack/react-router';
 import App from './App';
 import { Category, SortOptions } from './utils/apiStructs';
 import { z } from 'zod/mini';
+import { useIsBeta } from './utils/hooks/useIsBeta';
+import type { AuthState } from './auth';
 
-const rootRoute = createRootRoute({
+interface RootContext {
+	auth: AuthState;
+}
+
+const rootRoute = createRootRouteWithContext<RootContext>()({
 	component: () => <App />,
 	head: (context) => {
 		const linkTags = [];
@@ -64,9 +74,41 @@ const searchRoute = createRoute({
 	validateSearch: (search) => searchRouteSchema.parse(search),
 }).lazy(() => import('./pages/search/index').then((d) => d.searchLazyRoute));
 
+const authRoute = createRoute({
+	getParentRoute: () => rootRoute,
+	beforeLoad: () => {
+		const isBeta = useIsBeta();
+
+		if (!isBeta) {
+			throw redirect({
+				to: '/',
+			});
+		}
+	},
+	path: '/auth',
+}).lazy(() => import('./pages/auth/index').then((d) => d.authLazyRoute));
+
+const dashboardRoute = createRoute({
+	getParentRoute: () => rootRoute,
+	beforeLoad: ({ context }) => {
+		const isBeta = useIsBeta();
+
+		if (!isBeta || !context.auth.isAuthenticated) {
+			throw redirect({
+				to: '/auth/',
+			});
+		}
+	},
+	path: '/dashboard',
+}).lazy(() =>
+	import('./pages/dashboard/index').then((d) => d.dashboardLazyRoute),
+);
+
 export const routeTree = rootRoute.addChildren([
 	indexRoute,
 	contactRoute,
 	privacyRoute,
 	searchRoute,
+	authRoute,
+	dashboardRoute,
 ]);
