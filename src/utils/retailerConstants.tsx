@@ -447,6 +447,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly XReload = new Retailer(
+		'X-Reload',
+		'XReload',
+		'https://x-reload.com/',
+		'/retailers/xreload.svg',
+		'#a40001',
+		RetailerLocation.Quebec,
+		'#000',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

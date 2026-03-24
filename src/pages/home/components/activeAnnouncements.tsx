@@ -30,6 +30,16 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
+			title: 'Recently Added Retailers',
+			content: () => {
+				return <Text>{'X-Reload has been added to the site!'}</Text>;
+			},
+			date: 'Mar 23, 2026',
+			colour: theme.colors.red[5],
+			icon: <IconBuildingStore size="2rem" />,
+			shouldDisplay: () => true,
+		},
+		{
 			title: 'Google Form Feedback - Thanks',
 			content: () => {
 				return (
@@ -51,22 +61,6 @@ export default function getActiveAnnouncements() {
 			date: 'Mar 21, 2026',
 			colour: theme.colors.teal[3],
 			icon: <IconMessage size="2rem" />,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'Recently Added Retailers',
-			content: () => {
-				return (
-					<Text>
-						{
-							'Canfirearm and Wolverine Supplies have been added to the site!'
-						}
-					</Text>
-				);
-			},
-			date: 'Mar 18, 2026',
-			colour: theme.colors.grape[3],
-			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
 	];
