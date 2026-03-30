@@ -1,30 +1,38 @@
 import { createContext, useContext, useState, type ReactElement } from 'react';
+import { useCookies } from 'react-cookie';
+
+const COOKIE_NAME = 'token';
+
+interface CookieValue {
+	token?: string;
+}
 
 export interface AuthState {
 	isAuthenticated: boolean;
-	authenticate: () => void;
 	logout: () => void;
 }
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactElement }) {
-	const [isAuthenticated, setIsAuthenticated] = useState(
-		localStorage.getItem('token') === '123',
-	);
+	const [cookies, _, removeCookie] = useCookies<
+		typeof COOKIE_NAME,
+		CookieValue
+	>([COOKIE_NAME]);
 
-	const authenticate = () => {
-		setIsAuthenticated(true);
-		localStorage.setItem('token', '123');
-	};
+	console.log(cookies);
+
+	const [isAuthenticated, setIsAuthenticated] = useState(
+		cookies.token !== undefined,
+	);
 
 	const logout = () => {
 		setIsAuthenticated(false);
-		localStorage.removeItem('token');
+		removeCookie(COOKIE_NAME);
 	};
 
 	return (
-		<AuthContext.Provider value={{ isAuthenticated, authenticate, logout }}>
+		<AuthContext.Provider value={{ isAuthenticated, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

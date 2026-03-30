@@ -12,7 +12,6 @@ import { createLazyRoute } from '@tanstack/react-router';
 import SignInButton from './components/signInButton';
 import {
 	IconBrandDiscord,
-	IconBrandFacebook,
 	IconBrandGoogle,
 	IconMail,
 } from '@tabler/icons-react';
@@ -71,12 +70,6 @@ function AuthPage() {
 						displayName="Discord"
 						apiProvider="discord"
 						icon={<IconBrandDiscord />}
-						isExternal
-					/>
-					<SignInButton
-						displayName="Facebook"
-						apiProvider="facebook"
-						icon={<IconBrandFacebook />}
 						isExternal
 					/>
 					<SignInButton

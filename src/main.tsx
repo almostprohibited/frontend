@@ -6,6 +6,7 @@ import { routeTree } from './routes.tsx';
 import ErrorResult from './components/fallbacks/errorResult.tsx';
 import EmptyResult from './components/fallbacks/emptyResult.tsx';
 import { AuthProvider, useAuth } from './auth.tsx';
+import { CookiesProvider } from 'react-cookie';
 
 const router = createRouter({
 	routeTree,
@@ -44,9 +45,11 @@ if (rootElement && !rootElement.innerHTML) {
 
 	root.render(
 		<StrictMode>
-			<AuthProvider>
-				<Wrapper />
-			</AuthProvider>
+			<CookiesProvider>
+				<AuthProvider>
+					<Wrapper />
+				</AuthProvider>
+			</CookiesProvider>
 		</StrictMode>,
 	);
 }
