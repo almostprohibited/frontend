@@ -32,10 +32,10 @@ export default function getActiveAnnouncements() {
 		{
 			title: 'Recently Added Retailers',
 			content: () => {
-				return <Text>{'X-Reload has been added to the site!'}</Text>;
+				return <Text>{'Gobles has been added to the site!'}</Text>;
 			},
-			date: 'Mar 23, 2026',
-			colour: theme.colors.red[5],
+			date: 'Apr 2, 2026',
+			colour: theme.colors.lime[5],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},

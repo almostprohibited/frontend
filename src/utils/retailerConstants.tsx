@@ -457,6 +457,16 @@ export class RetailerEnum {
 		'#000',
 	);
 
+	static readonly Gobles = new Retailer(
+		'Gobles',
+		'Gobles',
+		'https://www.gobles.ca/',
+		'/retailers/gobles.png',
+		'#ebba2d',
+		RetailerLocation.Ontario,
+		'#000',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
