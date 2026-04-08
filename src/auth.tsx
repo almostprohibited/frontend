@@ -20,8 +20,6 @@ export function AuthProvider({ children }: { children: ReactElement }) {
 		CookieValue
 	>([COOKIE_NAME]);
 
-	console.log(cookies);
-
 	const [isAuthenticated, setIsAuthenticated] = useState(
 		cookies.token !== undefined,
 	);
