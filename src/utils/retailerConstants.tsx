@@ -458,13 +458,23 @@ export class RetailerEnum {
 	);
 
 	static readonly Gobles = new Retailer(
-		'Gobles',
+		"Goble's",
 		'Gobles',
 		'https://www.gobles.ca/',
 		'/retailers/gobles.png',
 		'#ebba2d',
 		RetailerLocation.Ontario,
 		'#000',
+	);
+
+	static readonly LonderoSports = new Retailer(
+		'Londero Sports',
+		'LonderoSports',
+		'https://www.londerosports.com/',
+		'/retailers/londero.webp',
+		'#00984e',
+		RetailerLocation.Quebec,
+		'#fff',
 	);
 
 	private constructor(

@@ -92,6 +92,10 @@ export default function ProductCard({
 						src={`${getApiDomain()}/api/image?id=${crawlData.id}`}
 						fallbackSrc={crawlData.image_url}
 						onLoad={() => setImageLoaded(true)}
+						fit="contain"
+						// sorry, going to make the background white so that we don't have the awkward
+						// black borders for images, since every appears to like using white backgrounds
+						bg="#fff"
 					/>
 				</Skeleton>
 			</CardSection>
