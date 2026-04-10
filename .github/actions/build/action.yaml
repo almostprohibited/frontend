@@ -4,8 +4,8 @@ inputs:
   stage:
     type: choice
     required: true
-    description: "Deployment stage"
-    options: ["release", "beta"]
+    description: 'Deployment stage'
+    options: ['release', 'beta']
 
 outputs:
   artifact-id:
@@ -14,17 +14,17 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Build
       run: |
         set -ueo pipefail
-        
+
         export VITE_STAGE=${{ inputs.stage }}
 
         npm ci
         npm run build
       shell: bash
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       name: Upload
       id: upload
       with:
