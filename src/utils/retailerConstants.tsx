@@ -477,6 +477,46 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly ShootersChoice = new Retailer(
+		'Shooters Choice',
+		'ShootersChoice',
+		'https://shooterschoice.com/',
+		'/retailers/shooterschoice.png',
+		'#1d8935',
+		RetailerLocation.Ontario,
+		'808080',
+	);
+
+	static readonly LanzShootingSupplies = new Retailer(
+		'Lanz Shooting Supplies',
+		'LanzShootingSupplies',
+		'https://lanzshootingsupplies.com/',
+		'/retailers/lanz.png',
+		'#0e1c26',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
+	static readonly DoubleTapSports = new Retailer(
+		'DoubleTap Sports',
+		'DoubleTapSports',
+		'https://doubletapsports.com/',
+		'/retailers/doubletap.png',
+		'#229ccb',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
+	static readonly NechakoOutdoors = new Retailer(
+		'Nechako Outdoors',
+		'NechakoOutdoors',
+		'https://nechakooutdoors.ca/',
+		'/retailers/nechako.png',
+		'#71ae47',
+		RetailerLocation.BritishColumbia,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
