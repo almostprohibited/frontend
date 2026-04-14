@@ -478,7 +478,7 @@ export class RetailerEnum {
 	);
 
 	static readonly ShootersChoice = new Retailer(
-		'Shooters Choice',
+		"Shooter's Choice",
 		'ShootersChoice',
 		'https://shooterschoice.com/',
 		'/retailers/shooterschoice.png',

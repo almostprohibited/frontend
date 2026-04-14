@@ -44,7 +44,7 @@ export default function getActiveAnnouncements() {
 							<ListItem>Fishing World Gun Centre</ListItem>
 							<ListItem>Lanz Shooting Supplies</ListItem>
 							<ListItem>Nechako Outdoors</ListItem>
-							<ListItem>Shooters Choice</ListItem>
+							<ListItem>Shooter's Choice</ListItem>
 							<ListItem>Uxbridge Arms</ListItem>
 						</List>
 					</Stack>
