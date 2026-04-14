@@ -4,7 +4,7 @@ import {
 	IconConfetti,
 	IconMessage,
 } from '@tabler/icons-react';
-import { Stack, Text, useMantineTheme } from '@mantine/core';
+import { List, ListItem, Stack, Text, useMantineTheme } from '@mantine/core';
 import type { AnnouncementObject } from './announcements';
 
 export default function getActiveAnnouncements() {
@@ -33,11 +33,25 @@ export default function getActiveAnnouncements() {
 			title: 'Recently Added Retailers',
 			content: () => {
 				return (
-					<Text>{'Londero Sports has been added to the site!'}</Text>
+					<Stack>
+						<Text>
+							{
+								"We've hit 50 supported retailers! The following stores have been added to the site:"
+							}
+						</Text>
+						<List>
+							<ListItem>DoubleTap Sports</ListItem>
+							<ListItem>Fishing World Gun Centre</ListItem>
+							<ListItem>Lanz Shooting Supplies</ListItem>
+							<ListItem>Nechako Outdoors</ListItem>
+							<ListItem>Shooters Choice</ListItem>
+							<ListItem>Uxbridge Arms</ListItem>
+						</List>
+					</Stack>
 				);
 			},
-			date: 'Apr 8, 2026',
-			colour: theme.colors.violet[5],
+			date: 'Apr 13, 2026',
+			colour: theme.colors.lime[5],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},

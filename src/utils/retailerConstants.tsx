@@ -517,6 +517,26 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly UxbridgeArms = new Retailer(
+		'Uxbridge Arms',
+		'UxbridgeArms',
+		'https://uxbridgearms.com/',
+		'/retailers/uxbridge.webp',
+		'#242833',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
+	static readonly Fwgc = new Retailer(
+		'Fishing World GC',
+		'Fwgc',
+		'https://fishingworldgc.ca/',
+		'/retailers/fwgc.png',
+		'#1e2021',
+		RetailerLocation.Ontario,
+		'#cccccc',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
