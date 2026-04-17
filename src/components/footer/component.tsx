@@ -1,7 +1,9 @@
 import { Divider, Flex, useMantineTheme } from '@mantine/core';
 import styles from './component.module.css';
 import { Link } from '@tanstack/react-router';
-import { IconBrandGithub } from '@tabler/icons-react';
+import { IconBrandGithub, IconCoffee } from '@tabler/icons-react';
+
+const ICON_SIZE = '1.2rem';
 
 export default function Footer() {
 	const theme = useMantineTheme();
@@ -25,7 +27,12 @@ export default function Footer() {
 						target="_blank"
 						referrerPolicy="no-referrer"
 					>
-						{'[ ☕ Buy me a coffee ]'}
+						{'[ '}
+						<IconCoffee
+							size={ICON_SIZE}
+							style={{ verticalAlign: 'text-top' }}
+						/>
+						{' Buy me a coffee ]'}
 					</a>
 					<a
 						href="https://github.com/almostprohibited"
@@ -33,7 +40,10 @@ export default function Footer() {
 						referrerPolicy="no-referrer"
 					>
 						{'[ '}
-						<IconBrandGithub size="1.1rem" />
+						<IconBrandGithub
+							size={ICON_SIZE}
+							style={{ verticalAlign: 'text-top' }}
+						/>
 						{' Source code ]'}
 					</a>
 				</Flex>
