@@ -1,0 +1,9 @@
+.label {
+	align-items: center;
+}
+
+.section {
+	position: absolute;
+	left: 0;
+	margin-left: var(--mantine-spacing-sm);
+}

@@ -11,6 +11,7 @@ import { IconMailForward } from '@tabler/icons-react';
 import { useState } from 'react';
 import { FinishedOverlay } from './finishedOverlay';
 import { getApiDomain, getCfSiteKey } from '@/utils/environment';
+import { isValidEmail } from '@/utils/inputCheckers';
 
 export function ContactForm() {
 	const siteKey = getCfSiteKey();
@@ -62,7 +63,7 @@ export function ContactForm() {
 	function validateEmail(email: string) {
 		setEmail(email);
 
-		if (email && !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.exec(email)) {
+		if (!isValidEmail(email)) {
 			setEmailContainsError(true);
 			return;
 		}

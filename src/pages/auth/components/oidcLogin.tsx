@@ -1,20 +1,46 @@
 import { getApiDomain } from '@/utils/environment';
-import { Text, Button, useMantineTheme } from '@mantine/core';
-import { IconExternalLink } from '@tabler/icons-react';
+import { Text, Button, useMantineTheme, Title, Flex } from '@mantine/core';
+import {
+	IconBrandDiscord,
+	IconBrandGoogle,
+	IconExternalLink,
+} from '@tabler/icons-react';
 import type { ReactElement } from 'react';
 
-export default function OidcProviderButton({
+export default function OidcLoginProviders({ cfToken }: { cfToken?: string }) {
+	return (
+		<Flex direction="column" gap="md" w="100%">
+			<Title order={4}>Sign in with a provider</Title>
+			<Text>
+				Use a third party service to log in. You'll be sent to their
+				confirmation page, and they'll send you right back here.
+			</Text>
+			<OidcProviderButton
+				displayName="Discord"
+				apiProvider="discord"
+				icon={<IconBrandDiscord />}
+				cfToken={cfToken}
+			/>
+			<OidcProviderButton
+				displayName="Google"
+				apiProvider="google"
+				icon={<IconBrandGoogle />}
+				cfToken={cfToken}
+			/>
+		</Flex>
+	);
+}
+
+function OidcProviderButton({
 	displayName,
 	icon,
 	apiProvider,
 	cfToken,
-	isExternal = false,
 }: {
 	displayName: string;
 	icon: ReactElement;
 	apiProvider: string;
 	cfToken?: string;
-	isExternal?: boolean;
 }) {
 	const theme = useMantineTheme();
 
@@ -35,7 +61,7 @@ export default function OidcProviderButton({
 
 			<Button
 				leftSection={icon}
-				rightSection={isExternal ? <IconExternalLink /> : <span />}
+				rightSection={<IconExternalLink />}
 				fullWidth
 				justify="space-between"
 				variant="light"
