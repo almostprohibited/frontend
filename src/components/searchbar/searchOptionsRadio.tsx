@@ -78,6 +78,7 @@ export default function SortOptionsRadio({
 				onChange={(val) => {
 					setSortValue(enumMapper(SortOptions, val)!);
 				}}
+				radius="md"
 				withItemsBorders={false}
 				data={[
 					{
@@ -118,6 +119,7 @@ export default function SortOptionsRadio({
 				}}
 				withItemsBorders={false}
 				data={categories}
+				radius="md"
 			/>
 		</>
 	);

@@ -18,6 +18,11 @@ import './globals.css';
 export default function App() {
 	const theme = createTheme({
 		fontFamily: 'Google Sans, Arial, Helvetica, sans-serif',
+
+		// https://mantine.dev/guides/8x-to-9x/#default-border-radius-change
+		// why they would do this, I will never understand
+		// 9.x SegmentedControl's 'sm' is NOT the same as 8.x SegmentedControl's default
+		defaultRadius: 'sm',
 	});
 
 	return (

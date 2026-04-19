@@ -192,7 +192,7 @@ export default function SearchBar({
 					/>
 				</Group>
 
-				<Collapse mt="1rem" in={dropDownVisible}>
+				<Collapse mt="1rem" expanded={dropDownVisible}>
 					<Flex gap="md" direction={isMobile ? 'column' : 'row'}>
 						<Fieldset disabled={isLoading} legend="Price" w="100%">
 							<Flex gap="md">
