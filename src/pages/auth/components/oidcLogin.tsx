@@ -3,6 +3,7 @@ import { Text, Button, useMantineTheme, Title, Flex } from '@mantine/core';
 import {
 	IconBrandDiscord,
 	IconBrandGoogle,
+	IconBrandWindows,
 	IconExternalLink,
 } from '@tabler/icons-react';
 import type { ReactElement } from 'react';
@@ -25,6 +26,12 @@ export default function OidcLoginProviders({ cfToken }: { cfToken?: string }) {
 				displayName="Google"
 				apiProvider="google"
 				icon={<IconBrandGoogle />}
+				cfToken={cfToken}
+			/>
+			<OidcProviderButton
+				displayName="Microsoft"
+				apiProvider="microsoft"
+				icon={<IconBrandWindows />}
 				cfToken={cfToken}
 			/>
 		</Flex>

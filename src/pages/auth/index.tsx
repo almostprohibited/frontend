@@ -47,6 +47,7 @@ function AuthPage() {
 					<OidcLoginProviders cfToken={cfToken} />
 					<Divider />
 					<Turnstile
+						id="login-turnstile"
 						style={{ width: '100%' }}
 						siteKey={getCfSiteKey()}
 						options={{

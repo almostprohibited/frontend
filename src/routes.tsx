@@ -76,12 +76,18 @@ const searchRoute = createRoute({
 
 const authRoute = createRoute({
 	getParentRoute: () => rootRoute,
-	beforeLoad: () => {
+	beforeLoad: ({ context }) => {
 		const isBeta = useIsBeta();
 
 		if (!isBeta) {
 			throw redirect({
 				to: '/',
+			});
+		}
+
+		if (context.auth.isAuthenticated) {
+			throw redirect({
+				to: '/dashboard/',
 			});
 		}
 	},
