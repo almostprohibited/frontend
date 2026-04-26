@@ -23,12 +23,10 @@ function DashboardPage() {
 				process.env.NODE_ENV === 'development'
 					? 'include'
 					: 'same-origin',
-		}).then((response) => {
-			if (response.ok) {
-				auth.logout();
+		}).then((_) => {
+			auth.logout();
 
-				navigate({ to: '/' });
-			}
+			navigate({ to: '/' });
 		});
 	}
 
