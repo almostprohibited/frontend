@@ -1,6 +1,7 @@
 import {
 	Anchor,
 	Box,
+	Code,
 	List,
 	ListItem,
 	Space,
@@ -22,7 +23,7 @@ function PrivacyPage() {
 			</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{'Last updated: June 22, 2025'}
+				{'Last updated: April 29th, 2026'}
 			</Text>
 			<Space h="md" />
 			<Stack gap="xl">
@@ -31,9 +32,14 @@ function PrivacyPage() {
 						{'TL;DR'}
 					</Title>
 					<Text>
-						{
-							"I don't care about your data. Unless you are trying to contact me, I won't save anything on my servers."
-						}
+						I don't care about your data. Unless you are trying to
+						contact me, I won't save any identifiable data on my
+						servers.
+					</Text>
+					<Text>
+						For any data that I do end up storing, it will be used
+						to contact you, or displayed as metrics for my own
+						understanding.
 					</Text>
 				</Stack>
 				<Stack>
@@ -77,12 +83,16 @@ function PrivacyPage() {
 						<ListItem>{'IP addresses'}</ListItem>
 						<ListItem>{'User agents'}</ListItem>
 						<ListItem>{'Type of device'}</ListItem>
+						<ListItem>
+							The URI path item (eg. <Code>/api/search</Code>,{' '}
+							<Code>/api/image</Code>, etc.)
+						</ListItem>
 					</List>
 					<Text>
-						{
-							'I do not store, or log, any of this information permanently on my own servers as you are browsing the site'
-						}
-						.
+						The URI path that was requested from you on my servers
+						for nintey (90) days. This does not include IP address,
+						user agents, actual parameter contents, or other
+						identifying information.
 					</Text>
 				</Stack>
 				<Stack>
