@@ -23,7 +23,7 @@ function PrivacyPage() {
 			</Title>
 			<Space h="xl" />
 			<Text size="sm" c="dark">
-				{'Last updated: April 29th, 2026'}
+				{'Last updated: April 30th, 2026'}
 			</Text>
 			<Space h="md" />
 			<Stack gap="xl">
@@ -90,7 +90,7 @@ function PrivacyPage() {
 					</List>
 					<Text>
 						The URI path that was requested from you on my servers
-						for nintey (90) days. This does not include IP address,
+						for ninety (90) days. This does not include IP address,
 						user agents, actual parameter contents, or other
 						identifying information.
 					</Text>
