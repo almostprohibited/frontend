@@ -537,6 +537,16 @@ export class RetailerEnum {
 		'#cccccc',
 	);
 
+	static readonly EasthillOutdoors = new Retailer(
+		'Easthill Outdoors',
+		'EasthillOutdoors',
+		'https://www.easthilloutdoors.com/',
+		'/retailers/easthill.png',
+		'#414141',
+		RetailerLocation.Ontario,
+		'#fdb813',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

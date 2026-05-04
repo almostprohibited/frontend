@@ -34,24 +34,12 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Stack>
-						<Text>
-							{
-								"We've hit 50 supported retailers! The following stores have been added to the site:"
-							}
-						</Text>
-						<List>
-							<ListItem>DoubleTap Sports</ListItem>
-							<ListItem>Fishing World Gun Centre</ListItem>
-							<ListItem>Lanz Shooting Supplies</ListItem>
-							<ListItem>Nechako Outdoors</ListItem>
-							<ListItem>Shooter's Choice</ListItem>
-							<ListItem>Uxbridge Arms</ListItem>
-						</List>
+						<Text>Easthill Outdoors has been added!</Text>
 					</Stack>
 				);
 			},
-			date: 'Apr 13, 2026',
-			colour: theme.colors.lime[5],
+			date: 'May 3, 2026',
+			colour: theme.colors.grape[4],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
