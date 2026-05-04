@@ -4,7 +4,7 @@ import {
 	IconConfetti,
 	IconMessage,
 } from '@tabler/icons-react';
-import { List, ListItem, Stack, Text, useMantineTheme } from '@mantine/core';
+import { Stack, Text, useMantineTheme } from '@mantine/core';
 import type { AnnouncementObject } from './announcements';
 
 export default function getActiveAnnouncements() {
