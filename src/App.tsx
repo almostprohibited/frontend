@@ -5,6 +5,7 @@ import {
 	Flex,
 	MantineProvider,
 } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import Footer from './components/footer/component';
 
 import { HeadContent, Outlet } from '@tanstack/react-router';
@@ -13,6 +14,8 @@ import Header from './components/header/component';
 
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
+import '@mantine/notifications/styles.css';
+
 import './globals.css';
 
 export default function App() {
@@ -30,6 +33,7 @@ export default function App() {
 			<HeadContent />
 			<ColorSchemeScript />
 			<MantineProvider defaultColorScheme="dark" theme={theme}>
+				<Notifications />
 				<Flex direction="column" h="100%">
 					<Header />
 					<Box mb="2rem" flex={1}>

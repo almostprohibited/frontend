@@ -15,6 +15,7 @@
 		"@mantine/charts": "^9.1.1",
 		"@mantine/core": "^9.0.2",
 		"@mantine/hooks": "^9.0.2",
+		"@mantine/notifications": "^9.1.1",
 		"@marsidev/react-turnstile": "^1.5.1",
 		"@tabler/icons-react": "^3.41.1",
 		"@tanstack/react-devtools": "^0.10.2",

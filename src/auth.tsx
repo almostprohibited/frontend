@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 const COOKIE_NAME = 'token';
 
 interface CookieValue {
-	token?: string;
+	[COOKIE_NAME]?: string;
 }
 
 export interface AuthState {
@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: ReactElement }) {
 	>([COOKIE_NAME]);
 
 	const [isAuthenticated, setIsAuthenticated] = useState(
-		cookies.token !== undefined,
+		cookies[COOKIE_NAME] !== undefined,
 	);
 
 	const logout = () => {

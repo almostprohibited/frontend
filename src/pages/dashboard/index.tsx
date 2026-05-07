@@ -1,45 +1,28 @@
-import { useAuth } from '@/auth';
-import { getApiDomain } from '@/utils/environment';
-import { Box, Button } from '@mantine/core';
-import { createLazyRoute, useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { Divider, Flex, Space, Title } from '@mantine/core';
+import { createLazyRoute } from '@tanstack/react-router';
+import Logout from './components/logout';
+import DeleteAccount from './components/delete';
 
 export const dashboardLazyRoute = createLazyRoute('/dashboard')({
 	component: DashboardPage,
 });
 
 function DashboardPage() {
-	const auth = useAuth();
-	const navigate = useNavigate();
-
-	const [isLoading, setIsLoading] = useState(false);
-
-	function logout() {
-		setIsLoading(true);
-
-		fetch(`${getApiDomain()}/api/auth/logout`, {
-			method: 'DELETE',
-			credentials:
-				process.env.NODE_ENV === 'development'
-					? 'include'
-					: 'same-origin',
-		}).then((_) => {
-			auth.logout();
-
-			navigate({ to: '/' });
-		});
-	}
-
 	return (
-		<>
-			<Box>hello world</Box>
-			<Button
-				onClick={logout}
-				loading={isLoading}
-				loaderProps={{ type: 'oval' }}
-			>
-				logout
-			</Button>
-		</>
+		<Flex
+			p={'var(--content-side-padding)'}
+			justify="center"
+			direction="column"
+			gap="xl"
+		>
+			<Space />
+			<Title>Dashboard</Title>
+
+			<Divider />
+			<Flex justify="space-between">
+				<Logout />
+				<DeleteAccount />
+			</Flex>
+		</Flex>
 	);
 }
