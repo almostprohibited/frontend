@@ -13,6 +13,16 @@ interface RootContext {
 	auth: AuthState;
 }
 
+function protectedPageCheck({ context }: { context: RootContext }) {
+	const isBeta = useIsBeta();
+
+	if (!isBeta || !context.auth.isAuthenticated) {
+		throw redirect({
+			to: '/auth/',
+		});
+	}
+}
+
 const rootRoute = createRootRouteWithContext<RootContext>()({
 	component: () => <App />,
 	head: (context) => {
@@ -96,18 +106,26 @@ const authRoute = createRoute({
 
 const dashboardRoute = createRoute({
 	getParentRoute: () => rootRoute,
-	beforeLoad: ({ context }) => {
-		const isBeta = useIsBeta();
-
-		if (!isBeta || !context.auth.isAuthenticated) {
-			throw redirect({
-				to: '/auth/',
-			});
-		}
-	},
+	beforeLoad: protectedPageCheck,
 	path: '/dashboard',
 }).lazy(() =>
 	import('./pages/dashboard/index').then((d) => d.dashboardLazyRoute),
+);
+
+const watchListRoute = createRoute({
+	getParentRoute: () => rootRoute,
+	beforeLoad: protectedPageCheck,
+	path: '/watchlist',
+}).lazy(() =>
+	import('./pages/watchlist/index').then((d) => d.watchListLazyRoute),
+);
+
+const notificationsRoute = createRoute({
+	getParentRoute: () => rootRoute,
+	beforeLoad: protectedPageCheck,
+	path: '/notifications',
+}).lazy(() =>
+	import('./pages/notifications/index').then((d) => d.notificationsLazyRoute),
 );
 
 export const routeTree = rootRoute.addChildren([
@@ -117,4 +135,6 @@ export const routeTree = rootRoute.addChildren([
 	searchRoute,
 	authRoute,
 	dashboardRoute,
+	watchListRoute,
+	notificationsRoute,
 ]);
