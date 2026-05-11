@@ -1,4 +1,4 @@
-import { Box, Card, Divider, Flex, Space, Text, Title } from '@mantine/core';
+import { Box, Card, Flex, Space, Text, Title } from '@mantine/core';
 import { createLazyRoute, Link } from '@tanstack/react-router';
 import Logout from './components/logout';
 import DeleteAccount from './components/delete';
@@ -51,7 +51,6 @@ function DashboardPage() {
 					</Card>
 				</Flex>
 			</Box>
-			<Divider />
 			<Flex justify="space-between">
 				<Logout />
 				<DeleteAccount />

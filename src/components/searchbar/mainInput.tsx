@@ -1,34 +1,9 @@
+import { usePlaceHolderSearch } from '@/utils/hooks/usePlaceHolderSearch';
 import styles from './mainInput.module.css';
 
 import { CloseButton, TextInput, useMantineTheme } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
-
-const placeHolderValues = [
-	'norinco sks',
-	'american ruger ranch',
-	'ruger 10/22',
-	'tikka t1x',
-	'citadel ad-500',
-	'henry lever 357',
-	'phased plasma rifle 40-watt',
-	'chiappa takedown',
-	'howa m1500',
-	'mauser',
-	'cz alpha',
-	'winchester 94',
-	'mrx bison',
-	'LAR mag',
-	'10/22 rotary magazine',
-	'stripper clip',
-	'vortex venom',
-	'red dot',
-	'5.56 m855',
-	'22lr 40gr',
-	'holosun',
-	'30mm mount',
-];
+import { useState, type Dispatch, type SetStateAction } from 'react';
 
 export default function MainInput({
 	value,
@@ -44,10 +19,7 @@ export default function MainInput({
 	disabled?: boolean;
 }) {
 	const theme = useMantineTheme();
-
-	const [placeHolderText] = useState(
-		placeHolderValues[Math.floor(Math.random() * placeHolderValues.length)],
-	);
+	const [placeHolderText] = useState(usePlaceHolderSearch());
 
 	const closeButton = (
 		<CloseButton
