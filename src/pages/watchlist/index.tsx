@@ -1,8 +1,16 @@
-import { Box, Button, Divider, Flex, Space, Text, Title } from '@mantine/core';
+import {
+	Accordion,
+	Box,
+	Button,
+	Divider,
+	Flex,
+	Space,
+	Text,
+	Title,
+} from '@mantine/core';
 import { createLazyRoute } from '@tanstack/react-router';
 import { IconClipboardPlus, IconPlus } from '@tabler/icons-react';
 import { useListState } from '@mantine/hooks';
-import type { ReactElement } from 'react';
 import { ProductAlert } from './components/productAlert';
 
 export const watchListLazyRoute = createLazyRoute('/watchlist')({
@@ -10,12 +18,15 @@ export const watchListLazyRoute = createLazyRoute('/watchlist')({
 });
 
 function WatchListPage() {
-	const [productAlerts, productAlertsHandler] = useListState<ReactElement>(
-		[],
-	);
+	const [productAlertIds, productAlertIdsHandler] = useListState<string>([]);
+	const [openAccordionItems, openAccordionItemsHandler] =
+		useListState<string>([]);
 
 	function addProductAlert() {
-		productAlertsHandler.append(<ProductAlert />);
+		const newId = Date.now().toString();
+
+		productAlertIdsHandler.insert(0, newId);
+		openAccordionItemsHandler.append(newId);
 	}
 
 	return (
@@ -29,7 +40,7 @@ function WatchListPage() {
 				</Flex>
 			</Button>
 			<Divider />
-			{productAlerts.length === 0 ? (
+			{productAlertIds.length === 0 ? (
 				<Flex c="dark" justify="center" align="center" gap="sm">
 					<IconClipboardPlus size={'3rem'} />
 					<Box>
@@ -39,7 +50,19 @@ function WatchListPage() {
 					</Box>
 				</Flex>
 			) : (
-				productAlerts
+				<Accordion
+					multiple
+					variant="separated"
+					chevronPosition="left"
+					value={openAccordionItems}
+					onChange={(openItems) => {
+						openAccordionItemsHandler.setState(openItems);
+					}}
+				>
+					{productAlertIds.map((id) => (
+						<ProductAlert key={id} accordionId={id} />
+					))}
+				</Accordion>
 			)}
 		</Flex>
 	);
