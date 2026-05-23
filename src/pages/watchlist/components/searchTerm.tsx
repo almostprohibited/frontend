@@ -35,6 +35,7 @@ export function SearchTerm({
 				onChange={(event) => {
 					setSearchTerm(event.target.value);
 				}}
+				variant="filled"
 				w="100%"
 			/>
 		</Flex>

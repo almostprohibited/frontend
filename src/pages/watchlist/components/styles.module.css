@@ -1,0 +1,22 @@
+.radio-card {
+	padding: var(--mantine-spacing-md);
+
+	&[data-checked] {
+		border-color: var(--mantine-primary-color-filled);
+	}
+
+	&:not(&[data-checked]) {
+		color: var(--mantine-color-dimmed);
+	}
+}
+
+.radio-card-inner {
+	align-items: center;
+	position: relative;
+}
+
+.radio-card-title {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}

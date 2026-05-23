@@ -22,6 +22,7 @@ import {
 import { useState } from 'react';
 import { SearchTerm } from './searchTerm';
 import { PriceAlert } from './priceAlert';
+import { NotificationSettings } from './notifications';
 
 export function ProductAlert({ accordionId }: { accordionId: string }) {
 	const [name, setName] = useState('');
@@ -118,6 +119,7 @@ export function ProductAlert({ accordionId }: { accordionId: string }) {
 							<Text>Search Term</Text>
 						</Button>
 					</Card>
+					<NotificationSettings />
 					{priceAlert ? (
 						<PriceAlert deleteHandler={handleDeletePrice} />
 					) : (
