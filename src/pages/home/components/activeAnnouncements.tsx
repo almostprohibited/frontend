@@ -50,8 +50,8 @@ export default function getActiveAnnouncements() {
 						<Text>
 							In the short term, I'll spin up another disk
 							parition specifically for backups and reduce the
-							number of daily backups kept the local machine from
-							14 days, to 7 days.
+							number of daily backups kept on the local machine
+							from 14 days, to 7 days.
 						</Text>
 						<Text>
 							Thanks to the 5 of you that had reached out (or had
