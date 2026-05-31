@@ -19,9 +19,10 @@ export interface AnnouncementObject {
 	colour: string;
 	icon: React.ReactNode;
 	shouldDisplay: () => boolean;
+	timeout_ms?: number;
 }
 
-export const ANNOUNCEMENT_COUNTDOWN_MS = 10_000;
+export const ANNOUNCEMENT_COUNTDOWN_MS = 20_000;
 
 export default function Announcements() {
 	const theme = useMantineTheme();
