@@ -12,14 +12,14 @@
 		"check": "prettier --write . && eslint --fix"
 	},
 	"dependencies": {
-		"@mantine/charts": "^9.2.1",
-		"@mantine/core": "^9.2.1",
-		"@mantine/hooks": "^9.2.1",
-		"@mantine/notifications": "^9.2.1",
+		"@mantine/charts": "^9.2.2",
+		"@mantine/core": "^9.2.2",
+		"@mantine/hooks": "^9.2.2",
+		"@mantine/notifications": "^9.2.2",
 		"@marsidev/react-turnstile": "^1.5.2",
 		"@tabler/icons-react": "^3.44.0",
 		"@tanstack/react-devtools": "^0.10.5",
-		"@tanstack/react-router": "^1.170.5",
+		"@tanstack/react-router": "^1.170.8",
 		"@tanstack/react-router-devtools": "^1.167.0",
 		"react": "^19.2.6",
 		"react-cookie": "^8.1.2",
@@ -40,7 +40,7 @@
 		"jsdom": "^29.1.1",
 		"prettier": "^3.8.3",
 		"typescript": "^6.0.3",
-		"vite": "^8.0.13",
+		"vite": "^8.0.14",
 		"vitest": "^4.1.7",
 		"web-vitals": "^5.2.0"
 	}
