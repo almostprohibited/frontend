@@ -547,6 +547,26 @@ export class RetailerEnum {
 		'#fdb813',
 	);
 
+	static readonly RangeArts = new Retailer(
+		'Range Arts Gunfitters',
+		'RangeArts',
+		'https://rangearts.com/',
+		'/retailers/range-arts.webp',
+		'#FF6700',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
+	static readonly GeneralGun = new Retailer(
+		'General Gun & Supply',
+		'GeneralGun',
+		'https://www.generalgun.com/',
+		'/retailers/generalgun.png',
+		'#0a0000',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

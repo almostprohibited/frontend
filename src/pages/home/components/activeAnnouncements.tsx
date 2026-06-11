@@ -1,7 +1,6 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
 	IconBuildingStore,
-	IconCloudOff,
 	IconConfetti,
 	IconMessage,
 } from '@tabler/icons-react';
@@ -31,51 +30,19 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
-			title: 'May 31st Outage',
-			content: () => {
-				return (
-					<Stack>
-						<Text>
-							Hey all, some of you may have noticed that the site
-							was down from roughly May 30th @ 11PM PT, to May
-							31st @ 12PM PT.
-						</Text>
-						<Text>
-							This was due to the disk space on the server filling
-							up with the automated backups, causing processes to
-							fail in the background as they were no longer able
-							to save their data. Each backup is roughly 2.7GB in
-							size.
-						</Text>
-						<Text>
-							In the short term, I'll spin up another disk
-							parition specifically for backups and reduce the
-							number of daily backups kept on the local machine
-							from 14 days, to 7 days.
-						</Text>
-						<Text>
-							Thanks to the 5 of you that had reached out (or had
-							tried to).
-						</Text>
-					</Stack>
-				);
-			},
-			date: 'May 31, 2026',
-			colour: theme.colors.red[8],
-			icon: <IconCloudOff size="2rem" />,
-			shouldDisplay: () => Date.now() < 1780426800000,
-		},
-		{
 			title: 'Recently Added Retailers',
 			content: () => {
 				return (
 					<Stack>
-						<Text>Easthill Outdoors has been added!</Text>
+						<Text>
+							General Gun & Supply and Range Arts have been added
+							to the site!
+						</Text>
 					</Stack>
 				);
 			},
-			date: 'May 3, 2026',
-			colour: theme.colors.grape[4],
+			date: 'June 11, 2026',
+			colour: theme.colors.yellow[4],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},
