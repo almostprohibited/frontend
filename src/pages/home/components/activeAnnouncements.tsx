@@ -3,7 +3,6 @@ import {
 	IconBuildingStore,
 	IconConfetti,
 	IconMessage,
-	IconTool,
 } from '@tabler/icons-react';
 import { Stack, Text, useMantineTheme } from '@mantine/core';
 import type { AnnouncementObject } from './announcements';
@@ -29,23 +28,6 @@ export default function getActiveAnnouncements() {
 			colour: 'orange',
 			icon: <IconConfetti size="2rem" />,
 			shouldDisplay: () => isBirthdayWeek(),
-		},
-		{
-			title: 'Server Maintenance',
-			content: () => {
-				return (
-					<Stack>
-						<Text>
-							The site will be down for up to two hours later
-							today at roughly midnight for maintenance.
-						</Text>
-					</Stack>
-				);
-			},
-			date: 'June 13, 2026',
-			colour: theme.colors.green[4],
-			icon: <IconTool size="2rem" />,
-			shouldDisplay: () => true,
 		},
 		{
 			title: 'Recently Added Retailers',
