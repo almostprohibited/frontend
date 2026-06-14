@@ -37,7 +37,7 @@ export default function getActiveAnnouncements() {
 					<Stack>
 						<Text>
 							The site will be down for up to two hours later
-							today, June 13th at roughly 12am for maintenance.
+							today at roughly midnight for maintenance.
 						</Text>
 					</Stack>
 				);
