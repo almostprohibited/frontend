@@ -43,9 +43,6 @@ function AuthPage() {
 				<Divider orientation={isMobile ? 'horizontal' : 'vertical'} />
 				<Flex direction="column" gap="md" w="100%">
 					<EmailLogin cfToken={cfToken} />
-					<Divider label="or" labelPosition="center" />
-					<OidcLoginProviders cfToken={cfToken} />
-					<Divider />
 					<Turnstile
 						id="login-turnstile"
 						style={{ width: '100%' }}
@@ -55,6 +52,8 @@ function AuthPage() {
 						}}
 						onSuccess={setCfToken}
 					/>
+					<Divider label="or" labelPosition="center" />
+					<OidcLoginProviders />
 				</Flex>
 			</Flex>
 		</Flex>

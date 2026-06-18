@@ -49,3 +49,13 @@ export interface HistoryPrice {
 	regular_price: number;
 	sale_price?: number;
 }
+
+export enum NotificationChannelStatus {
+	Verified = 'verified',
+	Pending = 'pending',
+}
+
+export interface NotificationChannel {
+	identifier: string;
+	status: NotificationChannelStatus;
+}

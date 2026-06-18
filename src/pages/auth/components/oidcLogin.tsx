@@ -8,7 +8,7 @@ import {
 } from '@tabler/icons-react';
 import type { ReactElement } from 'react';
 
-export default function OidcLoginProviders({ cfToken }: { cfToken?: string }) {
+export default function OidcLoginProviders() {
 	return (
 		<Flex direction="column" gap="md" w="100%">
 			<Title order={4}>Sign in with a provider</Title>
@@ -20,19 +20,16 @@ export default function OidcLoginProviders({ cfToken }: { cfToken?: string }) {
 				displayName="Discord"
 				apiProvider="discord"
 				icon={<IconBrandDiscord />}
-				cfToken={cfToken}
 			/>
 			<OidcProviderButton
 				displayName="Google"
 				apiProvider="google"
 				icon={<IconBrandGoogle />}
-				cfToken={cfToken}
 			/>
 			<OidcProviderButton
 				displayName="Microsoft"
 				apiProvider="microsoft"
 				icon={<IconBrandWindows />}
-				cfToken={cfToken}
 			/>
 		</Flex>
 	);
@@ -42,12 +39,10 @@ function OidcProviderButton({
 	displayName,
 	icon,
 	apiProvider,
-	cfToken,
 }: {
 	displayName: string;
 	icon: ReactElement;
 	apiProvider: string;
-	cfToken?: string;
 }) {
 	const theme = useMantineTheme();
 
@@ -58,14 +53,6 @@ function OidcProviderButton({
 			action={`${getApiDomain()}/api/auth/${apiProvider}/provider`}
 			method="POST"
 		>
-			{cfToken && (
-				<input
-					type="hidden"
-					name="cf-turnstile-response"
-					value={cfToken}
-				/>
-			)}
-
 			<Button
 				leftSection={icon}
 				rightSection={<IconExternalLink />}
@@ -75,7 +62,6 @@ function OidcProviderButton({
 				size="md"
 				color={theme.colors.blue[4]}
 				type="submit"
-				disabled={!cfToken}
 			>
 				<Text>Sign in with {displayName}</Text>
 			</Button>

@@ -33,6 +33,7 @@ function WatchListPage() {
 		<Flex p={'var(--content-side-padding)'} direction="column" gap="xl">
 			<Space />
 			<Title>Watch List</Title>
+			<Text>Add, manage, and delete your watch lists</Text>
 			<Button variant="outline" size="lg" onClick={addProductAlert}>
 				<Flex justify="center" gap="sm">
 					<IconPlus />
