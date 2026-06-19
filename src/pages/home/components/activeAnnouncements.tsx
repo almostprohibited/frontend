@@ -34,15 +34,12 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Stack>
-						<Text>
-							General Gun & Supply and Range Arts have been added
-							to the site!
-						</Text>
+						<Text>Tesro has been added to the site</Text>
 					</Stack>
 				);
 			},
-			date: 'June 11, 2026',
-			colour: theme.colors.yellow[4],
+			date: 'June 18, 2026',
+			colour: theme.colors.pink[4],
 			icon: <IconBuildingStore size="2rem" />,
 			shouldDisplay: () => true,
 		},

@@ -567,6 +567,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly Tesro = new Retailer(
+		'Tesro',
+		'Tesro',
+		'https://www.tesro.ca/',
+		'/retailers/tesro.png',
+		'#0067ab',
+		RetailerLocation.Ontario,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
