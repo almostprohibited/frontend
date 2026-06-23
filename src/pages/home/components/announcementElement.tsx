@@ -1,21 +1,21 @@
-import type { AnnouncementObject } from './announcements';
-import { Alert, Box, Text, useMantineTheme, Stack } from '@mantine/core';
+import {
+	Alert,
+	Box,
+	Text,
+	useMantineTheme,
+	Stack,
+	Progress,
+} from '@mantine/core';
+import type { AnnouncementObject } from './activeAnnouncements';
 
 export default function AnnouncementElement({
 	data,
+	progress,
 }: {
 	data: AnnouncementObject;
+	progress: number;
 }) {
 	const theme = useMantineTheme();
-	// const [progressBarLength, setProgressBarLength] = useState(100);
-
-	// useInterval(
-	// 	() => {
-	// 		setProgressBarLength(progressBarLength - 10);
-	// 	},
-	// 	100,
-	// 	{ autoInvoke: true },
-	// );
 
 	return (
 		<Alert
@@ -29,12 +29,6 @@ export default function AnnouncementElement({
 		>
 			<Stack>
 				<Box c={theme.colors.gray[4]}>{data.content()}</Box>
-				{/* <Progress
-    				mt="1rem"
-    				size="xs"
-    				color={data.colour}
-    				value={progressBarLength}
-    			/> */}
 				{data.date ? (
 					<Text size="xs" c="grey">
 						{data.date}
@@ -42,6 +36,12 @@ export default function AnnouncementElement({
 				) : (
 					<></>
 				)}
+				<Progress
+					size="xs"
+					color={data.colour}
+					value={progress}
+					animated
+				/>
 			</Stack>
 		</Alert>
 	);

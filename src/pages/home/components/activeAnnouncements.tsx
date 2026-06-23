@@ -5,7 +5,18 @@ import {
 	IconMessage,
 } from '@tabler/icons-react';
 import { Stack, Text, useMantineTheme } from '@mantine/core';
-import type { AnnouncementObject } from './announcements';
+
+const ANNOUNCEMENT_COUNTDOWN_MS_DEFAULT = 20_000;
+
+export interface AnnouncementObject {
+	title: string;
+	content: () => React.ReactNode;
+	date: string | undefined;
+	colour: string;
+	icon: React.ReactNode;
+	shouldDisplay: () => boolean;
+	timeout_ms: number;
+}
 
 export default function getActiveAnnouncements() {
 	const theme = useMantineTheme();
@@ -27,6 +38,7 @@ export default function getActiveAnnouncements() {
 			date: undefined,
 			colour: 'orange',
 			icon: <IconConfetti size="2rem" />,
+			timeout_ms: ANNOUNCEMENT_COUNTDOWN_MS_DEFAULT,
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
@@ -41,6 +53,7 @@ export default function getActiveAnnouncements() {
 			date: 'June 18, 2026',
 			colour: theme.colors.pink[4],
 			icon: <IconBuildingStore size="2rem" />,
+			timeout_ms: 10_000,
 			shouldDisplay: () => true,
 		},
 		{
@@ -65,6 +78,7 @@ export default function getActiveAnnouncements() {
 			date: 'Mar 21, 2026',
 			colour: theme.colors.teal[3],
 			icon: <IconMessage size="2rem" />,
+			timeout_ms: ANNOUNCEMENT_COUNTDOWN_MS_DEFAULT,
 			shouldDisplay: () => true,
 		},
 	];
