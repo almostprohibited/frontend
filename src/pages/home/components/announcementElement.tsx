@@ -36,12 +36,7 @@ export default function AnnouncementElement({
 				) : (
 					<></>
 				)}
-				<Progress
-					size="xs"
-					color={data.colour}
-					value={progress}
-					animated
-				/>
+				<Progress size="xs" color={data.colour} value={progress} />
 			</Stack>
 		</Alert>
 	);
