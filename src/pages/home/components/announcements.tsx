@@ -12,6 +12,10 @@ import { useEffect, useState } from 'react';
 import getActiveAnnouncements from './activeAnnouncements';
 import AnnouncementElement from './announcementElement';
 
+function lerp(start: number, end: number, progress: number) {
+	return end * progress + start * (1 - progress);
+}
+
 export default function Announcements() {
 	const announcements = getActiveAnnouncements();
 
@@ -20,16 +24,17 @@ export default function Announcements() {
 
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [progressBarLength, setProgressBarLength] = useState(100);
+	const [currentTime, setCurrentTime] = useState(Date.now());
 
 	const currentDelayMs = announcements[activeIndex].timeout_ms;
 
 	const progressBarInterval = useInterval(() => {
-		setProgressBarLength((prev) =>
-			Math.max(0, prev - 5000 / currentDelayMs),
+		setProgressBarLength(
+			lerp(100.0, 0.0, (Date.now() - currentTime) / currentDelayMs),
 		);
 
 		// will this destroy performance? I don't know
-		if (progressBarLength === 0) {
+		if (progressBarLength < 0.0) {
 			setActiveIndex((prev) => (prev + 1) % announcements.length);
 		}
 	}, 50);
@@ -37,6 +42,7 @@ export default function Announcements() {
 	useEffect(() => {
 		progressBarInterval.stop();
 
+		setCurrentTime(Date.now());
 		setProgressBarLength(100);
 
 		progressBarInterval.start();
