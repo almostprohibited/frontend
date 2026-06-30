@@ -55,7 +55,14 @@ export enum NotificationChannelStatus {
 	Pending = 'pending',
 }
 
+export enum ServiceType {
+	Google = 'google',
+	Email = 'email',
+	Microsoft = 'microsoft',
+}
+
 export interface NotificationChannel {
 	identifier: string;
 	status: NotificationChannelStatus;
+	service: ServiceType;
 }

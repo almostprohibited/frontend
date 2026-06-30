@@ -5,6 +5,9 @@ import type {
 	SearchApiResponse,
 } from './apiStructs';
 import { getApiDomain } from './environment';
+import { mutate } from 'swr';
+
+const GET_NOTIFICATION_CHANNELS = `${getApiDomain()}/api/notification/channels`;
 
 export function useSearchApi(params: string) {
 	const fetcher = (url: string) =>
@@ -36,10 +39,17 @@ export function useNotificationChannels() {
 					? 'include'
 					: 'same-origin',
 		}).then((response) => response.json());
-	const url = `${getApiDomain()}/api/notification/channels`;
 
-	return useSWRImmutable<Array<NotificationChannel>>(url, fetcher, {
-		refreshWhenOffline: false,
-		keepPreviousData: true,
-	});
+	return useSWRImmutable<Array<NotificationChannel>>(
+		GET_NOTIFICATION_CHANNELS,
+		fetcher,
+		{
+			refreshWhenOffline: false,
+			keepPreviousData: true,
+		},
+	);
+}
+
+export function updateNotificationChannels() {
+	mutate(GET_NOTIFICATION_CHANNELS);
 }
