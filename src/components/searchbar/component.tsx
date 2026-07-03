@@ -24,6 +24,7 @@ import PaginationButtons from './pagination';
 import type { SearchRouteSchema } from '@/routes';
 import RetailerSelector from './retailerSelector';
 import { useMobileView } from '@/utils/hooks/useMobileView';
+import { arrayEquals } from '@/utils/arrayEqual';
 
 const MAX_ITEMS_PER_PAGE = 32;
 
@@ -121,10 +122,14 @@ export default function SearchBar({
 	}
 
 	function shouldResetPage(oldParams: SearchRouteSchema): boolean {
+		console.log('oldParams.retailers || []', oldParams.retailers || []);
+		console.log('retailersValue', retailersValue);
+
 		return (
 			oldParams.query !== searchQuery ||
 			oldParams.sort !== sortValue ||
 			oldParams.category !== categoryValue ||
+			!arrayEquals(oldParams.retailers || [], retailersValue) ||
 			oldParams['min-price'] !== minPriceValue ||
 			oldParams['max-price'] !== maxPriceValue
 		);
@@ -133,6 +138,12 @@ export default function SearchBar({
 	useEffect(() => {
 		sendQuery();
 	}, [sortValue, categoryValue, pageValue]);
+
+	useEffect(() => {
+		if (searchParams?.page !== pageValue) {
+			updatePageValue(searchParams?.page);
+		}
+	}, [searchParams]);
 
 	useEffect(() => {
 		updateShowEmptyInputError(false);
