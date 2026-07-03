@@ -122,9 +122,6 @@ export default function SearchBar({
 	}
 
 	function shouldResetPage(oldParams: SearchRouteSchema): boolean {
-		console.log('oldParams.retailers || []', oldParams.retailers || []);
-		console.log('retailersValue', retailersValue);
-
 		return (
 			oldParams.query !== searchQuery ||
 			oldParams.sort !== sortValue ||
@@ -141,7 +138,7 @@ export default function SearchBar({
 
 	useEffect(() => {
 		if (searchParams?.page !== pageValue) {
-			updatePageValue(searchParams?.page);
+			updatePageValue(searchParams?.page || 0);
 		}
 	}, [searchParams]);
 
