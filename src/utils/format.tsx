@@ -10,3 +10,17 @@ export function centsToHumanString(price: number): string {
 
 	return `${dollars}.${cents}`;
 }
+
+export function convertTimestampToDate(timestamp: number) {
+	return new Date(timestamp * 1000);
+}
+
+export function convertTimestampToHumanReadable(
+	timestamp: number,
+	options: Intl.DateTimeFormatOptions,
+): string {
+	return convertTimestampToDate(timestamp).toLocaleDateString(
+		'en-US',
+		options,
+	);
+}
