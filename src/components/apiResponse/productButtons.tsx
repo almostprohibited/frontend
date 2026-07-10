@@ -1,10 +1,10 @@
 import { Button, ButtonGroup, useMantineTheme } from '@mantine/core';
 import { IconAlertTriangle, IconChartHistogram } from '@tabler/icons-react';
-import PriceHistory from './priceHistory';
 import type { CrawlResult } from '@/utils/apiStructs';
 import { useDisclosure } from '@mantine/hooks';
 import { useIsBeta } from '@/utils/hooks/useIsBeta';
 import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
+import PriceHistory from './priceHistory/component';
 
 export default function ProductButtons({
 	crawlResult,
