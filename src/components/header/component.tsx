@@ -39,7 +39,7 @@ export default function Header() {
 				<Box>
 					{!isBeta ? (
 						<Tooltip label="Github source code">
-							{/* this does not use ClearLink as it messes with the tooltip */}
+							{/* this does not use CleanLink as it messes with the tooltip */}
 							<a
 								href="https://github.com/almostprohibited"
 								target="_blank"
