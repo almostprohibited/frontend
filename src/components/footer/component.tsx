@@ -2,6 +2,7 @@ import { Divider, Flex, useMantineTheme } from '@mantine/core';
 import styles from './component.module.css';
 import { Link } from '@tanstack/react-router';
 import { IconBrandGithub, IconCoffee } from '@tabler/icons-react';
+import { CleanLink } from '../CleanLink';
 
 const ICON_SIZE = '1.2rem';
 
@@ -22,10 +23,9 @@ export default function Footer() {
 					<Link to="/privacy/">{'[ Privacy Policy ]'}</Link>
 				</Flex>
 				<Flex direction="column" w="100%" gap="md" align="end">
-					<a
-						href="https://buymeacoffee.com/almostprohibited"
-						target="_blank"
-						referrerPolicy="no-referrer"
+					<CleanLink
+						link="https://buymeacoffee.com/almostprohibited"
+						clearStyle
 					>
 						{'[ '}
 						<IconCoffee
@@ -33,11 +33,10 @@ export default function Footer() {
 							style={{ verticalAlign: 'text-top' }}
 						/>
 						{' Buy me a coffee ]'}
-					</a>
-					<a
-						href="https://github.com/almostprohibited"
-						target="_blank"
-						referrerPolicy="no-referrer"
+					</CleanLink>
+					<CleanLink
+						link="https://github.com/almostprohibited"
+						clearStyle
 					>
 						{'[ '}
 						<IconBrandGithub
@@ -45,7 +44,7 @@ export default function Footer() {
 							style={{ verticalAlign: 'text-top' }}
 						/>
 						{' Source code ]'}
-					</a>
+					</CleanLink>
 				</Flex>
 			</Flex>
 		</>

@@ -5,6 +5,7 @@ import {
 	IconMessage,
 } from '@tabler/icons-react';
 import { Stack, Text, useMantineTheme } from '@mantine/core';
+import { CleanLink } from '@/components/CleanLink';
 
 const ANNOUNCEMENT_COUNTDOWN_MS_DEFAULT = 20_000;
 
@@ -46,14 +47,27 @@ export default function getActiveAnnouncements() {
 			content: () => {
 				return (
 					<Stack>
-						<Text>Tesro has been added to the site</Text>
+						<Text>
+							<CleanLink link="https://aagcanada.ca/">
+								AAG Canada
+							</CleanLink>
+							,{' '}
+							<CleanLink link="https://sightsandarms.com/">
+								Sight And Arms
+							</CleanLink>
+							, and{' '}
+							<CleanLink link="https://swampdonkeyoutdoors.ca/">
+								Swamp Donkey Outdoors
+							</CleanLink>{' '}
+							have been added to the site!
+						</Text>
 					</Stack>
 				);
 			},
-			date: 'June 18, 2026',
-			colour: theme.colors.pink[4],
+			date: 'July 20, 2026',
+			colour: theme.colors.teal[8],
 			icon: <IconBuildingStore size="2rem" />,
-			timeout_ms: 10_000,
+			timeout_ms: 30_000,
 			shouldDisplay: () => true,
 		},
 		{

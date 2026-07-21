@@ -577,6 +577,36 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly SightsAndArms = new Retailer(
+		'Sights And Arms',
+		'SightsAndArms',
+		'https://sightsandarms.com/',
+		'/retailers/sights-and-arms.png',
+		'#4f4f4f',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
+	static readonly AagCanada = new Retailer(
+		'AAG Canada',
+		'AagCanada',
+		'https://aagcanada.ca/',
+		'/retailers/aag-canada.png',
+		'#121212',
+		RetailerLocation.Ontario,
+		'#f4ba26',
+	);
+
+	static readonly SwampDonkeyOutdoors = new Retailer(
+		'Swamp Donkey Outdoors',
+		'SwampDonkeyOutdoors',
+		'https://swampdonkeyoutdoors.ca/',
+		'/retailers/swamp-donkey.svg',
+		'#092539',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
