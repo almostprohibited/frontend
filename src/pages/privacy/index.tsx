@@ -1,5 +1,5 @@
+import { CleanLink } from '@/components/CleanLink';
 import {
-	Anchor,
 	Box,
 	Code,
 	List,
@@ -22,10 +22,16 @@ function PrivacyPage() {
 				{'Privacy Policy'}
 			</Title>
 			<Space h="xl" />
-			<Text size="sm" c="dark">
-				{'Last updated: April 30th, 2026'}
-			</Text>
-			<Space h="md" />
+			<Stack c="dark">
+				<Text size="sm">
+					View previous changes on{' '}
+					<CleanLink link="https://github.com/almostprohibited/frontend/commits/develop/src/pages/privacy/index.tsx">
+						GitHub
+					</CleanLink>
+				</Text>
+				<Text size="sm">{'Last updated: July 27th, 2026'}</Text>
+			</Stack>
+			<Space h="xl" />
 			<Stack gap="xl">
 				<Stack>
 					<Title order={2} c="lightgrey">
@@ -58,12 +64,9 @@ function PrivacyPage() {
 					</Text>
 					<Text>
 						{'Please visit '}
-						<Anchor
-							href="https://www.cloudflare.com/privacypolicy/"
-							target="_blank"
-						>
-							{'https://www.cloudflare.com/privacypolicy/'}
-						</Anchor>
+						<CleanLink link="https://www.cloudflare.com/privacypolicy/">
+							https://www.cloudflare.com/privacypolicy/
+						</CleanLink>
 						{
 							' for more infomation about what data is retained on their servers.'
 						}
@@ -89,10 +92,10 @@ function PrivacyPage() {
 						</ListItem>
 					</List>
 					<Text>
-						The URI path that was requested from you on my servers
-						for ninety (90) days. This does not include IP address,
-						user agents, actual parameter contents, or other
-						identifying information.
+						The URI path that was requested from you will be saved
+						as a data point on my servers for ninety (90) days. This
+						does not include IP address, user agents, actual
+						parameter contents, or other identifying information.
 					</Text>
 				</Stack>
 				<Stack>
