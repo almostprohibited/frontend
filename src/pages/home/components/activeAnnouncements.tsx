@@ -3,6 +3,7 @@ import {
 	IconBuildingStore,
 	IconConfetti,
 	IconMessage,
+	IconZoomQuestion,
 } from '@tabler/icons-react';
 import { Stack, Text, useMantineTheme } from '@mantine/core';
 import { CleanLink } from '@/components/CleanLink';
@@ -43,6 +44,33 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
+			title: 'Missing Shopify Retailer Data',
+			content: () => {
+				return (
+					<Stack>
+						<Text>
+							I'm aware that some Shopify based retailers (such as
+							AAG Canada, InterSurplus, and Uxbridge Arms) may
+							have results one day, and the next day not refresh
+							correctly.
+						</Text>
+						<Text>
+							Shopify has stepped up their rate limiting against
+							non-registered web crawlers (eg. my crawler) in
+							broader attempt to stop bots. Looking at options to
+							fix this, in the mean time we'll just have to deal
+							with it.
+						</Text>
+					</Stack>
+				);
+			},
+			date: 'July 27, 2026',
+			colour: theme.colors.pink[5],
+			icon: <IconZoomQuestion size="2rem" />,
+			timeout_ms: 30_000,
+			shouldDisplay: () => true,
+		},
+		{
 			title: 'Recently Added Retailers',
 			content: () => {
 				return (
@@ -67,7 +95,7 @@ export default function getActiveAnnouncements() {
 			date: 'July 20, 2026',
 			colour: theme.colors.teal[8],
 			icon: <IconBuildingStore size="2rem" />,
-			timeout_ms: 30_000,
+			timeout_ms: 20_000,
 			shouldDisplay: () => true,
 		},
 		{
