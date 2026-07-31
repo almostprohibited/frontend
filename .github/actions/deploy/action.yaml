@@ -23,6 +23,8 @@ runs:
       run: |
         set -euo pipefail
 
+        shopt -s dotglob nullglob
+        
         mkdir -p ${{ inputs.workspace-path }}/web
 
         echo "Removing old files"
