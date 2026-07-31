@@ -29,6 +29,10 @@ runs:
       id: upload
       with:
         name: built-files
-        path: dist/*
+        include-hidden-files: true
+        path: |
+          dist/*
+          !dist/**/.*
+          dist/.well-known
         if-no-files-found: error
         retention-days: 3
