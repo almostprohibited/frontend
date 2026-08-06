@@ -1,3 +1,4 @@
+import { CleanLink } from '@/components/CleanLink';
 import { ContactForm } from '@/pages/contact/components/contactForm';
 import { useMobileView } from '@/utils/hooks/useMobileView';
 import { Box, Code, Flex, Stack, Text, Title } from '@mantine/core';
@@ -48,6 +49,20 @@ function ContactPage() {
 								'almostprohibited/1.0 (+https://almostprohibited.ca/contact/; hello@almostprohibited.ca)'
 							}
 						</Code>
+						<Text>
+							For those that are tech savvy, I sign crawling
+							related requests according to the IETF Web Bot Auth{' '}
+							<CleanLink link="https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/">
+								directory
+							</CleanLink>{' '}
+							and{' '}
+							<CleanLink link="https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/">
+								protocol
+							</CleanLink>{' '}
+							drafts. Please use these (draft) standards to
+							validate requests instead of relying on user agents
+							and IP addresses.
+						</Text>
 						<Text>
 							{"The crawler won't read any "}
 							<Code>{'/robots.txt'}</Code>
