@@ -59,9 +59,8 @@ function ContactPage() {
 							<CleanLink link="https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/">
 								protocol
 							</CleanLink>{' '}
-							drafts. Please use these (draft) standards to
-							validate requests instead of relying on user agents
-							and IP addresses.
+							drafts. Please use this draft to validate requests
+							instead of relying on user agents and IP addresses.
 						</Text>
 						<Text>
 							{"The crawler won't read any "}
