@@ -607,6 +607,26 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly DsTactical = new Retailer(
+		'DS Tactical',
+		'DsTactical',
+		'https://dstactical.com/',
+		'/retailers/dstactical.png',
+		'#333333',
+		RetailerLocation.BritishColumbia,
+		'#fff',
+	);
+
+	static readonly PartsOnly = new Retailer(
+		'Parts Only Canada',
+		'PartsOnly',
+		'https://partsonly.ca/',
+		'/retailers/partsonly.png',
+		'#731d20',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

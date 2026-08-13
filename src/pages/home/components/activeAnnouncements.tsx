@@ -44,53 +44,25 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
-			title: 'Fixed: Missing Shopify Retailer Data',
-			content: () => {
-				return (
-					<Stack>
-						<Text>
-							If you were waiting for a fix, thanks for standing
-							by - Shopify based retailers should start to index
-							again.
-						</Text>
-						<Text>
-							As always, if you find anything weird that doesn't
-							fix itself or have retailer suggestions, please
-							reach out.
-						</Text>
-					</Stack>
-				);
-			},
-			date: 'August 5, 2026',
-			colour: theme.colors.yellow[5],
-			icon: <IconZoomQuestion size="2rem" />,
-			timeout_ms: 20_000,
-			shouldDisplay: () => true,
-		},
-		{
 			title: 'Recently Added Retailers',
 			content: () => {
 				return (
 					<Stack>
 						<Text>
-							<CleanLink link="https://aagcanada.ca/">
-								AAG Canada
+							<CleanLink link="https://dstactical.com/">
+								DS Tactical
 							</CleanLink>
-							,{' '}
-							<CleanLink link="https://sightsandarms.com/">
-								Sight And Arms
-							</CleanLink>
-							, and{' '}
-							<CleanLink link="https://swampdonkeyoutdoors.ca/">
-								Swamp Donkey Outdoors
+							{' and '}
+							<CleanLink link="https://partsonly.ca/">
+								Parts Only Canada
 							</CleanLink>{' '}
 							have been added to the site!
 						</Text>
 					</Stack>
 				);
 			},
-			date: 'July 20, 2026',
-			colour: theme.colors.teal[8],
+			date: 'August 12, 2026',
+			colour: theme.colors.indigo[4],
 			icon: <IconBuildingStore size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
