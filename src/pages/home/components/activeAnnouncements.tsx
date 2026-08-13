@@ -3,7 +3,6 @@ import {
 	IconBuildingStore,
 	IconConfetti,
 	IconMessage,
-	IconZoomQuestion,
 } from '@tabler/icons-react';
 import { Stack, Text, useMantineTheme } from '@mantine/core';
 import { CleanLink } from '@/components/CleanLink';
