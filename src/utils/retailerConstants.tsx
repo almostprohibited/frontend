@@ -627,6 +627,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly Liangjian = new Retailer(
+		'Liangjian Outdoors',
+		'Liangjian',
+		'https://liangjian.ca/',
+		'/retailers/liangjian.jpg',
+		'#535a5e',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

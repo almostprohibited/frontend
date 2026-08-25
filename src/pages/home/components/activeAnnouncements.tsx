@@ -48,20 +48,20 @@ export default function getActiveAnnouncements() {
 				return (
 					<Stack>
 						<Text>
-							<CleanLink link="https://dstactical.com/">
-								DS Tactical
-							</CleanLink>
-							{' and '}
-							<CleanLink link="https://partsonly.ca/">
-								Parts Only Canada
+							Thanks for sticking around, we've hit the big 60 for
+							supported and crawled retailers!
+						</Text>
+						<Text>
+							<CleanLink link="https://liangjian.ca/">
+								Liangjian Outdoors
 							</CleanLink>{' '}
-							have been added to the site!
+							has been added to the site.
 						</Text>
 					</Stack>
 				);
 			},
-			date: 'August 12, 2026',
-			colour: theme.colors.indigo[4],
+			date: 'August 25, 2026',
+			colour: theme.colors.yellow[4],
 			icon: <IconBuildingStore size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
