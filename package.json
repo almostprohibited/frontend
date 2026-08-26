@@ -19,7 +19,7 @@
 		"@marsidev/react-turnstile": "^1.6.0",
 		"@tabler/icons-react": "^3.46.0",
 		"@tanstack/react-devtools": "^0.10.10",
-		"@tanstack/react-router": "^1.170.27",
+		"@tanstack/react-router": "^1.170.31",
 		"@tanstack/react-router-devtools": "^1.167.1",
 		"react": "^19.2.8",
 		"react-cookie": "^8.1.2",
@@ -41,7 +41,7 @@
 		"prettier": "^3.9.6",
 		"typescript": "^7.0.2",
 		"vite": "^8.2.1",
-		"vitest": "^4.1.10",
-		"web-vitals": "^6.1.0"
+		"vitest": "^4.1.11",
+		"web-vitals": "^6.1.1"
 	}
 }
