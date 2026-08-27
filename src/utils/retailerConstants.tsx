@@ -637,6 +637,16 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly NorthernElite = new Retailer(
+		'Northern Elite Firearms',
+		'NorthernElite',
+		'https://northernelitefirearms.ca/',
+		'/retailers/northernelite.png',
+		'#ff0000',
+		RetailerLocation.Saskatchewan,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -54,14 +54,19 @@ export default function getActiveAnnouncements() {
 						<Text>
 							<CleanLink link="https://liangjian.ca/">
 								Liangjian Outdoors
-							</CleanLink>{' '}
-							has been added to the site.
+							</CleanLink>
+							{' (Alberta) and '}
+							<CleanLink link="https://northernelitefirearms.ca/">
+								Northern Elite Firearms
+							</CleanLink>
+							{' (Saskatchewan) '}
+							have been added to the site.
 						</Text>
 					</Stack>
 				);
 			},
-			date: 'August 25, 2026',
-			colour: theme.colors.yellow[4],
+			date: 'August 26, 2026',
+			colour: theme.colors.yellow[7],
 			icon: <IconBuildingStore size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
