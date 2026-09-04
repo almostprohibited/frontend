@@ -12,14 +12,14 @@
 		"check": "prettier --write . && eslint --fix"
 	},
 	"dependencies": {
-		"@mantine/charts": "^9.5.1",
-		"@mantine/core": "^9.5.1",
-		"@mantine/hooks": "^9.5.1",
-		"@mantine/notifications": "^9.5.1",
-		"@marsidev/react-turnstile": "^1.6.0",
+		"@mantine/charts": "^9.5.2",
+		"@mantine/core": "^9.5.2",
+		"@mantine/hooks": "^9.5.2",
+		"@mantine/notifications": "^9.5.2",
+		"@marsidev/react-turnstile": "^1.6.1",
 		"@tabler/icons-react": "^3.46.0",
-		"@tanstack/react-devtools": "^0.10.10",
-		"@tanstack/react-router": "^1.170.31",
+		"@tanstack/react-devtools": "^0.10.12",
+		"@tanstack/react-router": "^1.170.32",
 		"@tanstack/react-router-devtools": "^1.167.1",
 		"react": "^19.2.8",
 		"react-cookie": "^8.1.2",
@@ -32,16 +32,16 @@
 	"devDependencies": {
 		"@tanstack/eslint-config": "^0.4.0",
 		"@testing-library/dom": "^10.4.0",
-		"@testing-library/react": "^16.3.2",
-		"@types/node": "^26.2.0",
+		"@testing-library/react": "^16.3.3",
+		"@types/node": "^26.4.0",
 		"@types/react": "^19.2.18",
-		"@types/react-dom": "^19.2.4",
-		"@vitejs/plugin-react": "^6.0.5",
+		"@types/react-dom": "^19.2.5",
+		"@vitejs/plugin-react": "^6.1.1",
 		"jsdom": "^30.0.1",
 		"prettier": "^3.9.6",
 		"typescript": "^7.0.2",
-		"vite": "^8.2.1",
+		"vite": "^8.2.2",
 		"vitest": "^4.1.11",
-		"web-vitals": "^6.1.1"
+		"web-vitals": "^6.2.1"
 	}
 }
