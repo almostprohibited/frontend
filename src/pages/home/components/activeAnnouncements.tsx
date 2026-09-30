@@ -1,6 +1,7 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
 	IconBuildingStore,
+	IconCloudCancel,
 	IconConfetti,
 	IconMessage,
 } from '@tabler/icons-react';
@@ -41,6 +42,31 @@ export default function getActiveAnnouncements() {
 			icon: <IconConfetti size="2rem" />,
 			timeout_ms: ANNOUNCEMENT_COUNTDOWN_MS_DEFAULT,
 			shouldDisplay: () => isBirthdayWeek(),
+		},
+		{
+			title: 'Latulippe - Temporarily Down',
+			content: () => {
+				return (
+					<Stack>
+						<Text>
+							For now, Latulippe's (Quebec) results will not show
+							up on the site. This is due to their product pages
+							being protected by Cloudflare's managed challenge
+							(that "Performing security validation" check).
+						</Text>
+						<Text>
+							In short, my crawler does not solve or handle those
+							challenges since it wasn't needed at the time and I
+							never implemented it. I'll fix this at some point.
+						</Text>
+					</Stack>
+				);
+			},
+			date: 'September 29, 2026',
+			colour: theme.colors.red[4],
+			icon: <IconCloudCancel size="2rem" />,
+			timeout_ms: 20_000,
+			shouldDisplay: () => true,
 		},
 		{
 			title: 'Recently Added Retailers',
