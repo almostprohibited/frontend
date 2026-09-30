@@ -219,11 +219,7 @@ export function PriceGraph({ graphData }: { graphData: Array<HistoryPrice> }) {
 					viewportRef={scrollViewport}
 				>
 					<Box
-						w={
-							displayPoints.length > 30
-								? `${0.3 * displayPoints.length}rem`
-								: '100%'
-						}
+						w={`max(${0.3 * displayPoints.length}rem, 100%)`}
 						mb="1rem"
 					>
 						<LineChart

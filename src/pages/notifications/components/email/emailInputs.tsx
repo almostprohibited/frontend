@@ -45,7 +45,7 @@ export function EmailInputs() {
 			notifications.show({
 				title: response.status,
 				message: response.statusText,
-				autoClose: false,
+				autoClose: 3000,
 			});
 
 			// TODO: consider only updating local notification methods
