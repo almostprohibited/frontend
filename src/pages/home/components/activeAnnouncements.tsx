@@ -44,6 +44,31 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
+			title: 'Recently Added Retailers',
+			content: () => {
+				return (
+					<Stack>
+						<Text>
+							<CleanLink link="https://gobigtactical.ca/">
+								Go Big Tactical
+							</CleanLink>
+							{' (BC) and '}
+							<CleanLink link="https://www.gun-shop.ca/">
+								Wild West
+							</CleanLink>
+							{' (Alberta) '}
+							have been added to the site!
+						</Text>
+					</Stack>
+				);
+			},
+			date: 'October 4, 2026',
+			colour: theme.colors.green[5],
+			icon: <IconBuildingStore size="2rem" />,
+			timeout_ms: 20_000,
+			shouldDisplay: () => true,
+		},
+		{
 			title: 'Latulippe - Temporarily Down',
 			content: () => {
 				return (
@@ -65,35 +90,6 @@ export default function getActiveAnnouncements() {
 			date: 'September 29, 2026',
 			colour: theme.colors.red[4],
 			icon: <IconCloudCancel size="2rem" />,
-			timeout_ms: 20_000,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'Recently Added Retailers',
-			content: () => {
-				return (
-					<Stack>
-						<Text>
-							Thanks for sticking around, we've hit the big 60 for
-							supported and crawled retailers!
-						</Text>
-						<Text>
-							<CleanLink link="https://liangjian.ca/">
-								Liangjian Outdoors
-							</CleanLink>
-							{' (Alberta) and '}
-							<CleanLink link="https://northernelitefirearms.ca/">
-								Northern Elite Firearms
-							</CleanLink>
-							{' (Saskatchewan) '}
-							have been added to the site.
-						</Text>
-					</Stack>
-				);
-			},
-			date: 'August 26, 2026',
-			colour: theme.colors.yellow[7],
-			icon: <IconBuildingStore size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
 		},

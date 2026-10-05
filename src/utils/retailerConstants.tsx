@@ -647,6 +647,26 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly WildWest = new Retailer(
+		'Wild West',
+		'WildWest',
+		'https://www.gun-shop.ca/',
+		'/retailers/wild-west.png',
+		'#1C263C',
+		RetailerLocation.Alberta,
+		'#fff',
+	);
+
+	static readonly GoBigTactical = new Retailer(
+		'Go Big Tactical',
+		'GoBigTactical',
+		'https://gobigtactical.ca/',
+		'/retailers/go-big-tactical.png',
+		'#d91536',
+		RetailerLocation.BritishColumbia,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
