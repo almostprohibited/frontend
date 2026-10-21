@@ -1,6 +1,5 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
-	IconAlertTriangleFilled,
 	IconBuildingStore,
 	IconCloudCancel,
 	IconConfetti,
@@ -43,24 +42,6 @@ export default function getActiveAnnouncements() {
 			icon: <IconConfetti size="2rem" />,
 			timeout_ms: ANNOUNCEMENT_COUNTDOWN_MS_DEFAULT,
 			shouldDisplay: () => isBirthdayWeek(),
-		},
-		{
-			title: 'Server Maintenance',
-			content: () => {
-				return (
-					<Text>
-						Sorry about the late notice, but my servers are going to
-						be restarting between 5:00PM-6:00PM PT October 20th to
-						apply security fixes. You may notice some oddities
-						during this time.
-					</Text>
-				);
-			},
-			date: 'October 20, 2026',
-			colour: theme.colors.red[8],
-			icon: <IconAlertTriangleFilled size="2rem" />,
-			timeout_ms: 20_000,
-			shouldDisplay: () => true,
 		},
 		{
 			title: 'Recently Added Retailers',
