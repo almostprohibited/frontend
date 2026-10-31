@@ -26,6 +26,7 @@ function Home() {
 				<Box
 					ta={'center'}
 					pt={'2rem'}
+					p={'var(--content-side-padding)'}
 					pb={'2rem'}
 					w={'100%'}
 					bg={theme.colors.indigo[9]}
