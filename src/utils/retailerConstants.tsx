@@ -667,6 +667,26 @@ export class RetailerEnum {
 		'#fff',
 	);
 
+	static readonly NorthProSports = new Retailer(
+		'North Pro Sports',
+		'NorthProSports',
+		'https://northprosports.com/',
+		'/retailers/north-pro-sports.png',
+		'#a40d08',
+		RetailerLocation.Saskatchewan,
+		'#fff',
+	);
+
+	static readonly TigerArms = new Retailer(
+		'Tiger Arms',
+		'TigerArms',
+		'https://tigerarms.ca/',
+		'/retailers/tiger-arms.png',
+		'#455026',
+		RetailerLocation.BritishColumbia,
+		'#fff',
+	);
+
 	private constructor(
 		private readonly key: string,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

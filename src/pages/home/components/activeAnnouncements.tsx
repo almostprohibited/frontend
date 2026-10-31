@@ -49,46 +49,45 @@ export default function getActiveAnnouncements() {
 				return (
 					<Stack>
 						<Text>
-							<CleanLink link="https://gobigtactical.ca/">
-								Go Big Tactical
+							<CleanLink link="https://northprosports.com/">
+								North Pro Sports
 							</CleanLink>
-							{' (BC) and '}
-							<CleanLink link="https://www.gun-shop.ca/">
-								Wild West
+							{' (Saskatchewan) and '}
+							<CleanLink link="https://tigerarms.ca">
+								Tiger Arms
 							</CleanLink>
-							{' (Alberta) '}
+							{' (BC) '}
 							have been added to the site!
 						</Text>
 					</Stack>
 				);
 			},
-			date: 'October 4, 2026',
-			colour: theme.colors.green[5],
+			date: 'October 30, 2026',
+			colour: theme.colors.grape[8],
 			icon: <IconBuildingStore size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
 		},
 		{
-			title: 'Latulippe - Temporarily Down',
+			title: 'Cloudflare - Update',
 			content: () => {
 				return (
 					<Stack>
 						<Text>
-							For now, Latulippe's (Quebec) results will not show
-							up on the site. This is due to their product pages
-							being protected by Cloudflare's managed challenge
-							(that "Performing security validation" check).
+							I have a fix that is held together by duct tape.
+							Some of the retailers that have been out of action
+							should be crawling again.
 						</Text>
 						<Text>
-							In short, my crawler does not solve or handle those
-							challenges since it wasn't needed at the time and I
-							never implemented it. I'll fix this at some point.
+							We'll see how long that solution lasts. In the
+							meantime I'll try to patch it up so that it's not as
+							brittle, but that fix may be here to stay.
 						</Text>
 					</Stack>
 				);
 			},
-			date: 'September 29, 2026',
-			colour: theme.colors.red[4],
+			date: 'October 30, 2026',
+			colour: theme.colors.teal[8],
 			icon: <IconCloudCancel size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
