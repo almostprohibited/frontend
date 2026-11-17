@@ -14,8 +14,7 @@ const metaTags = [
 	// },
 	{
 		name: 'description',
-		content:
-			"Canada's upcoming aggregator for firearms, parts, and accessories",
+		content: "Canada's aggregator for firearms, parts, and accessories",
 	},
 	{
 		name: 'viewport',
@@ -39,8 +38,7 @@ const metaTags = [
 	},
 	{
 		property: 'og:description',
-		content:
-			"Canada's upcoming aggregator for firearms, parts, and accessories",
+		content: "Canada's aggregator for firearms, parts, and accessories",
 	},
 	{
 		property: 'og:image',

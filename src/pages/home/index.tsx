@@ -36,7 +36,7 @@ function Home() {
 					<Space h={'lg'} />
 					<Text>
 						{
-							"Canada's upcoming aggregator for firearms, parts, and accessories"
+							"Canada's aggregator for firearms, parts, and accessories"
 						}
 					</Text>
 				</Box>
