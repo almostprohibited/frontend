@@ -66,3 +66,16 @@ export interface NotificationChannel {
 	status: NotificationChannelStatus;
 	service: ServiceType;
 }
+
+export interface RetailerStatusApiResponse {
+	retailer: string;
+	counts: RetailerStatusCountApiResponse;
+	successful: boolean;
+	timestamp: number;
+}
+
+export interface RetailerStatusCountApiResponse {
+	firearms: number;
+	other: number;
+	ammo: number;
+}

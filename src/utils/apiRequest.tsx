@@ -2,6 +2,7 @@ import useSWRImmutable from 'swr/immutable';
 import type {
 	HistoryApiResponse,
 	NotificationChannel,
+	RetailerStatusApiResponse,
 	SearchApiResponse,
 } from './apiStructs';
 import { getApiDomain } from './environment';
@@ -29,6 +30,21 @@ export function useHistoryApi(objectId: string) {
 		refreshWhenOffline: false,
 		keepPreviousData: true,
 	});
+}
+
+export function useRetailersStatusApi() {
+	const fetcher = (url: string) =>
+		fetch(url).then((response) => response.json());
+	const url = `${getApiDomain()}/api/retailers/status`;
+
+	return useSWRImmutable<Record<string, RetailerStatusApiResponse>>(
+		url,
+		fetcher,
+		{
+			refreshWhenOffline: false,
+			keepPreviousData: true,
+		},
+	);
 }
 
 export function useNotificationChannels() {
