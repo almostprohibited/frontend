@@ -25,6 +25,8 @@ import type { SearchRouteSchema } from '@/routes';
 import RetailerSelector from './retailerSelector';
 import { useMobileView } from '@/utils/hooks/useMobileView';
 import { arrayEquals } from '@/utils/arrayEqual';
+import { useIsBeta } from '@/utils/hooks/useIsBeta';
+import { AmmoCount } from './ammoCount';
 
 const MAX_ITEMS_PER_PAGE = 32;
 
@@ -39,6 +41,7 @@ export default function SearchBar({
 }) {
 	const theme = useMantineTheme();
 	const isMobile = useMobileView();
+	const isBeta = useIsBeta();
 
 	const navigateSearch = useNavigate({ from: '/search' });
 	const currentRoute = useLocation().pathname;
@@ -85,6 +88,8 @@ export default function SearchBar({
 		retailersValue.length > 0 ||
 		minPriceValue !== undefined ||
 		maxPriceValue !== undefined;
+
+	const fieldSetWidth = isMobile ? '100%' : '49%';
 
 	function sendQuery(forceSend: boolean = false) {
 		if (forceSend || currentRoute !== '/') {
@@ -201,8 +206,17 @@ export default function SearchBar({
 				</Group>
 
 				<Collapse mt="1rem" expanded={dropDownVisible}>
-					<Flex gap="md" direction={isMobile ? 'column' : 'row'}>
-						<Fieldset disabled={isLoading} legend="Price" w="100%">
+					<Flex
+						gap="md"
+						direction={isMobile ? 'column' : 'row'}
+						wrap="wrap"
+						justify="space-between"
+					>
+						<Fieldset
+							disabled={isLoading}
+							legend="Price"
+							w={fieldSetWidth}
+						>
 							<Flex gap="md">
 								<FormattedNumberInput
 									value={minPriceValue}
@@ -219,13 +233,24 @@ export default function SearchBar({
 						<Fieldset
 							disabled={isLoading}
 							legend="Retailers"
-							w="100%"
+							w={fieldSetWidth}
 						>
 							<RetailerSelector
 								value={retailersValue}
 								setValue={updateRetailersValue}
 							/>
 						</Fieldset>
+						{isBeta ? (
+							<Fieldset
+								disabled={isLoading}
+								legend="Ammo Count"
+								w={fieldSetWidth}
+							>
+								<AmmoCount />
+							</Fieldset>
+						) : (
+							<></>
+						)}
 					</Flex>
 				</Collapse>
 			</Box>
