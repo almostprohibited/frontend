@@ -1,9 +1,9 @@
 import { getYearsOld, isBirthdayWeek } from '@/utils/birthday';
 import {
 	IconBuildingStore,
-	IconCloudCancel,
 	IconConfetti,
 	IconMessage,
+	IconPalette,
 } from '@tabler/icons-react';
 import { Stack, Text, useMantineTheme } from '@mantine/core';
 import { CleanLink } from '@/components/CleanLink';
@@ -44,6 +44,35 @@ export default function getActiveAnnouncements() {
 			shouldDisplay: () => isBirthdayWeek(),
 		},
 		{
+			title: 'Retailer Card Status',
+			content: () => {
+				return (
+					<Stack>
+						<Text>
+							The retailer cards just below this announcement has
+							gotten a face lift!
+						</Text>
+						<Text>
+							The name of the retailers now uses the same
+							background and colour that the results use to keep
+							things consistent.
+						</Text>
+						<Text>
+							Along with the colour change, the latest crawl
+							status is now shown for each retailer. You can find
+							a basic breakdown of product count, and whether or
+							not my crawlers were successful that night.
+						</Text>
+					</Stack>
+				);
+			},
+			date: 'November 18, 2026',
+			colour: theme.colors.cyan[8],
+			icon: <IconPalette size="2rem" />,
+			timeout_ms: 45_000,
+			shouldDisplay: () => true,
+		},
+		{
 			title: 'Recently Added Retailers',
 			content: () => {
 				return (
@@ -65,30 +94,6 @@ export default function getActiveAnnouncements() {
 			date: 'October 30, 2026',
 			colour: theme.colors.grape[8],
 			icon: <IconBuildingStore size="2rem" />,
-			timeout_ms: 20_000,
-			shouldDisplay: () => true,
-		},
-		{
-			title: 'Cloudflare - Update',
-			content: () => {
-				return (
-					<Stack>
-						<Text>
-							I have a fix that is held together by duct tape.
-							Some of the retailers that have been out of action
-							should be crawling again.
-						</Text>
-						<Text>
-							We'll see how long that solution lasts. In the
-							meantime I'll try to patch it up so that it's not as
-							brittle, but that fix may be here to stay.
-						</Text>
-					</Stack>
-				);
-			},
-			date: 'October 30, 2026',
-			colour: theme.colors.teal[8],
-			icon: <IconCloudCancel size="2rem" />,
 			timeout_ms: 20_000,
 			shouldDisplay: () => true,
 		},

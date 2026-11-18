@@ -18,10 +18,10 @@ import {
 } from '@mantine/core';
 
 import './styles.css';
-import { RetailerNameContainer } from '../retailerNameContainer';
 import type { Retailer } from '@/utils/retailerConstants';
 import { PriceGraph } from './priceGraph';
 import { HistoricalPrices } from './historicalPrices';
+import { RetailerNameContainer } from '@/components/RetailerNameContainer';
 
 export default function PriceHistory({
 	isGraphOpen,

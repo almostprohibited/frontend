@@ -11,18 +11,18 @@ import {
 	Card,
 	CardSection,
 	Center,
-	Anchor,
 	Flex,
-	Divider,
 	Skeleton,
 	Tooltip,
 	NumberFormatter,
+	useMantineTheme,
 } from '@mantine/core';
 import IconFirearm from '../icons/firearm';
 import IconAmmo from '../icons/ammo';
 import { IconBox } from '@tabler/icons-react';
 import type { RetailerStatusCountApiResponse } from '@/utils/apiStructs';
 import type { ReactElement } from 'react';
+import { RetailerNameContainer } from '../RetailerNameContainer';
 
 function ItemCount({
 	icon,
@@ -33,10 +33,12 @@ function ItemCount({
 	labelSuffix: string;
 	count: number | undefined;
 }) {
+	const isMobile = useMobileView();
+
 	return (
 		<Tooltip label={`${count} ${labelSuffix}`}>
 			<Flex
-				direction="column"
+				direction={isMobile ? 'row' : 'column'}
 				gap="md"
 				align="center"
 				justify="center"
@@ -53,19 +55,23 @@ function ItemCount({
 	);
 }
 
-function RetailerStatus({
+function RetailerCountStats({
 	retailerApiName,
 	counts,
 }: {
 	retailerApiName: string;
 	counts: RetailerStatusCountApiResponse | undefined;
 }) {
-	//        const currentUnixSecs = new Date().getTime() / 1000;
-	// const timeDiffSecs = currentUnixSecs - crawlData.query_time;
-	//    const timeDiffHours = timeDiffSecs / 60 / 60;
+	const isMobile = useMobileView();
 
 	return (
-		<Flex w="100%" justify="center" key={retailerApiName}>
+		<Flex
+			w="100%"
+			direction={isMobile ? 'column' : 'row'}
+			gap="xs"
+			justify="center"
+			key={retailerApiName}
+		>
 			<ItemCount
 				icon={<IconFirearm size="1.5rem" />}
 				labelSuffix="firearms"
@@ -85,6 +91,49 @@ function RetailerStatus({
 	);
 }
 
+function RetailerCrawlState({
+	crawlTime,
+	successful,
+}: {
+	crawlTime: number | undefined;
+	successful: boolean | undefined;
+}) {
+	const theme = useMantineTheme();
+
+	const currentUnixSecs = new Date().getTime() / 1000;
+	const timeDiffSecs = currentUnixSecs - (crawlTime ?? 0);
+	const timeDiffHours = timeDiffSecs / 60 / 60;
+	const displayDiff = timeDiffHours.toFixed(2);
+
+	const stateColour =
+		timeDiffHours < 24 ? theme.colors.green[6] : theme.colors.orange[6];
+
+	const successColour = successful
+		? theme.colors.green[6]
+		: theme.colors.orange[6];
+
+	return (
+		<Skeleton
+			visible={crawlTime === undefined}
+			miw="3rem"
+			style={{ alignSelf: 'end' }}
+		>
+			<Center c="dimmed">
+				<Text size="sm">
+					{'Last crawled'}{' '}
+					<Text span c={stateColour}>{`${displayDiff}`}</Text>{' '}
+					{'hours ago'}{' '}
+					<Text
+						span
+						size="sm"
+						c={successColour}
+					>{`${successful ? 'successfully' : 'with errors'}`}</Text>
+				</Text>
+			</Center>
+		</Skeleton>
+	);
+}
+
 export default function RetailerCards() {
 	const isMobile = useMobileView();
 	const { data, isLoading: _ } = useRetailersStatusApi();
@@ -96,37 +145,49 @@ export default function RetailerCards() {
 			return a.name.localeCompare(b.name);
 		})
 		.forEach((retailer) => {
+			const cardChildren = [
+				<CardSection>
+					<Image
+						p="0.25rem"
+						alt=""
+						src={retailer.logoUrl}
+						radius="md"
+						fit="contain"
+						h="5rem"
+					/>
+				</CardSection>,
+				<CardSection>
+					<RetailerNameContainer retailer={retailer} />
+				</CardSection>,
+				<RetailerCountStats
+					retailerApiName={retailer.apiName}
+					counts={data?.[retailer.apiName].counts}
+				/>,
+				<RetailerCrawlState
+					crawlTime={data?.[retailer.apiName].timestamp}
+					successful={data?.[retailer.apiName].successful}
+				/>,
+			];
+
 			retailerCards.push(
-				<Anchor
+				<Card
 					key={retailer.name}
+					component="a"
 					href={retailer.url}
 					target="_blank"
-					underline="never"
-					c="initial"
+					shadow="sm"
+					radius="md"
+					style={{
+						display: 'grid',
+						gridRow: `span ${cardChildren.length}`,
+						gridTemplateRows: 'subgrid',
+						rowGap: 'var(--mantine-spacing-md)',
+						underline: 'never',
+						color: 'inherit',
+					}}
 				>
-					<Card shadow="sm" radius="md">
-						<CardSection>
-							<Image
-								p="0.25rem"
-								alt=""
-								src={retailer.logoUrl}
-								radius="md"
-								fit="contain"
-								h="5rem"
-							/>
-						</CardSection>
-						<Center mt="1rem">
-							<Text size="lg" ta="center">
-								{retailer.name}
-							</Text>
-						</Center>
-						<Divider size="md" mt="1rem" mb="1rem" />
-						<RetailerStatus
-							retailerApiName={retailer.apiName}
-							counts={data?.[retailer.apiName].counts}
-						/>
-					</Card>
-				</Anchor>,
+					{cardChildren}
+				</Card>,
 			);
 		});
 

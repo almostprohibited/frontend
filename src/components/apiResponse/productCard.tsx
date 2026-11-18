@@ -29,7 +29,7 @@ import { Retailer, RetailerEnum } from '@/utils/retailerConstants';
 import IconFirearm from '../icons/firearm';
 import IconAmmo from '../icons/ammo';
 import { getApiDomain } from '@/utils/environment';
-import { RetailerNameContainer } from './retailerNameContainer';
+import { RetailerNameContainer } from '../RetailerNameContainer';
 
 export default function ProductCard({
 	crawlData,
