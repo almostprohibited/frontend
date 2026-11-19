@@ -157,7 +157,7 @@ export default function RetailerCards() {
 					/>
 				</CardSection>,
 				<CardSection>
-					<RetailerNameContainer retailer={retailer} />
+					<RetailerNameContainer retailer={retailer} textSize="lg" />
 				</CardSection>,
 				<RetailerCountStats
 					retailerApiName={retailer.apiName}

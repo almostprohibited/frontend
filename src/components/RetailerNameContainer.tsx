@@ -1,22 +1,28 @@
 import { useMobileView } from '@/utils/hooks/useMobileView';
 import type { Retailer } from '@/utils/retailerConstants';
-import { Flex, Text } from '@mantine/core';
+import { Flex, Text, type TextProps } from '@mantine/core';
 
-export function RetailerNameContainer({ retailer }: { retailer: Retailer }) {
+export function RetailerNameContainer({
+	retailer,
+	textSize,
+}: {
+	retailer: Retailer;
+	textSize?: TextProps['size'];
+}) {
 	const isMobile = useMobileView();
+
+	const size = textSize ?? (isMobile ? 'sm' : 'xs');
 
 	return (
 		<Flex
 			bg={retailer.colourHex}
-			pt="0.5rem"
-			pb="0.5rem"
-			direction="row"
-			fw="bold"
+			p="0.5rem"
 			justify="center"
-			w="initial"
+			align="center"
+			h="100%"
 		>
 			<Text
-				size={isMobile ? 'sm' : 'xs'}
+				size={size}
 				c={retailer.textColourHex ? retailer.textColourHex : 'gray'}
 				ta="center"
 				fw="bold"

@@ -75,80 +75,92 @@ export default function ProductCard({
 		referrerPolicy: 'no-referrer',
 	};
 
+	const gridChildren = [
+		<CardSection component="a" {...linkProperties}>
+			<Skeleton h="10rem" visible={!imageLoaded}>
+				<Image
+					alt=""
+					h="10rem"
+					src={`${getApiDomain()}/api/image?id=${crawlData.id}`}
+					fallbackSrc={crawlData.image_url}
+					onLoad={() => setImageLoaded(true)}
+					fit="contain"
+					// sorry, going to make the background white so that we don't have the awkward
+					// black borders for images, since every appears to like using white backgrounds
+					bg="#fff"
+				/>
+			</Skeleton>
+		</CardSection>,
+		<CardSection component="a" {...linkProperties}>
+			<PriceCard
+				crawlData={crawlData}
+				viewProductPrice={viewProductPrice}
+				setViewProductPrice={setViewProductPrice}
+			/>
+		</CardSection>,
+		<CardSection component="a" {...linkProperties}>
+			<RetailerNameContainer retailer={retailer} />
+		</CardSection>,
+		<Box
+			component="a"
+			{...linkProperties}
+			pt="var(--mantine-spacing-md)"
+			pb="var(--mantine-spacing-md)"
+		>
+			<Flex direction="column" h="7.5rem">
+				<Box flex={1} style={{ zIndex: 1 }}>
+					<TooltipFloating
+						label={crawlData.name}
+						color="black"
+						multiline
+						w="15rem"
+						disabled={isMobile}
+					>
+						<Text size="sm" lineClamp={4}>
+							{crawlData.name}
+						</Text>
+					</TooltipFloating>
+				</Box>
+				<Box style={{ zIndex: 1 }}>
+					<TooltipFloating
+						label="It's been 24 hours since we've seen this item, it may be out of stock!"
+						color="black"
+						multiline
+						w="15rem"
+						disabled={isMobile || !isItemStale}
+					>
+						<Group gap="xs" c={isItemStale ? '#c77700ff' : 'grey'}>
+							{clockIcon}
+							<Text size="sm">
+								{timeDiffHours.toFixed(2)} hours ago
+							</Text>
+						</Group>
+					</TooltipFloating>
+				</Box>
+				<Box pos="absolute" right={0} bottom="2rem" c="#333333">
+					{itemIcon}
+				</Box>
+			</Flex>
+		</Box>,
+		<CardSection>
+			<ProductButtons crawlResult={crawlData} />
+		</CardSection>,
+	];
+
 	return (
 		<Card
 			key={crawlData.id}
 			radius="lg"
 			withBorder={true}
-			h={'27rem'}
 			shadow="sm"
 			bg="#2e2e2e"
+			style={{
+				display: 'grid',
+				gridRow: `span ${gridChildren.length}`,
+				rowGap: '0',
+			}}
 		>
-			<CardSection component="a" {...linkProperties}>
-				<Skeleton h="10rem" visible={!imageLoaded}>
-					<Image
-						alt=""
-						h="10rem"
-						src={`${getApiDomain()}/api/image?id=${crawlData.id}`}
-						fallbackSrc={crawlData.image_url}
-						onLoad={() => setImageLoaded(true)}
-						fit="contain"
-						// sorry, going to make the background white so that we don't have the awkward
-						// black borders for images, since every appears to like using white backgrounds
-						bg="#fff"
-					/>
-				</Skeleton>
-			</CardSection>
-			<CardSection pb="1rem" component="a" {...linkProperties}>
-				<PriceCard
-					crawlData={crawlData}
-					viewProductPrice={viewProductPrice}
-					setViewProductPrice={setViewProductPrice}
-				/>
-				<RetailerNameContainer retailer={retailer} />
-			</CardSection>
-			<Box h="100%" component="a" {...linkProperties}>
-				<Flex direction="column" h="100%">
-					<Box flex={1} style={{ zIndex: 1 }}>
-						<TooltipFloating
-							label={crawlData.name}
-							color="black"
-							multiline
-							w="15rem"
-							disabled={isMobile}
-						>
-							<Text size="sm" lineClamp={4}>
-								{crawlData.name}
-							</Text>
-						</TooltipFloating>
-					</Box>
-					<Box style={{ zIndex: 1 }}>
-						<TooltipFloating
-							label="It's been 24 hours since we've seen this item, it may be out of stock!"
-							color="black"
-							multiline
-							w="15rem"
-							disabled={isMobile || !isItemStale}
-						>
-							<Group
-								gap="xs"
-								c={isItemStale ? '#c77700ff' : 'grey'}
-							>
-								{clockIcon}
-								<Text size="sm">
-									{timeDiffHours.toFixed(2)} hours ago
-								</Text>
-							</Group>
-						</TooltipFloating>
-					</Box>
-					<Box pos="absolute" right={0} bottom="2rem" c="#333333">
-						{itemIcon}
-					</Box>
-				</Flex>
-			</Box>
-			<CardSection mt="1rem">
-				<ProductButtons crawlResult={crawlData} />
-			</CardSection>
+			{gridChildren}
 		</Card>
 	);
 }
