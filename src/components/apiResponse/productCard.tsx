@@ -157,6 +157,7 @@ export default function ProductCard({
 			style={{
 				display: 'grid',
 				gridRow: `span ${gridChildren.length}`,
+				gridTemplateRows: 'subgrid',
 				rowGap: '0',
 			}}
 		>
