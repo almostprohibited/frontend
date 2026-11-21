@@ -118,7 +118,7 @@ export class RetailerEnum {
 	);
 
 	static readonly TheAmmoSource = new Retailer(
-		'SFRC (The Ammo Source)',
+		'SFRC',
 		'TheAmmoSource',
 		'https://theammosource.com/',
 		'/retailers/theammosource.jpg',
